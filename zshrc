@@ -1,0 +1,89 @@
+source ~/.guix-home/profile/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.guix-home/profile/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.guix-home/profile/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+HISTORY_SUBSTRING_SEARCH_FUZZY=1
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt INC_APPEND_HISTORY_TIME
+
+setopt prompt_subst
+
+export PROMPT=$'%(?..
+%K{black}[%F{red}%?%f]%k)
+%F{green}%B%K{black}[%T, %D{%d/%m/%y}]%f%k%b
+%B%K{black}%F{%(!.red.green)}%n%f@%F{green}%m %F{grey}[$(pwd)]%f%f%k%b
+%K{black}%F{blue} %k
+%K{black}%F{blue} -> %k%f'
+
+autoload -Uz compinit
+compinit
+
+# zsh tab completion same colors as LS_COLORS
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# automatic rehash of completion database
+zstyle ':completion:*' rehash true
+
+alias ls='ls --group-directories-first --color'
+alias ll='ls --group-directories-first --color -l'
+alias la='ls --group-directories-first --color -lah'
+
+alias gst='git status'
+alias gp='git push'
+alias gl='git pull --rebase'
+alias glo='git log --oneline'
+alias ga='git add'
+alias gc='git clone --recurse-submodules'
+alias gf='git fetch'
+alias gd='git diff'
+alias gdca='git diff --cached'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+alias ........='cd ../../../../../../..'
+alias .........='cd ../../../../../../../..'
+
+set -o emacs
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+bindkey '^[[3~' delete-char
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+
+if [[ -v TMUX ]]; then
+    # Check if has TrueColor support and set corresponding tmux active bg"
+    if [ -z "$(tmux showenv TC 2>&1 | cut -s -d'=' -f2)" ]; then
+        if tmux run 'tmux info -t #{client_tty} | grep Tc | grep true | grep -v Job &>/dev/null'; then
+            tmux set window-active-style "fg=default,bg=#002b36"
+            tmux set-option @BG "#002b36"
+            tmux setenv TC 1
+        else
+            tmux set window-active-style "fg=default,bg=colour8"
+            tmux set-option @BG "colour8"
+            tmux setenv TC 0
+        fi
+    fi
+    # update window title
+    __preexec-title() {
+        print -Pn "\e]0;$1\a"} #sets title for running command
+    __precmd-title() {
+        print -Pn "\e]0;$PWD\a"} #sets title to PWD otherwise
+    preexec_functions+=( __preexec-title )
+    precmd_functions+=( __precmd-title )
+elif [[ -o login ]]; then
+    echo "This is a login shell, so not starting tmux"
+elif [[ ! -z "$INSIDE_EMACS" ]]; then
+    tmux -2 new-session -s $$
+fi
+
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=239"
