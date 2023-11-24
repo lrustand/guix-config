@@ -60,6 +60,9 @@ bindkey '^[[3~' delete-char
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
 
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+
 if [[ -v TMUX ]]; then
     # Check if has TrueColor support and set corresponding tmux active bg"
     if [ -z "$(tmux showenv TC 2>&1 | cut -s -d'=' -f2)" ]; then
@@ -82,7 +85,7 @@ if [[ -v TMUX ]]; then
     precmd_functions+=( __precmd-title )
 elif [[ -o login ]]; then
     echo "This is a login shell, so not starting tmux"
-elif [[ ! -z "$INSIDE_EMACS" ]]; then
+elif [[ -z "$INSIDE_EMACS" ]]; then
     tmux -2 new-session -s $$
 fi
 

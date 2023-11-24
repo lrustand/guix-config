@@ -40,11 +40,9 @@
    (service home-zsh-service-type
             (home-zsh-configuration
              (zshrc (list
-                     (local-file "zshrc")))))
+                     (local-file "files/zsh/zshrc")))))
    (service home-bash-service-type
             (home-bash-configuration
              (guix-defaults? #t)))
-   (simple-service 'tmux-config
-                   home-xdg-configuration-files-service-type
-                   (list `("tmux/tmux.conf"
-                           ,(local-file "tmux.conf")))))))
+   (service home-xdg-configuration-files-service-type
+            `(("tmux/tmux.conf" ,(local-file "files/tmux/tmux.conf")))))))
