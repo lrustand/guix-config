@@ -1,0 +1,8 @@
+clear lock
+clear Lock
+clear mod3
+clear Mod3
+
+! Change Caps Lock into Hyper
+keycode 110 = Hyper_L
+add Mod3 = Hyper_L

@@ -1,0 +1,246 @@
+#-quicklisp ;; -*- lisp -*-
+;;(ql:quickload "stumpwm")
+
+(in-package :stumpwm)
+(setf *default-package* :stumpwm)
+
+(setf *mouse-focus-policy* :click)
+(setf *suppress-frame-indicator* T)
+(setf *normal-border-width* 2)
+
+(set-font "pango:DejaVu Sans Mono 10")
+
+(defcommand alacritty () ()
+  "start alacritty"
+  (run-shell-command "alacritty"))
+
+(defcommand rofi () ()
+  "show rofi"
+  (run-shell-command "rofi -show run"))
+
+(defcommand hsplit-and-focus () ()
+  "Create a new frame on the right and focus it."
+  (hsplit)
+  (move-focus :right))
+
+(defcommand vsplit-and-focus () ()
+  "Create a new frame below and move focus to it."
+  (vsplit)
+  (move-focus :down))
+
+(define-key *top-map* (kbd "s-RET") "alacritty")
+(define-key *top-map* (kbd "s-BackSpace") "delete")
+(define-key *top-map* (kbd "H-BackSpace") "kill-windows-current-group")
+(define-key *top-map* (kbd "s-c") "loadrc")
+(define-key *top-map* (kbd "H-d") "rofi")
+
+(define-key *top-map* (kbd "s-f") "fullscreen")
+
+;; Move focus
+(define-key *top-map* (kbd "s-h") "move-focus left")
+(define-key *top-map* (kbd "s-j") "move-focus down")
+(define-key *top-map* (kbd "s-k") "move-focus up")
+(define-key *top-map* (kbd "s-l") "move-focus right")
+(define-key *top-map* (kbd "s-Left") "move-focus left")
+(define-key *top-map* (kbd "s-Down") "move-focus down")
+(define-key *top-map* (kbd "s-Up") "move-focus up")
+(define-key *top-map* (kbd "s-Right") "move-focus right")
+
+;; Move window
+(define-key *top-map* (kbd "s-H") "move-window left")
+(define-key *top-map* (kbd "s-J") "move-window down")
+(define-key *top-map* (kbd "s-K") "move-window up")
+(define-key *top-map* (kbd "s-L") "move-window right")
+(define-key *top-map* (kbd "s-S-Left") "move-window left")
+(define-key *top-map* (kbd "s-S-Down") "move-window down")
+(define-key *top-map* (kbd "s-S-Up") "move-window up")
+(define-key *top-map* (kbd "s-S-Right") "move-window right")
+
+;; Exchange window
+(define-key *top-map* (kbd "s-M-h") "exchange-direction left")
+(define-key *top-map* (kbd "s-M-j") "exchange-direction down")
+(define-key *top-map* (kbd "s-M-k") "exchange-direction up")
+(define-key *top-map* (kbd "s-M-l") "exchange-direction right")
+(define-key *top-map* (kbd "s-M-Left") "exchange-direction left")
+(define-key *top-map* (kbd "s-M-Down") "exchange-direction down")
+(define-key *top-map* (kbd "s-M-Up") "exchange-direction up")
+(define-key *top-map* (kbd "s-M-Right") "exchange-direction right")
+
+;; Resize frame
+(define-key *top-map* (kbd "s-C-h") "resize-direction left")
+(define-key *top-map* (kbd "s-C-j") "resize-direction down")
+(define-key *top-map* (kbd "s-C-k") "resize-direction up")
+(define-key *top-map* (kbd "s-C-l") "resize-direction right")
+(define-key *top-map* (kbd "s-C-Left") "resize-direction left")
+(define-key *top-map* (kbd "s-C-Down") "resize-direction down")
+(define-key *top-map* (kbd "s-C-Up") "resize-direction up")
+(define-key *top-map* (kbd "s-C-Right") "resize-direction right")
+(define-key *top-map* (kbd "s-C-e") "balance-frames")
+
+;; Change workspace
+(define-key *top-map* (kbd "s-q") "gselect 1")
+(define-key *top-map* (kbd "s-w") "gselect 2")
+(define-key *top-map* (kbd "s-e") "gselect 3")
+(define-key *top-map* (kbd "s-r") "gselect 4")
+(define-key *top-map* (kbd "s-t") "gselect 5")
+(define-key *top-map* (kbd "s-y") "gselect 6")
+(define-key *top-map* (kbd "s-u") "gselect 7")
+(define-key *top-map* (kbd "s-i") "gselect 8")
+(define-key *top-map* (kbd "s-o") "gselect 9")
+(define-key *top-map* (kbd "s-p") "gselect 10")
+
+;; Move window to workspace
+(define-key *top-map* (kbd "s-Q") "gmove-and-follow 1")
+(define-key *top-map* (kbd "s-W") "gmove-and-follow 2")
+(define-key *top-map* (kbd "s-E") "gmove-and-follow 3")
+(define-key *top-map* (kbd "s-R") "gmove-and-follow 4")
+(define-key *top-map* (kbd "s-T") "gmove-and-follow 5")
+(define-key *top-map* (kbd "s-Y") "gmove-and-follow 6")
+(define-key *top-map* (kbd "s-U") "gmove-and-follow 7")
+(define-key *top-map* (kbd "s-I") "gmove-and-follow 8")
+(define-key *top-map* (kbd "s-O") "gmove-and-follow 9")
+(define-key *top-map* (kbd "s-P") "gmove-and-follow 10")
+
+;; Change workspace/screen
+(define-key *top-map* (kbd "H-h") "sprev")
+(define-key *top-map* (kbd "H-j") "gnext")
+(define-key *top-map* (kbd "H-k") "gprev")
+(define-key *top-map* (kbd "H-l") "snext")
+(define-key *top-map* (kbd "H-Left") "sprev")
+(define-key *top-map* (kbd "H-Down") "gnext")
+(define-key *top-map* (kbd "H-Up") "gprev")
+(define-key *top-map* (kbd "H-Right") "snext")
+
+;; Move window to workspace/screen
+;; TODO fix screen with window commands
+(define-key *top-map* (kbd "H-H") "sprev-with-window")
+(define-key *top-map* (kbd "H-J") "gnext-with-window")
+(define-key *top-map* (kbd "H-K") "gprev-with-window")
+(define-key *top-map* (kbd "H-L") "snext-with-window")
+(define-key *top-map* (kbd "H-S-Left") "sprev-with-window")
+(define-key *top-map* (kbd "H-S-Down") "gnext-with-window")
+(define-key *top-map* (kbd "H-S-Up") "gprev-with-window")
+(define-key *top-map* (kbd "H-S-Right") "snext-with-window")
+
+;; Show hidden windows
+(define-key *top-map* (kbd "s-g") "pull-from-windowlist")
+(define-key *top-map* (kbd "s-n") "next-in-frame")
+(define-key *top-map* (kbd "s-p") "prev-in-frame")
+(define-key *top-map* (kbd "s-TAB") "other-in-frame")
+
+;; Split frame
+(define-key *top-map* (kbd "s-s") "vsplit-and-focus")
+(define-key *top-map* (kbd "s-S") "hsplit-and-focus")
+
+;;(load-module "clipboard-history")
+;;
+;;(define-key *root-map* (kbd "C-y") "show-clipboard-history")
+;;;; start the polling timer process
+;;(clipboard-history:start-clipboard-manager)
+
+(setf *time-modeline-string* "%a %d.%m.%Y %H:%M")
+(setf *mode-line-foreground-color* "#cccccc")
+(setf *mode-line-timeout* 1)
+;;(load-module "net")
+;;(load-module "cpu")
+;;(load-module "battery-portable")
+;;(load-module "mem")
+;;(load-module "maildir")
+
+;;(ql:quickload :clx-truetype)
+;;(load-module "ttf-fonts")
+;;
+;;(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Bold" :size 10 :antialias t))
+;;(setf cpu::*cpu-modeline-fmt* "%c %t")
+;;(setf mem::*mem-modeline-fmt* "mem: ")
+;;(setf maildir::*maildir-modeline-fmt* "mail: %l %n %c %t")
+
+(setf *screen-mode-line-format*
+  (list
+    "^B"
+    "Head: %h" ;; Current head
+    " | %g" ;; List of groups
+    "^b"
+
+    "^>" ;; Right align after this
+
+    "%D" ;; Maildir info
+    " | %l" ;; Network info
+    " | %M" ;; Memory info
+    " | %C" ;; CPU info
+    " | %B" ;; Battery info
+    " | ^B%d" ;; Date and time as describe in "time-modeline-string"
+))
+
+(when *initializing*
+  (mode-line))
+
+(when *initializing*
+  (grename "[MAIN]")
+  (gnewbg "[TERM]")
+  (gnewbg "[WWW]")
+  (gnewbg "[PRIV]")
+  (gnewbg "[FILES]"))
+
+(when *initializing*
+  (which-key-mode))
+
+;;(ql:quickload "slynk")
+;;(require :slynk)
+;;(defcommand stump-slynk-server () ()
+;;  (slynk:create-server :port 4004
+;;                       :dont-close t))
+;;
+;;(when *initializing*
+;;  (stump-slynk-server))
+;;
+;;(setf *input-history-ignore-duplicates* t)
+;;(set-prefix-key (kbd "s-space"))
+
+
+;;(stumpwm:add-to-load-path "~/.stumpwm.d/modules/stumpwm-rofi")
+;;(load-module "rofi")
+;;
+;;
+;;(defvar *history* (list))
+;;(defun stump-windows ()
+;;  (setq stumpwm-windows (list)
+;;	visible-windows (list))
+;;  (setq my-windows
+;;	(loop for key being the hash-keys of *xwin-to-window*
+;;	      using (hash-value window)
+;;	      when (window-visible-p window)
+;;	      do (push window visible-windows)
+;;	      collect window))
+;;  ;; push current window to history head
+;;  (setq *history* (remove (current-window) *history*))
+;;  (push (current-window) *history*)
+;;  ;; remove closed windows from history
+;;  (mapcar (lambda (arg)
+;;	    (unless (member arg my-windows)
+;;	      (setq *history* (remove arg *history*))))
+;;	  *history*)
+;;  ;; place history windows on top of list
+;;  (mapcar (lambda (arg)
+;;	    (setq my-windows (remove arg my-windows))
+;;	    (unless (member arg visible-windows)    
+;;	      (push arg my-windows)))
+;;	  (reverse *history*))
+;;  ;; move current windows to the end of the list
+;;  (mapcar (lambda (arg)
+;;	    (setq my-windows (remove arg my-windows))
+;;	    (push arg (cdr (last my-windows))))
+;;	  visible-windows)
+;;  ;; format it for rofi:menu cons of title
+;;  ;; and command to pull the window
+;;  (mapcar (lambda (value)
+;;	    (cons (rofi::window-name value)
+;;		  (format nil
+;;			  "pull-window-by-number ~A"
+;;			  (window-number value))))
+;;	  my-windows))
+;;
+;;(defcommand draw-window-menu () ()
+;;  (rofi:menu (stump-windows) "-i -matching fuzzy"))
+;;
+;;(define-key *top-map* (kbd "s-x") "draw-window-menu")
