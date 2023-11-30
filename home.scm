@@ -10,6 +10,7 @@
              (gnu services base)
              (gnu packages base)
              (gnu packages admin)
+             (gnu packages gnupg)
              (gnu packages emacs)
              (gnu packages emacs-xyz)
              (gnu packages vim)
@@ -29,6 +30,8 @@
              (gnu packages pulseaudio)
              (gnu packages image-viewers)
              (gnu packages password-utils)
+             (gnu packages xorg)
+             (gnu packages linux)
              (guix gexp)
              (lrustand mail offlineimap)
              (lrustand mail msmtp))
@@ -45,12 +48,20 @@
           ("imap-host" . "mail.rustand.tech")
           ("smtp-host" . "mail.rustand.tech"))))
 
+(define-public qutebrowser-with-tldextract
+  (package/inherit qutebrowser
+    (name "qutebrowser-with-adblock")
+    (inputs (modify-inputs (package-inputs qutebrowser)
+                           (prepend python-tldextract)))))
 (home-environment
  (packages (list
             htop
             git
+            gnupg
+            pinentry
             alacritty
             tmux
+            ecryptfs-utils
             emacs-next
             emacs-vterm
             emacs-geiser
@@ -66,6 +77,8 @@
             sbcl
             msmtp
             scrot
+            rofi
+            xev
             feh
             offlineimap
             autorandr
