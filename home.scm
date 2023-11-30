@@ -108,8 +108,8 @@
    (service home-xmodmap-service-type
          (home-xmodmap-configuration
           (key-map '(("remove Lock" . "Caps_Lock")
-                     ("clear" . "Mod3")
                      ("keysym Caps_Lock" . "Hyper_L")
+                     ("remove Mod4" . "Hyper_L")
                      ("add Mod3" . "Hyper_L")))))
    (service home-syncthing-service-type)
    (service home-xdg-configuration-files-service-type
