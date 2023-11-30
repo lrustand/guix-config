@@ -21,7 +21,9 @@
   (kernel linux)
   (initrd microcode-initrd)
   (initrd-modules (append '("vmd") %base-initrd-modules))
-  (firmware (list linux-firmware))
+  (firmware (list
+             linux-firmware
+             sof-firmware))
 
   ;;(kernel-arguments (list "console=ttyS0,115200"))
 
