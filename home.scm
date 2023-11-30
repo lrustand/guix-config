@@ -5,6 +5,7 @@
              (gnu home services mail)
              (gnu home services syncthing)
              (gnu home services desktop)
+             (gnu home services shepherd)
              (gnu services)
              (gnu services base)
              (gnu packages base)
@@ -79,6 +80,7 @@
             neovim))
  (services
   (list
+   (service home-shepherd-service-type)
    (service home-zsh-service-type
             (home-zsh-configuration
              (zshrc (list
