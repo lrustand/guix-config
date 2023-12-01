@@ -35,48 +35,69 @@
     (name "qutebrowser-with-adblock")
     (inputs (modify-inputs (package-inputs qutebrowser)
                            (prepend python-tldextract)))))
+
+(define %shell-packages
+  (specifications->packages
+   '("zsh"
+     "zsh-completions"
+     "zsh-syntax-highlighting"
+     "zsh-autosuggestions"
+     "zsh-history-substring-search")))
+
+(define %emacs-packages
+  (specifications->packages
+   '("emacs-next"
+     "emacs-vterm"
+     "emacs-geiser")))
+
+(define %mail-packages
+  (specifications->packages
+   '("msmtp"
+     "mu"
+     "offlineimap3")))
+
+(define %x11-packages
+  (specifications->packages
+   '("scrot"
+     "rofi"
+     "i3lock"
+     "xev"
+     "xinput"
+     "xclip"
+     "feh"
+     "mpv"
+     "youtube-dl"
+     "yt-dlp"
+     "alacritty"
+     "pavucontrol"
+     "autorandr")))
+
+(define %password-store-packages
+  (specifications->packages
+   '("password-store"
+     "pass-otp"
+     "gnupg"
+     "pinentry")))
+
 (home-environment
  (packages
-  (cons
-   qutebrowser-with-tldextract
+  (append
+   (list qutebrowser-with-tldextract)
+   %shell-packages
+   %emacs-packages
+   %mail-packages
+   %x11-packages
+   %password-store-packages
    (specifications->packages
     '("htop"
       "git"
-      "gnupg"
-      "pinentry"
-      "alacritty"
       "tmux"
       "ecryptfs-utils"
-      "emacs-next"
-      "emacs-vterm"
-      "emacs-geiser"
-      "zsh"
-      "zsh-completions"
-      "zsh-syntax-highlighting"
-      "zsh-autosuggestions"
-      "zsh-history-substring-search"
       "glibc-locales"
       "guile-readline"
       "guile-colorized"
       "nyxt"
       "sbcl"
-      "msmtp"
-      "scrot"
-      "rofi"
-      "i3lock"
-      "xev"
-      "xinput"
-      "xclip"
-      "feh"
-      "offlineimap3"
-      "autorandr"
-      "mu"
-      "mpv"
-      "youtube-dl"
-      "yt-dlp"
-      "password-store"
-      "pass-otp"
-      "pavucontrol"
       ;;"qutebrowser-with-tldextract"
       "python"
       "python-tldextract"
