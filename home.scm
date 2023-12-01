@@ -1,11 +1,5 @@
 (use-modules (gnu home)
              (gnu home services)
-             (gnu home services shells)
-             (gnu home services ssh)
-             (gnu home services mail)
-             (gnu home services syncthing)
-             (gnu home services desktop)
-             (gnu home services shepherd)
              (gnu services)
              (gnu services base)
              (gnu packages base)
@@ -33,8 +27,18 @@
              (gnu packages xorg)
              (gnu packages linux)
              (guix gexp)
+             (lrustand home services)
              (lrustand mail offlineimap)
              (lrustand mail msmtp))
+
+(use-home-service-modules
+ shells
+ ssh
+ mail
+ syncthing
+ desktop
+ shepherd)
+
 
 (define email-accounts
   (list '(("account-name" . "gmail")
