@@ -3,6 +3,7 @@
              (gnu services)
              (gnu packages web-browsers)
              (guix gexp)
+             (lrustand packages package-groups)
              (lrustand home services)
              (lrustand mail offlineimap)
              (lrustand mail msmtp))
@@ -33,49 +34,6 @@
     (name "qutebrowser-with-adblock")
     (inputs (modify-inputs (package-inputs qutebrowser)
                            (prepend python-tldextract)))))
-
-(define %shell-packages
-  (specifications->packages
-   '("zsh"
-     "zsh-completions"
-     "zsh-syntax-highlighting"
-     "zsh-autosuggestions"
-     "zsh-history-substring-search")))
-
-(define %emacs-packages
-  (specifications->packages
-   '("emacs-next"
-     "emacs-vterm"
-     "emacs-geiser")))
-
-(define %mail-packages
-  (specifications->packages
-   '("msmtp"
-     "mu"
-     "offlineimap3")))
-
-(define %x11-packages
-  (specifications->packages
-   '("scrot"
-     "rofi"
-     "i3lock"
-     "xev"
-     "xinput"
-     "xclip"
-     "feh"
-     "mpv"
-     "youtube-dl"
-     "yt-dlp"
-     "alacritty"
-     "pavucontrol"
-     "autorandr")))
-
-(define %password-store-packages
-  (specifications->packages
-   '("password-store"
-     "pass-otp"
-     "gnupg"
-     "pinentry")))
 
 (home-environment
  (packages
