@@ -122,4 +122,5 @@
               ("offlineimap/postsync.sh" ,(local-file "files/offlineimap/postsync.sh"))
               ("davmail/davmail.properties" ,(local-file "files/davmail/davmail.properties"))
               ("qutebrowser/config.py" ,(local-file "files/qutebrowser/config.py"))
+              ("qutebrowser/greasemonkey/youtube-ad-blocker.js" ,(local-file "files/qutebrowser/greasemonkey/youtube-ad-blocker.js"))
               ("tmux/tmux.conf" ,(local-file "files/tmux/tmux.conf")))))))
