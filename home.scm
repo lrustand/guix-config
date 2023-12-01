@@ -1,31 +1,9 @@
 (use-modules (gnu home)
              (gnu home services)
+             (gnu packages)
              (gnu services)
              (gnu services base)
-             (gnu packages base)
-             (gnu packages admin)
-             (gnu packages gnupg)
-             (gnu packages emacs)
-             (gnu packages emacs-xyz)
-             (gnu packages vim)
-             (gnu packages version-control)
-             (gnu packages terminals)
-             (gnu packages tmux)
-             (gnu packages shells)
-             (gnu packages guile)
-             (gnu packages guile-xyz)
-             (gnu packages shellutils)
              (gnu packages web-browsers)
-             (gnu packages certs)
-             (gnu packages mail)
-             (gnu packages xdisorg)
-             (gnu packages video)
-             (gnu packages lisp)
-             (gnu packages pulseaudio)
-             (gnu packages image-viewers)
-             (gnu packages password-utils)
-             (gnu packages xorg)
-             (gnu packages linux)
              (guix gexp)
              (lrustand home services)
              (lrustand mail offlineimap)
@@ -58,43 +36,55 @@
     (inputs (modify-inputs (package-inputs qutebrowser)
                            (prepend python-tldextract)))))
 (home-environment
- (packages (list
-            htop
-            git
-            gnupg
-            pinentry
-            alacritty
-            tmux
-            ecryptfs-utils
-            emacs-next
-            emacs-vterm
-            emacs-geiser
-            zsh
-            zsh-completions
-            zsh-syntax-highlighting
-            zsh-autosuggestions
-            zsh-history-substring-search
-            glibc-locales
-            guile-readline
-            guile-colorized
-            nyxt
-            sbcl
-            msmtp
-            scrot
-            rofi
-            xev
-            feh
-            offlineimap
-            autorandr
-            mpv
-            youtube-dl
-            yt-dlp
-            password-store
-            pass-otp
-            pavucontrol
-            qutebrowser
-            nss-certs
-            neovim))
+ (packages
+  (cons
+   qutebrowser-with-tldextract
+   (specifications->packages
+    '("htop"
+      "git"
+      "gnupg"
+      "pinentry"
+      "alacritty"
+      "tmux"
+      "ecryptfs-utils"
+      "emacs-next"
+      "emacs-vterm"
+      "emacs-geiser"
+      "zsh"
+      "zsh-completions"
+      "zsh-syntax-highlighting"
+      "zsh-autosuggestions"
+      "zsh-history-substring-search"
+      "glibc-locales"
+      "guile-readline"
+      "guile-colorized"
+      "nyxt"
+      "sbcl"
+      "msmtp"
+      "scrot"
+      "rofi"
+      "i3lock"
+      "xev"
+      "xinput"
+      "xclip"
+      "feh"
+      "offlineimap3"
+      "autorandr"
+      "mu"
+      "mpv"
+      "youtube-dl"
+      "yt-dlp"
+      "password-store"
+      "pass-otp"
+      "pavucontrol"
+      ;;"qutebrowser-with-tldextract"
+      "python"
+      "python-tldextract"
+      "nss-certs"
+      ;sbcl-ttf-fonts
+      ;font-dejavu
+      "neovim"))))
+ 
  (services
   (list
    (service home-shepherd-service-type)
