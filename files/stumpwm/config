@@ -195,7 +195,7 @@
 ;;  (stump-slynk-server))
 ;;
 ;;(setf *input-history-ignore-duplicates* t)
-;;(set-prefix-key (kbd "s-space"))
+(set-prefix-key (kbd "s-space"))
 
 
 ;;(stumpwm:add-to-load-path "~/.stumpwm.d/modules/stumpwm-rofi")
