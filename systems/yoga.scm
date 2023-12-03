@@ -47,6 +47,7 @@
           "htop"
           "tmux"
           "stumpwm"
+          "sof-firmware"
           "openssh"))
       %base-packages))
 
