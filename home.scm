@@ -86,6 +86,17 @@
                        "257cebd587b66e4d865b3537a9a88cccd7107c95"
                        (openpgp-fingerprint
                         "2841 9AC6 5038 7440 C7E9  2FFA 2208 D209 58C1 DEB0"))))))
+   (simple-service 'lrustand-channel-service
+                   home-channels-service-type
+                   (list
+                    (channel
+                     (name 'lrustand)
+                     (url "https://github.com/lrustand/guix-config")
+                     (introduction
+                      (make-channel-introduction
+                       "050796f9d48e8a5af8b99a03cdfe7ff1fda8d2a3"
+                       (openpgp-fingerprint
+                        "8A20 89FB 60FA 2311 3046  5178 022B 5FFE 7AEE F619"))))))
    (service home-shepherd-service-type)
    (service home-zsh-service-type
             (home-zsh-configuration
