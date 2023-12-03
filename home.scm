@@ -53,17 +53,12 @@
       "git"
       "tmux"
       "ecryptfs-utils"
-      "glibc-locales"
       "guile-readline"
       "guile-colorized"
       "nyxt"
       "sbcl"
-      ;;"qutebrowser-with-tldextract"
       "python"
-      "python-tldextract"
       "nss-certs"
-      ;sbcl-ttf-fonts
-      ;font-dejavu
       "neovim"))))
  
  (services
