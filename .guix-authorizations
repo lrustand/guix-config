@@ -1,0 +1,5 @@
+(authorizations
+ (version 0)               ;current file format version
+
+ (("8A20 89FB 60FA 2311 3046  5178 022B 5FFE 7AEE F619"
+   (name "lrustand"))))
