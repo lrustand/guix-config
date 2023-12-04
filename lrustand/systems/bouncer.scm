@@ -1,3 +1,4 @@
+(define-module (lrustand systems bouncer))
 (use-modules
   (gnu)
   (gnu packages firmware)

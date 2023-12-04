@@ -1,4 +1,4 @@
-(define-module (config)
+(define-module (lrustand systems pinephone-pro)
   #:use-module (gnu packages certs)
   #:use-module (gnu packages linux)
   #:use-module (nongnu packages linux)
@@ -149,7 +149,7 @@ System on hardware which requires nonfree software to function."))))
                `(("lars" ,(local-file "ssh.key"))))
               (print-last-log? #t))))))
 
-(define pinephone-pro-os
+(define pinephone-pro-operating-system
   (operating-system
     (kernel pinephone-pro-kernel)
     (kernel-arguments
@@ -206,4 +206,4 @@ System on hardware which requires nonfree software to function."))))
 
     (services %my-services)))
 
-pinephone-pro-os
+pinephone-pro-operating-system
