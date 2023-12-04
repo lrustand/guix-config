@@ -40,6 +40,7 @@
   
     (packages
       (append
+        (list sof-firmware)
         (map specification->package
           (list
             "nss-certs"
@@ -47,7 +48,6 @@
             "htop"
             "tmux"
             "stumpwm"
-            "sof-firmware"
             "openssh"))
         %base-packages))
   
