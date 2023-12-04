@@ -1,4 +1,6 @@
-(use-modules (gnu home services)
+(use-modules (gnu)
+             (gnu home)
+             (gnu home services)
              (gnu packages)
              (gnu services)
              (gnu packages web-browsers)
