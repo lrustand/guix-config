@@ -15,7 +15,7 @@
   (operating-system
     (locale "en_US.utf8")
     (timezone "Europe/Oslo")
-    (keyboard-layout (keyboard-layout "us"))
+    (keyboard-layout (keyboard-layout "us,no" #:options '("grp:switch")))
     (host-name "yoga")
   
     (kernel linux)
