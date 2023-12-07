@@ -53,6 +53,9 @@
   
     (services
       (cons*
+       (set-xorg-configuration
+         (xorg-configuration
+           (keyboard-layout keyboard-layout)))
        (modify-services %desktop-services
          (guix-service-type config => (guix-configuration
            (inherit config)
