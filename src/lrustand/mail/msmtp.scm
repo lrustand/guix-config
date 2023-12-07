@@ -57,7 +57,7 @@ host smtp.office365.com\n")
       (let ((acc (car accounts)))
         (string-append (msmtp-account-config-fragment acc) (msmtp-accounts-config-fragments (cdr accounts))))))
 
-(define* (msmtp-config accounts)
+(define* (msmtp-config accounts default)
   (string-append "# Set default values for all following accounts.
 defaults
 auth on
@@ -65,6 +65,7 @@ port 587
 tls on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
 logfile ~/.msmtp.log\n\n"
-          (msmtp-accounts-config-fragments accounts)))
-;;          (format #f "# Set a default account
-;;account default : ~a" "NOTHING")))
+          (msmtp-accounts-config-fragments accounts)
+          (format #f "# Set a default account
+account default : ~a
+" default)))

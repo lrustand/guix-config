@@ -124,7 +124,7 @@
               ("nyxt/config.lisp" ,(local-file "files/nyxt/config.lisp"))
               ("msmtp/config"
                ,(plain-file
-                 "" (msmtp-config email-accounts)))
+                 "" (msmtp-config email-accounts "gmail")))
               ("offlineimap/config"
                ,(plain-file
                  "" (offlineimap-config email-accounts)))
