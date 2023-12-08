@@ -17,8 +17,11 @@
 (define %emacs-packages
   (specifications->packages
    '("emacs-next"
+     "libvterm"
      "emacs-vterm"
-     "emacs-geiser")))
+     "emacs-multi-vterm"
+     "emacs-geiser"
+     "emacs-geiser-guile")))
 
 (define %mail-packages
   (specifications->packages
