@@ -27,6 +27,7 @@
   (specifications->packages
    '("msmtp"
      "mu"
+     "notmuch"
      "offlineimap3")))
 
 (define %x11-packages
