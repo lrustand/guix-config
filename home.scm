@@ -57,6 +57,7 @@
       "ecryptfs-utils"
       "guile-readline"
       "guile-colorized"
+      "sqlite" ;; Needed for qutebrowser
       "nyxt"
       "sbcl"
       "python"
@@ -108,7 +109,8 @@
             (home-bash-configuration
              (guix-defaults? #t)))
    (service home-files-service-type
-            `((".emacs.d/init.el" ,(local-file "files/emacs/init.el"))))
+            `((".emacs.d/init.el" ,(local-file "files/emacs/init.el"))
+              (".local/share/qutebrowser/userscripts/qutedmenu" ,(local-file "files/qutebrowser/qutedmenu" #:recursive? #t))))
               ;;(".guile" ,(local-file "files/guile/.guile"))))
    ;; TODO possibly add this in etc
    (service home-xmodmap-service-type
