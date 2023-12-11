@@ -11,6 +11,7 @@
              (lrustand packages package-groups)
              (lrustand home services)
              (lrustand services repos)
+             (lrustand services symlinks)
              (lrustand mail offlineimap)
              (lrustand mail msmtp))
 
@@ -106,6 +107,28 @@
             (home-zsh-configuration
              (zshrc (list
                      (local-file "files/zsh/zshrc")))))
+   (service home-symlinks-service-type
+            '(("/home/lars/code/guix-config/files/emacs/init.el"
+               ".emacs.d/init.el")
+              ("/home/lars/code/guix-config/files/alacritty/alacritty.yml"
+               ".config/alacritty/alacritty.yml")
+              ("/home/lars/code/guix-config/files/stumpwm/config"
+               ".config/stumpwm/config")
+              ("/home/lars/code/guix-config/files/nyxt/config.lisp"
+               ".config/nyxt/config.lisp")
+              ("/home/lars/code/guix-config/files/offlineimap/auth.py"
+               ".config/offlineimap/auth.py")
+              ("/home/lars/code/guix-config/files/davmail/davmail.properties"
+               ".config/davmail/davmail.properties")
+              ("/home/lars/code/guix-config/files/qutebrowser/config.py"
+               ".config/qutebrowser/config.py")
+              ("/home/lars/code/guix-config/files/qutebrowser/greasemonkey/youtube-ad-blocker.js"
+               ".config/qutebrowser/greasemonkey/youtube-ad-blocker.js")
+              ("/home/lars/code/guix-config/files/qutebrowser/qutedmenu"
+               ".local/share/qutebrowser/userscripts/qutedmenu")
+              ("/home/lars/code/guix-config/files/guile/.guile" ".guile")
+              ("/home/lars/code/guix-config/files/tmux/tmux.conf"
+               ".config/tmux/tmux.conf")))
    (service home-git-clone-service-type
             '(("https://github.com/stumpwm/stumpwm"
                "code/forks/stumpwm")
@@ -122,10 +145,6 @@
    (service home-bash-service-type
             (home-bash-configuration
              (guix-defaults? #t)))
-   (service home-files-service-type
-            `((".emacs.d/init.el" ,(local-file "files/emacs/init.el"))
-              (".local/share/qutebrowser/userscripts/qutedmenu" ,(local-file "files/qutebrowser/qutedmenu" #:recursive? #t))))
-              ;;(".guile" ,(local-file "files/guile/.guile"))))
    ;; TODO possibly add this in etc
    (service home-xmodmap-service-type
          (home-xmodmap-configuration
@@ -135,18 +154,9 @@
                      ("add Mod3" . "Hyper_L")))))
    (service home-syncthing-service-type)
    (service home-xdg-configuration-files-service-type
-            `(("alacritty/alacritty.yml" ,(local-file "files/alacritty/alacritty.yml"))
-              ("stumpwm/config" ,(local-file "files/stumpwm/config"))
-              ("nyxt/config.lisp" ,(local-file "files/nyxt/config.lisp"))
-              ("msmtp/config"
+            `(("msmtp/config"
                ,(plain-file
                  "" (msmtp-config email-accounts "gmail")))
               ("offlineimap/config"
                ,(plain-file
-                 "" (offlineimap-config email-accounts)))
-              ("offlineimap/auth.py" ,(local-file "files/offlineimap/auth.py"))
-              ("offlineimap/postsync.sh" ,(local-file "files/offlineimap/postsync.sh"))
-              ("davmail/davmail.properties" ,(local-file "files/davmail/davmail.properties"))
-              ("qutebrowser/config.py" ,(local-file "files/qutebrowser/config.py"))
-              ("qutebrowser/greasemonkey/youtube-ad-blocker.js" ,(local-file "files/qutebrowser/greasemonkey/youtube-ad-blocker.js"))
-              ("tmux/tmux.conf" ,(local-file "files/tmux/tmux.conf")))))))
+                 "" (offlineimap-config email-accounts))))))))
