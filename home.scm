@@ -10,6 +10,7 @@
              (guix packages)
              (lrustand packages package-groups)
              (lrustand home services)
+             (lrustand services repos)
              (lrustand mail offlineimap)
              (lrustand mail msmtp))
 
@@ -105,6 +106,19 @@
             (home-zsh-configuration
              (zshrc (list
                      (local-file "files/zsh/zshrc")))))
+   (service home-git-clone-service-type
+            '(("https://github.com/stumpwm/stumpwm"
+               "code/forks/stumpwm")
+              ("https://github.com/lrustand/guix-config"
+               "code/guix-config")
+              ("https://github.com/lrustand/dotfiles_ansible"
+               "code/dotfiles_ansible")
+              ("https://github.com/lrustand/qmk_firmware"
+               "code/qmk")
+              ("https://github.com/lrustand/zmk"
+               "code/zmk")
+              ("https://github.com/qutebrowser/qutebrowser"
+               "code/forks/qutebrowser")))
    (service home-bash-service-type
             (home-bash-configuration
              (guix-defaults? #t)))
