@@ -153,6 +153,9 @@
             '(("https://github.com/stumpwm/stumpwm"
                "code/forks/stumpwm")
 
+              ("https://github.com/atlas-engineer/nyxt"
+               "code/forks/nyxt")
+
               ("https://github.com/lrustand/guix-config"
                "code/guix-config")
 
