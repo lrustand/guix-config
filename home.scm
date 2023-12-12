@@ -59,7 +59,11 @@
       "ecryptfs-utils"
       "guile-readline"
       "guile-colorized"
+      "cmake"
+      "make"
+      "gcc-toolchain"
       "sqlite" ;; Needed for qutebrowser
+      "tree"
       "font-dejavu"
       "nyxt"
       "sbcl"
