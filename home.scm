@@ -102,49 +102,70 @@
                        "050796f9d48e8a5af8b99a03cdfe7ff1fda8d2a3"
                        (openpgp-fingerprint
                         "8A20 89FB 60FA 2311 3046  5178 022B 5FFE 7AEE F619"))))))
+
    (service home-shepherd-service-type)
+
    (service home-zsh-service-type
             (home-zsh-configuration
              (zshrc (list
                      (local-file "files/zsh/zshrc")))))
+
    (service home-symlinks-service-type
             '(("/home/lars/code/guix-config/files/emacs/init.el"
                ".emacs.d/init.el")
+
               ("/home/lars/code/guix-config/files/alacritty/alacritty.yml"
                ".config/alacritty/alacritty.yml")
+
               ("/home/lars/code/guix-config/files/stumpwm/config"
                ".config/stumpwm/config")
+
               ("/home/lars/code/guix-config/files/nyxt/config.lisp"
                ".config/nyxt/config.lisp")
+
               ("/home/lars/code/guix-config/files/offlineimap/auth.py"
                ".config/offlineimap/auth.py")
+
               ("/home/lars/code/guix-config/files/davmail/davmail.properties"
                ".config/davmail/davmail.properties")
+
               ("/home/lars/code/guix-config/files/qutebrowser/config.py"
                ".config/qutebrowser/config.py")
+
               ("/home/lars/code/guix-config/files/qutebrowser/greasemonkey/youtube-ad-blocker.js"
                ".config/qutebrowser/greasemonkey/youtube-ad-blocker.js")
+
               ("/home/lars/code/guix-config/files/qutebrowser/qutedmenu"
                ".local/share/qutebrowser/userscripts/qutedmenu")
+
               ("/home/lars/code/guix-config/files/guile/.guile" ".guile")
+
               ("/home/lars/code/guix-config/files/tmux/tmux.conf"
                ".config/tmux/tmux.conf")))
+
    (service home-git-clone-service-type
             '(("https://github.com/stumpwm/stumpwm"
                "code/forks/stumpwm")
+
               ("https://github.com/lrustand/guix-config"
                "code/guix-config")
+
               ("https://github.com/lrustand/dotfiles_ansible"
                "code/dotfiles_ansible")
+
               ("https://github.com/lrustand/qmk_firmware"
                "code/qmk")
+
               ("https://github.com/lrustand/zmk"
                "code/zmk")
+
               ("https://github.com/qutebrowser/qutebrowser"
                "code/forks/qutebrowser")))
+
    (service home-bash-service-type
             (home-bash-configuration
              (guix-defaults? #t)))
+
    ;; TODO possibly add this in etc
    (service home-xmodmap-service-type
          (home-xmodmap-configuration
@@ -152,7 +173,9 @@
                      ("keysym Caps_Lock" . "Hyper_L")
                      ("remove Mod4" . "Hyper_L")
                      ("add Mod3" . "Hyper_L")))))
+
    (service home-syncthing-service-type)
+
    (service home-xdg-configuration-files-service-type
             `(("msmtp/config"
                ,(plain-file
