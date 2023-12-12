@@ -28,6 +28,8 @@
   (vsplit)
   (move-focus :down))
 
+(set-prefix-key (kbd "s-space"))
+
 (define-key *top-map* (kbd "s-RET") "alacritty")
 (define-key *top-map* (kbd "s-BackSpace") "delete")
 (define-key *top-map* (kbd "H-BackSpace") "kill-windows-current-group")
@@ -142,6 +144,18 @@
 (setf *mode-line-foreground-color* "#cccccc")
 (setf *mode-line-timeout* 1)
 
+(when *initializing*
+  (mode-line))
+
+(when *initializing*
+  (grename "[MAIN]")
+  (gnewbg "[TERM]")
+  (gnewbg "[WWW]")
+  (gnewbg "[PRIV]")
+  (gnewbg "[FILES]"))
+
+(when *initializing*
+  (which-key-mode))
 
 (ql:quickload "slynk")
 (require :slynk)
@@ -187,21 +201,8 @@
     " | ^B%d" ;; Date and time as describe in "time-modeline-string"
 ))
 
-(when *initializing*
-  (mode-line))
 
-(when *initializing*
-  (grename "[MAIN]")
-  (gnewbg "[TERM]")
-  (gnewbg "[WWW]")
-  (gnewbg "[PRIV]")
-  (gnewbg "[FILES]"))
-
-(when *initializing*
-  (which-key-mode))
-
-;;(setf *input-history-ignore-duplicates* t)
-(set-prefix-key (kbd "s-space"))
+(setf *input-history-ignore-duplicates* t)
 
 
 ;;(stumpwm:add-to-load-path "~/.stumpwm.d/modules/stumpwm-rofi")
