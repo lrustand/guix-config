@@ -120,6 +120,12 @@
               ("/home/lars/code/guix-config/files/stumpwm/config"
                ".config/stumpwm/config")
 
+              ("/home/lars/code/guix-config/files/stumpwm/.xinitrc"
+               ".xinitrc")
+
+              ("/home/lars/code/guix-config/files/stumpwm/start-stump"
+               "start-stump")
+
               ("/home/lars/code/guix-config/files/nyxt/config.lisp"
                ".config/nyxt/config.lisp")
 

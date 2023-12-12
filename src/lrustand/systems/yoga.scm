@@ -48,6 +48,7 @@
             "htop"
             "tmux"
             "stumpwm"
+            "xinitrc-xsession"
             "openssh"))
         %base-packages))
   
