@@ -169,6 +169,15 @@
               ("https://github.com/lrustand/guix-config"
                "code/guix-config")
 
+              ("https://git.savannah.gnu.org/git/guix.git"
+               "code/forks/guix")
+
+              ("https://gitlab.com/nonguix/nonguix"
+               "code/forks/nonguix")
+
+              ("https://git.sr.ht/~abcdw/rde"
+               "code/forks/rde")
+
               ("https://github.com/lrustand/dotfiles_ansible"
                "code/dotfiles_ansible")
 
