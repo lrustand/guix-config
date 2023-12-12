@@ -60,6 +60,7 @@
       "guile-readline"
       "guile-colorized"
       "sqlite" ;; Needed for qutebrowser
+      "font-dejavu"
       "nyxt"
       "sbcl"
       "python"
@@ -123,6 +124,9 @@
               ("/home/lars/code/guix-config/files/stumpwm/.xinitrc"
                ".xinitrc")
 
+              ("/home/lars/code/forks/stumpwm"
+               ".quicklisp/local-projects/stumpwm")
+
               ("/home/lars/code/guix-config/files/stumpwm/start-stump"
                "start-stump")
 
@@ -152,6 +156,12 @@
    (service home-git-clone-service-type
             '(("https://github.com/stumpwm/stumpwm"
                "code/forks/stumpwm")
+
+              ("https://github.com/stumpwm/stumpwm-contrib"
+               "code/forks/stumpwm-contrib")
+
+              ("https://github.com/lihebi/clx-truetype"
+               ".quicklisp/local-projects/clx-truetype")
 
               ("https://github.com/atlas-engineer/nyxt"
                "code/forks/nyxt")

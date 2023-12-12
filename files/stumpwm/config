@@ -141,19 +141,34 @@
 (setf *time-modeline-string* "%a %d.%m.%Y %H:%M")
 (setf *mode-line-foreground-color* "#cccccc")
 (setf *mode-line-timeout* 1)
-;;(load-module "net")
-;;(load-module "cpu")
-;;(load-module "battery-portable")
-;;(load-module "mem")
-;;(load-module "maildir")
 
-;;(ql:quickload :clx-truetype)
-;;(load-module "ttf-fonts")
-;;
-;;(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Bold" :size 10 :antialias t))
-;;(setf cpu::*cpu-modeline-fmt* "%c %t")
-;;(setf mem::*mem-modeline-fmt* "mem: ")
-;;(setf maildir::*maildir-modeline-fmt* "mail: %l %n %c %t")
+
+(ql:quickload "slynk")
+(require :slynk)
+(defcommand stump-slynk-server () ()
+  (slynk:create-server :port 4004
+                       :dont-close t))
+
+(when *initializing*
+  (stump-slynk-server))
+
+(load-module "net")
+(load-module "cpu")
+(load-module "battery-portable")
+(load-module "mem")
+(load-module "maildir")
+
+(ql:quickload "clx-truetype")
+(load-module "ttf-fonts")
+
+(setf xft:*font-dirs* (list (concat (getenv "HOME") "/.guix-home/profile/share/fonts/")))
+(setf clx-truetype::+font-cache-filename+ (concat (getenv "HOME") "/.fonts/font-cache.sexp"))
+(xft:cache-fonts)
+
+(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Bold" :size 10 :antialias t))
+(setf cpu::*cpu-modeline-fmt* "%c %t")
+(setf mem::*mem-modeline-fmt* "mem: ")
+(setf maildir::*maildir-modeline-fmt* "mail: %l %n %c %t")
 
 (setf *screen-mode-line-format*
   (list
@@ -185,15 +200,6 @@
 (when *initializing*
   (which-key-mode))
 
-;;(ql:quickload "slynk")
-;;(require :slynk)
-;;(defcommand stump-slynk-server () ()
-;;  (slynk:create-server :port 4004
-;;                       :dont-close t))
-;;
-;;(when *initializing*
-;;  (stump-slynk-server))
-;;
 ;;(setf *input-history-ignore-duplicates* t)
 (set-prefix-key (kbd "s-space"))
 
