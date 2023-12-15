@@ -21,9 +21,6 @@
             home-offlineimap-service-type))
 
 (define-configuration/no-serialization offlineimap-configuration
-  (pid-file
-   (string "/var/run/offlineimap.pid")
-   "Where to store the PID file.")
   (config-file
    (string "/home/lars/.config/offlineimap/config")
    "Configuration file to use.")
@@ -43,7 +40,7 @@ arbitrary command-line arguments to ‘offlineimap’ as a list of strings.")
 
 (define offlineimap-shepherd-service
   (match-record-lambda <offlineimap-configuration>
-    (pid-file config-file log-file user extra-options home-service?)
+    (config-file log-file user extra-options home-service?)
     (list (shepherd-service
            (provision '(offlineimap))
            (documentation "")
@@ -57,8 +54,7 @@ arbitrary command-line arguments to ‘offlineimap’ as a list of strings.")
                      #:user #$user
                      #:environment-variables
                      (list (string-append "HOME=" (passwd:dir (getpw #$user))))
-                     #:log-file #$log-file
-                     #:pid-file #$pid-file))
+                     #:log-file #$log-file))
            (stop #~(make-kill-destructor))
            (one-shot? #f)
            (respawn? #t)))))

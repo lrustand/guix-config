@@ -21,9 +21,6 @@
             home-davmail-service-type))
 
 (define-configuration/no-serialization davmail-configuration
-  (pid-file
-   (string "/var/run/davmail.pid")
-   "Where to store the PID file.")
   (config-file
    (string "/home/lars/.config/davmail/davmail.properties")
    "Configuration file to use.")
@@ -40,7 +37,7 @@ arbitrary command-line arguments to ‘davmail’ as a list of strings.")
 
 (define davmail-shepherd-service
   (match-record-lambda <davmail-configuration>
-    (pid-file config-file log-file extra-options home-service?)
+    (config-file log-file extra-options home-service?)
     (list (shepherd-service
            (provision '(davmail))
            (documentation "")
@@ -50,8 +47,7 @@ arbitrary command-line arguments to ‘davmail’ as a list of strings.")
                                            "/bin/davmail")
                              #$@extra-options
                              "-c" #$config-file)
-                     #:log-file #$log-file
-                     #:pid-file #$pid-file))
+                     #:log-file #$log-file))
            (stop #~(make-kill-destructor))
            (one-shot? #f)
            (respawn? #t)))))
