@@ -32,7 +32,8 @@
   #:use-module (gnu packages base)
   #:use-module (gnu packages bash)
   #:use-module (gnu packages shells)
-  #:use-module (gnu packages fonts))
+  #:use-module (gnu packages fonts)
+  #:export (%pinephone-pro-operating-system))
 
 (define-public pinephone-pro-firmware
   (let ((commit "5c4c2b89f30a42f5ffabb5b5bcbc799d8ac9f66f")
@@ -149,7 +150,7 @@ System on hardware which requires nonfree software to function."))))
                `(("lars" ,(local-file "ssh.key"))))
               (print-last-log? #t))))))
 
-(define pinephone-pro-operating-system
+(define %pinephone-pro-operating-system
   (operating-system
     (kernel pinephone-pro-kernel)
     (kernel-arguments
@@ -206,4 +207,4 @@ System on hardware which requires nonfree software to function."))))
 
     (services %my-services)))
 
-pinephone-pro-operating-system
+%pinephone-pro-operating-system
