@@ -1,7 +1,7 @@
 (define-module (lrustand services davmail)
   #:use-module (gnu)
   #:use-module (gnu services)
-  #:use-module (gnu packages mail)
+  #:use-module (lrustand packages davmail)
   #:use-module (gnu services shepherd)
   #:use-module (gnu services configuration)
   #:use-module (guix gexp)
