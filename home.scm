@@ -10,6 +10,7 @@
              (guix packages)
              (lrustand packages package-groups)
              (lrustand home services)
+             (lrustand services offlineimap)
              (lrustand services repos)
              (lrustand services symlinks)
              (lrustand mail offlineimap)
@@ -207,6 +208,7 @@
                      ("add Mod3" . "Hyper_L")))))
 
    (service home-syncthing-service-type)
+   (service home-offlineimap-service-type)
 
    (service home-xdg-configuration-files-service-type
             `(("msmtp/config"
