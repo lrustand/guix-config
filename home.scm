@@ -9,6 +9,7 @@
              (guix channels)
              (guix packages)
              (lrustand packages package-groups)
+             (lrustand packages lisgd)
              (lrustand home services)
              (lrustand services offlineimap)
              (lrustand services repos)
@@ -47,7 +48,8 @@
 (home-environment
  (packages
   (append
-   (list qutebrowser-with-tldextract)
+   (list qutebrowser-with-tldextract
+         lisgd)
    %shell-packages
    %emacs-packages
    %mail-packages

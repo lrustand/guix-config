@@ -151,6 +151,10 @@
 (define-key *top-map* (kbd "s-s") "vsplit-and-focus")
 (define-key *top-map* (kbd "s-S") "hsplit-and-focus")
 
+;; Enable touchscreen keyboard
+(define-key *top-map* (kbd "H-m") "show-svkbd")
+(define-key *top-map* (kbd "H-M") "hide-svkbd")
+
 ;;(load-module "clipboard-history")
 ;;
 ;;(define-key *root-map* (kbd "C-y") "show-clipboard-history")
@@ -163,6 +167,23 @@
 
 (when *initializing*
   (mode-line))
+
+(defvar svkbd-visible t)
+(defvar svkbd-xwin nil)
+
+(defcommand show-svkbd () ()
+  (stumpwm::resize-head 0 0 0 1920 (- 1080 270))
+  (xlib:map-window (mode-line-window (car *mode-lines*)))
+  (setf (xlib:drawable-y (mode-line-window (car *mode-lines*))) (- 1080 270))
+  (setf (xlib:drawable-height (mode-line-window (car *mode-lines*))) 270)
+  (setf svkbd-visible t))
+
+(defcommand hide-svkbd () ()
+  (stumpwm::resize-head 0 0 0 1920 1080)
+  (xlib:unmap-window (mode-line-window (car *mode-lines*)))
+  (setf svkbd-visible nil))
+
+
 
 (when *initializing*
   (grename "[MAIN]")
@@ -221,3 +242,5 @@
 
 (setf *input-history-ignore-duplicates* t)
 
+(when *initializing*
+  (run-shell-command "svkbd-mobile-intl -l minimal,symbols -d -g -0-0"))
