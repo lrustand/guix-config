@@ -35,7 +35,7 @@
           (group "users")
           (shell (file-append zsh "/bin/zsh"))
           (home-directory "/home/lars")
-          (supplementary-groups '("wheel")))
+          (supplementary-groups '("wheel" "input")))
         %base-user-accounts))
   
     (packages
@@ -49,6 +49,8 @@
             "tmux"
             "stumpwm"
             "xinitrc-xsession"
+            "libinput"
+            "xf86-input-libinput"
             "openssh"))
         %base-packages))
   
