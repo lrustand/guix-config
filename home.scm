@@ -205,9 +205,7 @@
               ("https://github.com/qutebrowser/qutebrowser"
                "code/forks/qutebrowser")))
 
-   (service home-bash-service-type
-            (home-bash-configuration
-             (guix-defaults? #t)))
+   (service home-bash-service-type)
 
    ;; TODO possibly add this in etc
    (service home-xmodmap-service-type
