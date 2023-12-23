@@ -36,7 +36,24 @@
 (define-key *top-map* (kbd "s-c") "loadrc")
 (define-key *top-map* (kbd "H-d") "rofi")
 
-(define-key *top-map* (kbd "s-f") "fullscreen")
+
+(defparameter *layouts* (make-hash-table :test #'eql))
+
+(defcommand toggle-full-layout () ()
+  (let* ( (gnum (group-number (current-group)))
+          (currlay (gethash gnum *layouts*)) )
+    (if currlay
+    (progn
+          (restore-group (current-group) currlay)
+          (setf (gethash gnum *layouts*) nil))
+      (progn
+        (setf (gethash gnum *layouts*) (dump-group (current-group)))
+    (run-commands "only"))
+      )
+    )
+  )
+
+(define-key *top-map* (kbd "s-f") "toggle-full-layout")
 
 ;; Move focus
 (define-key *top-map* (kbd "s-h") "move-focus left")
