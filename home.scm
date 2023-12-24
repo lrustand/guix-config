@@ -12,6 +12,7 @@
              (lrustand packages lisgd)
              (lrustand home services)
              (lrustand services offlineimap)
+             (lrustand services lisgd)
              (lrustand services repos)
              (lrustand services symlinks)
              (lrustand mail offlineimap)
@@ -48,8 +49,7 @@
 (home-environment
  (packages
   (append
-   (list qutebrowser-with-tldextract
-         lisgd)
+   (list qutebrowser-with-tldextract)
    %shell-packages
    %emacs-packages
    %mail-packages
@@ -217,6 +217,19 @@
 
    (service home-syncthing-service-type)
    (service home-offlineimap-service-type)
+
+   (service home-lisgd-service-type
+            (lisgd-configuration
+             (home-service? #t)
+             (extra-options '("-d" "/dev/input/by-path/pci-0000:00:15.0-platform-i2c_designware.0-event"
+                              "-g" "1,RL,R,*,P,xdotool key Super_L+n"
+                              "-g" "1,LR,L,*,P,xdotool key Super_L+p"
+                              "-g" "2,RL,*,*,R,xdotool key Super_L+n"
+                              "-g" "2,LR,*,*,R,xdotool key Super_L+p"
+                              "-g" "1,DU,B,*,P,xdotool key Hyper_L+m"
+                              "-g" "1,UD,B,*,P,xdotool key Hyper_L+M"
+                              "-g" "1,UD,T,*,P,SHOW_MENU"
+                              "-g" "1,DLUR,TR,*,P,xdotool key Super_L+f"))))
 
    (service home-xdg-configuration-files-service-type
             `(("msmtp/config"
