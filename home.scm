@@ -78,6 +78,8 @@
       "font-dejavu"
       "nyxt"
       "sbcl"
+      "sbcl-clx-truetype"
+      "sbcl-slynk"
       "python"
       "nss-certs"
       "neovim"))))

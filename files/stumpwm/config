@@ -195,7 +195,7 @@
 (when *initializing*
   (which-key-mode))
 
-(ql:quickload "slynk")
+(asdf:load-system "slynk")
 (require :slynk)
 (defcommand stump-slynk-server () ()
   (slynk:create-server :port 4004
@@ -210,7 +210,7 @@
 (load-module "mem")
 (load-module "maildir")
 
-(ql:quickload "clx-truetype")
+(asdf:load-system "clx-truetype")
 (load-module "ttf-fonts")
 
 (setf xft:*font-dirs* (list (concat (getenv "HOME") "/.guix-home/profile/share/fonts/")))
