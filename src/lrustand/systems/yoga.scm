@@ -7,6 +7,7 @@
   #:use-module (gnu services xorg)
 
   #:use-module (gnu services networking)
+  #:use-module (gnu services virtualization)
   #:use-module (gnu services ssh)
   #:use-module (gnu services admin)
   #:use-module (gnu services desktop))
@@ -56,6 +57,9 @@
   
     (services
       (cons*
+       (service qemu-binfmt-service-type
+                (qemu-binfmt-configuration
+                 (platforms (lookup-qemu-platforms "arm" "aarch64"))))
        (set-xorg-configuration
          (xorg-configuration
            (keyboard-layout keyboard-layout)))
