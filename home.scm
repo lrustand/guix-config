@@ -147,6 +147,9 @@
               ("/home/lars/code/guix-config/files/stumpwm/start-stump"
                "start-stump")
 
+              ("/home/lars/code/guix-config/files/autorandr"
+               ".config/autorandr")
+
               ("/home/lars/code/guix-config/files/nyxt/config.lisp"
                ".config/nyxt/config.lisp")
 
