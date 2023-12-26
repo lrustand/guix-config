@@ -1,3 +1,4 @@
-(ql:register-local-projects)
-(require :stumpwm)
+;; -*- mode: lisp -*-
+(push  "~/code/forks/stumpwm/" asdf:*central-registry*)
+(asdf:load-system :stumpwm)
 (stumpwm:stumpwm)
