@@ -1,5 +1,6 @@
 (define-module (lrustand systems rpi)
   #:use-module (lrustand packages rpi)
+  #:use-module (lrustand systems base)
   #:use-module (gnu)
   #:use-module (gnu bootloader)
   #:use-module (gnu bootloader u-boot)
@@ -46,14 +47,14 @@ load the Grub bootloader located in the 'Guix_image' root partition."
    (disk-image-installer install-rpi-arm64-u-boot)))
 
 (define-public raspberry-pi-barebones-os
-  (operating-system
+  (operating-system (inherit %base-operating-system)
    (host-name "rpi")
-   (timezone "Europe/Oslo")
-   (locale "en_US.utf8")
+
    (bootloader (bootloader-configuration
 		(bootloader  u-boot-rpi-arm64-bootloader)
 		(targets '("/dev/vda"))
     (device-tree-support? #f)))
+
    (kernel linux-raspberry-6.1)
    (kernel-arguments (cons* "cgroup_enable=memory"
                             %default-kernel-arguments))
@@ -73,16 +74,7 @@ load the Grub bootloader located in the 'Guix_image' root partition."
 
    (services %base-services)
 
-   (packages %base-packages)
-
-   (users (cons (user-account
-                 (name "pi")
-                 (comment "raspberrypi user")
-                 (password (crypt "123" "123$456"))
-                 (group "users")
-                 (supplementary-groups '("wheel")))
-                %base-user-accounts))
-   ))
+   (packages %base-packages)))
 
 (define rpi-boot-partition
   (partition
