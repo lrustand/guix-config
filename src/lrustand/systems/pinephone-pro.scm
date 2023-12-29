@@ -16,6 +16,8 @@
 
 (define-public %pinephone-pro-operating-system
   (operating-system (inherit %base-operating-system)
+    (host-name "pinephonepro")
+
     (kernel pinephone-pro-kernel)
     (kernel-arguments
      (append
@@ -27,10 +29,9 @@
 
     (initrd-modules '())
 
-    (firmware (append
-               (list pinephone-pro-firmware)
+    (firmware (cons*
+               pinephone-pro-firmware
                %base-firmware))
-    (host-name "pinephonepro")
 
     (bootloader
      (bootloader-configuration
