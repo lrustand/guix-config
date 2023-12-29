@@ -22,22 +22,6 @@
   #:use-module (guix gexp)
   #:export (%pinephone-pro-operating-system))
 
-(define %my-services
-  (append
-   %desktop-services
-   (list
-    ;;(service wpa-supplicant-service-type)
-    ;;(service network-manager-service-type)
-    ;;(service slim-service-type)
-    ;;(service modem-manager-service-type)
-    ;;(service alsa-service-type)
-    (service openssh-service-type
-             (openssh-configuration
-              (x11-forwarding? #f)
-              (authorized-keys
-               `(("lars" ,(local-file "ssh.key"))))
-              (print-last-log? #t))))))
-
 (define %pinephone-pro-operating-system
   (operating-system
     (kernel pinephone-pro-kernel)
@@ -93,6 +77,20 @@
               nss-certs)
       %base-packages))
 
-    (services %my-services)))
+    (services
+     (append
+      %base-services
+      (list
+       (service wpa-supplicant-service-type)
+       ;;(service network-manager-service-type)
+       ;;(service slim-service-type)
+       ;;(service modem-manager-service-type)
+       ;;(service alsa-service-type)
+       (service openssh-service-type
+                (openssh-configuration
+                 (x11-forwarding? #f)
+                 (authorized-keys
+                  `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))))
+                 (print-last-log? #t))))))))
 
 %pinephone-pro-operating-system
