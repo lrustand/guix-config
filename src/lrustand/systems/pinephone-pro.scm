@@ -22,7 +22,7 @@
   #:use-module (guix gexp)
   #:export (%pinephone-pro-operating-system))
 
-(define %pinephone-pro-operating-system
+(define-public %pinephone-pro-operating-system
   (operating-system
     (kernel pinephone-pro-kernel)
     (kernel-arguments

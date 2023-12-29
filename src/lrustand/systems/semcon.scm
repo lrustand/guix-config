@@ -11,7 +11,7 @@
   #:use-module (gnu services admin)
   #:use-module (gnu services desktop))
 
-(define %semcon-operating-system
+(define-public %semcon-operating-system
   (operating-system
     (locale "en_US.utf8")
     (timezone "Europe/Oslo")

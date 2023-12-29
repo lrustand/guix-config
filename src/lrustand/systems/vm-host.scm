@@ -35,7 +35,7 @@
       (description "")
       (license gpl2))))
 
-(define %vm-host-operating-system
+(define-public %vm-host-operating-system
   (operating-system
     (locale "en_US.utf8")
     (timezone "Europe/Oslo")
