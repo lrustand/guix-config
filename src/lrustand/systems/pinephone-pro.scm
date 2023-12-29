@@ -51,7 +51,7 @@
 		  ;; Uncomment and edit this when building image
                   ;; (password (crypt "1234" "$6$abc"))
                   (group "users")
-                  (supplementary-groups '("wheel" "audio" "video"))
+                  (supplementary-groups '("wheel" "audio" "video" "input"))
                   (shell (file-append zsh "/bin/zsh"))
                   (home-directory "/home/lars"))
                  %base-user-accounts))
