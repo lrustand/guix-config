@@ -1,61 +1,48 @@
-(define-module (lrustand systems bouncer))
-(use-modules
-  (gnu)
-  (gnu packages firmware)
-  (gnu services xorg))
+(define-module (lrustand systems bouncer)
+  #:use-module (lrustand systems base)
+  #:use-module (lrustand services base)
 
-(use-service-modules
- networking
- ssh
- admin
- vpn)
+  #:use-module (gnu)
+  #:use-module (gnu packages firmware)
+  #:use-module (gnu services xorg)
 
-(operating-system
-  (locale "en_US.utf8")
-  (timezone "Europe/Oslo")
-  (keyboard-layout (keyboard-layout "us"))
-  (host-name "yoga")
+  #:use-module (gnu services networking)
+  #:use-module (gnu services ssh)
+  #:use-module (gnu services admin)
+  #:use-module (gnu services vpn))
 
-  (kernel-arguments (list "console=ttyS0,115200"))
+(define-public %bouncer-operating-system
+  (operating-system (inherit %base-operating-system)
+    (host-name "bouncer")
 
-  (users
-    (cons*
-      (user-account
-        (name "lars")
-        (comment "")
-        (group "users")
-        (home-directory "/home/lars")
-        (supplementary-groups '("wheel")))
-      %base-user-accounts))
+    (kernel-arguments (list "console=ttyS0,115200"))
 
-  (packages
-    (append
-      (map specification->package
-        (list
-          "nss-certs"
-          "znc"
-          "tmux"))
-      %base-packages))
+    (packages
+      (append
+        (map specification->package
+          (list
+            "nss-certs"
+            "znc"
+            "bitlbee"
+            "tmux"))
+        %base-packages))
 
-  (services
-    (cons*
-     (service dhcp-client-service-type)
-     (service ntp-service-type)
-     %base-services))
+    (services
+     (cons*
+      (service dhcp-client-service-type)
+      (service ntp-service-type)
+      %base-services))
 
-   (bootloader
-     (bootloader-configuration
-       (bootloader grub-efi-bootloader)
-       (targets '("/boot/efi"))
-       (keyboard-layout keyboard-layout)))
+     (file-systems
+      (cons*
+       (file-system
+         (mount-point "/")
+         (device "/dev/vda2")
+         (type "ext4"))
+       (file-system
+         (mount-point "/boot/efi")
+         (device "/dev/vda1")
+         (type "vfat"))
+       %base-file-systems))))
 
-   (file-systems
-    (cons*
-     (file-system
-       (mount-point "/")
-       (device "/dev/vda")
-       (type "ext4"))
-     (file-system
-       (mount-point "/boot/efi")
-       (device "/dev/vda")
-       (type "vfat")) %base-file-systems)))
+%bouncer-operating-system
