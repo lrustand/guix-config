@@ -13,28 +13,6 @@
   #:use-module (guix licenses)
   #:use-module (guix build-system linux-module))
 
-(define-public vendor-reset
-  (let ((commit "4b466e92a2d9f76ce1082cde982c7be0be91e248"))
-    (package
-      (name "vendor-reset")
-      (version (git-version "0.8" "2" commit))
-      (source (origin
-                (method git-fetch)
-                (uri (git-reference
-                      (url "https://github.com/gnif/vendor-reset")
-                      (commit commit)))
-                (file-name (git-file-name name version))
-                (sha256
-                 (base32
-                  "1gaf4j20grng689c9fylcqri3j9ycnhr2bsva2z6qcdqvzl6yxbi"))))
-      (build-system linux-module-build-system)
-      (arguments
-       (list #:tests? #f))              ; no test suite
-      (home-page "https://github.com/gnif/vendor-reset")
-      (synopsis "")
-      (description "")
-      (license gpl2))))
-
 (define-public %vm-host-operating-system
   (operating-system
     (locale "en_US.utf8")
@@ -91,6 +69,7 @@
             "tmux"
             "mdadm"
             "xf86-video-amdgpu"
+            "vendor-reset-linux-module"
             "openssh"
             "net-tools"
             "tpm2-tss"
@@ -98,7 +77,6 @@
             "ovmf"
             "virt-manager"
             "libvirt"))
-        (list vendor-reset)
         %base-packages))
 
     ;; Below is the list of system services.  To search for available
