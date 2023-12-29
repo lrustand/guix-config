@@ -9,6 +9,7 @@
   #:use-module (gnu services networking)
   #:use-module (gnu services ssh)
   #:use-module (gnu services admin)
+  #:use-module (gnu services messaging)
   #:use-module (gnu services vpn))
 
 (define-public %bouncer-operating-system
@@ -29,6 +30,7 @@
 
     (services
      (cons*
+      (service bitlbee-service-type)
       (service dhcp-client-service-type)
       (service ntp-service-type)
       %base-services))
