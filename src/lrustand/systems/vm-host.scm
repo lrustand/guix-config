@@ -1,28 +1,14 @@
 (define-module (lrustand systems vm-host)
+  #:use-module (lrustand systems base)
+  #:use-module (lrustand services base)
   #:use-module (gnu)
-  #:use-module (nongnu packages linux)
-  #:use-module (nongnu system linux-initrd)
   #:use-module (gnu packages firmware)
-  #:use-module (gnu services desktop)
-  #:use-module (gnu services networking)
   #:use-module (gnu services ssh)
-  #:use-module (gnu services xorg)
-  #:use-module (gnu services virtualization)
-  #:use-module (guix packages)
-  #:use-module (guix git-download)
-  #:use-module (guix licenses)
-  #:use-module (guix build-system linux-module))
+  #:use-module (gnu services virtualization))
 
 (define-public %vm-host-operating-system
-  (operating-system
-    (locale "en_US.utf8")
-    (timezone "Europe/Oslo")
-    (keyboard-layout (keyboard-layout "us"))
+  (operating-system (inherit %base-operating-system)
     (host-name "ryzen")
-
-    (kernel linux)
-    (initrd microcode-initrd)
-    (firmware (list linux-firmware))
 
     (kernel-arguments
       (append
@@ -44,7 +30,6 @@
 
     (kernel-loadable-modules (list vendor-reset))
 
-    ;; The list of user accounts ('root' is implicit).
     (users
       (cons*
         (user-account
@@ -55,9 +40,6 @@
           (supplementary-groups '("wheel" "netdev" "audio" "video" "libvirt" "kvm")))
         %base-user-accounts))
 
-    ;; Packages installed system-wide.  Users can also install packages
-    ;; under their own account: use 'guix search KEYWORD' to search
-    ;; for packages and 'guix install PACKAGE' to install a package.
     (packages
       (append
         (map specification->package
@@ -79,8 +61,6 @@
             "libvirt"))
         %base-packages))
 
-    ;; Below is the list of system services.  To search for available
-    ;; services, run 'guix system search KEYWORD' in a terminal.
     (services
       (cons*
         (service openssh-service-type
@@ -90,21 +70,7 @@
           (libvirt-configuration
             (unix-sock-group "kvm")))
         (service virtlog-service-type)
-        (modify-services %desktop-services
-          (guix-service-type config => (guix-configuration
-            (inherit config)
-            (substitute-urls
-             (append (list "https://substitutes.nonguix.org")
-               %default-substitute-urls))
-            (authorized-keys
-             (append (list (plain-file "non-guix.pub" "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
-               %default-authorized-guix-keys)))))))
-
-    (bootloader
-      (bootloader-configuration
-        (bootloader grub-efi-removable-bootloader)
-        (targets (list "/boot/efi"))
-        (keyboard-layout keyboard-layout)))
+        %lr/desktop-services))
 
     (mapped-devices
       (list
