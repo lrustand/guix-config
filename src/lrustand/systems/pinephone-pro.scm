@@ -1,29 +1,21 @@
 (define-module (lrustand systems pinephone-pro)
   #:use-module (lrustand packages pinephone-pro)
-  #:use-module (gnu packages certs)
-  #:use-module (nongnu packages linux)
+  #:use-module (lrustand systems base)
+  #:use-module (lrustand services base)
   #:use-module (gnu system)
-  #:use-module (gnu system keyboard)
   #:use-module (gnu system file-systems)
   #:use-module (gnu system shadow)
   #:use-module (gnu bootloader)
   #:use-module (gnu bootloader u-boot)
-  #:use-module (gnu services)
-  #:use-module (gnu services base)
-  #:use-module (gnu services ssh)
-  #:use-module (gnu services desktop)
-  #:use-module (gnu services networking)
-  #:use-module (gnu services xorg)
-  #:use-module (gnu services sound)
-  #:use-module (gnu packages)
-  #:use-module (gnu packages base)
   #:use-module (gnu packages shells)
+  #:use-module (gnu services)
+  #:use-module (gnu services ssh)
   #:use-module (srfi srfi-1)
   #:use-module (guix gexp)
   #:export (%pinephone-pro-operating-system))
 
 (define-public %pinephone-pro-operating-system
-  (operating-system
+  (operating-system (inherit %base-operating-system)
     (kernel pinephone-pro-kernel)
     (kernel-arguments
      (append
@@ -39,9 +31,6 @@
                (list pinephone-pro-firmware)
                %base-firmware))
     (host-name "pinephonepro")
-    (timezone "Europe/Oslo")
-    (locale "en_US.utf8")
-    (keyboard-layout (keyboard-layout "us" "qwerty"))
 
     (bootloader
      (bootloader-configuration
@@ -66,26 +55,10 @@
                   (home-directory "/home/lars"))
                  %base-user-accounts))
 
-    (packages
-     (append (list
-              parted
-              stumpwm
-              pulseaudio
-              alsa-utils
-              sof-firmware ;; TODO: Might not be needed, try without
-              ;;alsa-firmware
-              nss-certs)
-      %base-packages))
-
     (services
      (append
-      %base-services
+      %lr/desktop-services
       (list
-       (service wpa-supplicant-service-type)
-       ;;(service network-manager-service-type)
-       ;;(service slim-service-type)
-       ;;(service modem-manager-service-type)
-       ;;(service alsa-service-type)
        (service openssh-service-type
                 (openssh-configuration
                  (x11-forwarding? #f)
