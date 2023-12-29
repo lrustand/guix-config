@@ -72,23 +72,11 @@
         (service virtlog-service-type)
         %lr/desktop-services))
 
-    (mapped-devices
-      (list
-        (mapped-device
-          (source (list "/dev/nvme0n1p2" "/dev/nvme1n1p3"))
-          ;; TODO: post bug
-          ;; (source (list (uuid "a07c54da-eb61-4135-86b8-8791e863e46a") (uuid "c40026af-ace9-47fc-9d3f-4b8d6a2219cb")))
-          (target "/dev/md0")
-          (type raid-device-mapping))))
-
     (swap-devices
       (list
         (swap-space (target (uuid "7490c696-a596-4d9e-9ff9-ba7444a001db")))
         (swap-space (target (uuid "9b6e0c75-1f85-4ba7-84fb-8e2eceae5c1f")))))
 
-    ;; The list of file systems that get "mounted".  The unique
-    ;; file system identifiers there ("UUIDs") can be obtained
-    ;; by running 'blkid' in a terminal.
     (file-systems
       (cons*
         (file-system
@@ -98,13 +86,10 @@
                    'ext4))
           (type "ext4"))
         (file-system
-          (mount-point "/asdf")
-          (device "/dev/md0")
-          (type "ext4"))
-        (file-system
           (mount-point "/boot/efi")
           (device (uuid "CE8E-65A2"
                         'fat32))
-          (type "vfat")) %base-file-systems))))
+          (type "vfat"))
+        %base-file-systems))))
 
 %vm-host-operating-system
