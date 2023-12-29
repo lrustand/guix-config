@@ -35,16 +35,16 @@
       (service ntp-service-type)
       %base-services))
 
-     (file-systems
-      (cons*
-       (file-system
-         (mount-point "/")
-         (device "/dev/vda2")
-         (type "ext4"))
-       (file-system
-         (mount-point "/boot/efi")
-         (device "/dev/vda1")
-         (type "vfat"))
-       %base-file-systems))))
+    (file-systems
+     (cons*
+      (file-system
+        (mount-point "/")
+        (device "/dev/vda2")
+        (type "ext4"))
+      (file-system
+        (mount-point "/boot/efi")
+        (device "/dev/vda1")
+        (type "vfat"))
+      %base-file-systems))))
 
 %bouncer-operating-system
