@@ -1,16 +1,22 @@
 (define-module (lrustand systems base)
   #:use-module (lrustand services base)
-
   #:use-module (gnu)
-  #:use-module (nongnu packages linux)
-  #:use-module (nongnu system linux-initrd)
+  #:use-module (gnu bootloader)
+  #:use-module (gnu bootloader grub)
   #:use-module (gnu packages firmware)
   #:use-module (gnu packages shells)
-  #:use-module (gnu services xorg)
-
-  #:use-module (gnu services networking)
+  #:use-module (gnu system)
+  #:use-module (gnu system file-systems)
+  #:use-module (gnu system keyboard)
+  #:use-module (gnu system accounts)
+  #:use-module (gnu system linux-initrd)
+  #:use-module (gnu system locale)
   #:use-module (gnu services admin)
-  #:use-module (gnu services desktop))
+  #:use-module (gnu services desktop)
+  #:use-module (gnu services networking)
+  #:use-module (gnu services xorg)
+  #:use-module (nongnu packages linux)
+  #:use-module (nongnu system linux-initrd))
 
 (define-public %base-operating-system
   (operating-system
