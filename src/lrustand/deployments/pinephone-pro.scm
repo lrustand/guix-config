@@ -1,8 +1,7 @@
 (define-module (lrustand deployments pinephone-pro)
-  #:use-module (lrustand machines pinephone-pro)
-  #:export (%pinephone-pro-deployment))
+  #:use-module (lrustand machines pinephone-pro))
 
-(define %pinephone-pro-deployment
+(define-public %pinephone-pro-deployment
   (list %pinephone-pro-machine))
 
 %pinephone-pro-deployment

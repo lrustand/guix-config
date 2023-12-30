@@ -3,8 +3,7 @@
   #:use-module (gnu machine)
   #:use-module (gnu machine ssh)
   #:use-module (guix)
-  #:use-module (lrustand systems pinephone-pro)
-  #:export (%pinephone-pro-machine))
+  #:use-module (lrustand systems pinephone-pro))
 
 (define-public %pinephone-pro-machine
   (machine
