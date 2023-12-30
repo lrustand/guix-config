@@ -1,10 +1,5 @@
 (define-module (lrustand packages package-groups)
-  #:use-module (gnu packages)
-  #:export (%shell-packages)
-  #:export (%emacs-packages)
-  #:export (%mail-packages)
-  #:export (%x11-packages)
-  #:export (%password-store-packages))
+  #:use-module (gnu packages))
 
 (define-public %shell-packages
   (specifications->packages
@@ -14,7 +9,7 @@
      "zsh-autosuggestions"
      "zsh-history-substring-search")))
 
-(define %emacs-packages
+(define-public %emacs-packages
   (specifications->packages
    '("emacs-next"
      "libvterm"
@@ -23,14 +18,14 @@
      "emacs-geiser"
      "emacs-geiser-guile")))
 
-(define %mail-packages
+(define-public %mail-packages
   (specifications->packages
    '("msmtp"
      "mu"
      "notmuch"
      "offlineimap3")))
 
-(define %x11-packages
+(define-public %x11-packages
   (specifications->packages
    '("scrot"
      "rofi"
@@ -46,7 +41,7 @@
      "pavucontrol"
      "autorandr")))
 
-(define %password-store-packages
+(define-public %password-store-packages
   (specifications->packages
    '("password-store"
      "pass-otp"
