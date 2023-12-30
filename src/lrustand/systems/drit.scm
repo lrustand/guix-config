@@ -1,6 +1,8 @@
 (define-module (lrustand systems drit)
   #:use-module (lrustand systems base)
   #:use-module (lrustand services base)
+  #:use-module (gnu bootloader)
+  #:use-module (gnu bootloader grub)
   #:use-module (gnu system file-systems)
   #:use-module (gnu system))
 
