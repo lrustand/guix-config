@@ -66,12 +66,7 @@
           #:name name
           #:linux linux
           #:defconfig
-          ;; It could be "pinephone_pro_defconfig", but with a small patch
-          ;; TODO: Rewrite it to the simple patch for the source code
-          ;;(local-file "./pinephone_pro_defconfig")
           "pinephone_pro_defconfig"
-          ;;#:configs '("CONFIG_EXTRA_FIRMWARE=\"regulatory.db regulatory.db.p7s brcm/brcmfmac43455-sdio.bin brcm/brcmfmac43455-sdio.pine64,pinephone-pro.txt brcm/brcmfmac43455-sdio.clm_blob brcm/BCM4345C0.hcd rockchip/dptx.bin\""
-          ;;            "CONFIG_EXTRA_FIRMWARE_DIR=\"ppp/lib/firmware\"")
           #:extra-version "arm64-pinephone-pro"
           #:source (origin (method url-fetch)
                            (uri (linux-pinephone-urls version))
