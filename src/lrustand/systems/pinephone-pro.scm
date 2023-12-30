@@ -27,6 +27,7 @@
        "earlyprintk")
       (drop-right %default-kernel-arguments 1)))
 
+    (initrd base-initrd)
     (initrd-modules '())
 
     (firmware (cons*

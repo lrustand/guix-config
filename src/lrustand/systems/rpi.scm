@@ -57,6 +57,7 @@ load the Grub bootloader located in the 'Guix_image' root partition."
    (kernel linux-raspberry-6.1)
    (kernel-arguments (cons* "cgroup_enable=memory"
                             %default-kernel-arguments))
+   (initrd base-initrd)
    (initrd-modules '())
    (firmware (list raspberrypi-firmware brcm80211-firmware))
 
