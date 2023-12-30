@@ -11,8 +11,7 @@
   #:use-module (gnu services)
   #:use-module (gnu services ssh)
   #:use-module (srfi srfi-1)
-  #:use-module (guix gexp)
-  #:export (%pinephone-pro-operating-system))
+  #:use-module (guix gexp))
 
 (define-public %pinephone-pro-operating-system
   (operating-system (inherit %base-operating-system)
