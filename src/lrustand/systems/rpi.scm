@@ -16,6 +16,7 @@
   #:use-module (gnu system)
   #:use-module (gnu system file-systems)
   #:use-module (gnu system image)
+  #:use-module (gnu system linux-initrd)
   #:use-module (guix build-system copy)
   #:use-module (guix download)
   #:use-module (guix gexp)

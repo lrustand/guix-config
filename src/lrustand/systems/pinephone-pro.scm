@@ -4,6 +4,7 @@
   #:use-module (lrustand services base)
   #:use-module (gnu system)
   #:use-module (gnu system file-systems)
+  #:use-module (gnu system linux-initrd)
   #:use-module (gnu system shadow)
   #:use-module (gnu bootloader)
   #:use-module (gnu bootloader u-boot)
