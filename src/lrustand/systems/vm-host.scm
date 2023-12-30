@@ -28,7 +28,7 @@
           "nomodeset")))
     (initrd-modules (cons* "vfio" "vfio_pci" "vfio_iommu_type1" %base-initrd-modules))
 
-    (kernel-loadable-modules (list vendor-reset))
+    (kernel-loadable-modules (list (specification->package "vendor-reset-linux-module")))
 
     (users
       (cons*
