@@ -1,7 +1,7 @@
 (setq mugur-user-defined-keys
   '((H . caps)
-    (lower . space)
-    (raise . space)))
+    (lower . (LT lower space))
+    (raise . (LT raise space))))
 
 (let ((mugur-qmk-path       "~/code/keyboards/qmk_firmware")
       (mugur-keyboard-name   "ergotravel")
