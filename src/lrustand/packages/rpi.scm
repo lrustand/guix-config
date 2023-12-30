@@ -1,14 +1,12 @@
 (define-module (lrustand packages rpi)
  #:use-module (gnu)
- #:use-module (gnu packages linux)
  #:use-module (gnu system)
- #:use-module (gnu)
  #:use-module (gnu packages)
  #:use-module (gnu packages base)
  #:use-module (gnu packages compression)
  #:use-module (gnu packages linux)
+ #:use-module (gnu packages tls)
  #:use-module (guix gexp)
- #:use-module (guix licenses)
  #:use-module (guix packages)
  #:use-module (guix utils)
  #:use-module (guix download)
@@ -19,8 +17,7 @@
  #:use-module (guix build-system trivial)
  #:use-module (guix platform)
  #:use-module (ice-9 match)
- #:use-module (guix licenses)
- #:use-module (nonguix licenses))
+  #:use-module ((guix licenses) #:prefix license:))
 
 (define (config->string options)
   (string-join (map (match-lambda
@@ -86,57 +83,58 @@
             (method git-fetch)
             (uri (git-reference
                   (url "https://github.com/raspberrypi/linux")
-		  (commit "1.20230405")))
+                  (commit "1.20230405")))
             (file-name (string-append "linux-" version))
             (sha256
              (base32
               "04mpklc550yy7157f7i0kynpy8y2sjphf54hhn3dw13mfrq1xg10"))))
+   (native-inputs (modify-inputs (package-native-inputs linux-libre-6.1)
+                                 (append openssl)))
    (arguments
-    (substitute-keyword-arguments (package-arguments linux-libre-6.1)
-				  ((#:phases phases)
-				   #~(modify-phases #$phases
+    (substitute-keyword-arguments
+      (package-arguments linux-libre-6.1)
+      ((#:phases phases)
+       #~(modify-phases #$phases
 
-						    (replace 'configure
-							     (lambda* (#:key inputs target #:allow-other-keys)
-								      ;; Avoid introducing timestamps
-								      (setenv "KCONFIG_NOTIMESTAMP" "1")
-								      (setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
+          (replace 'configure
+           (lambda* (#:key inputs target #:allow-other-keys)
+             ;; Avoid introducing timestamps
+             (setenv "KCONFIG_NOTIMESTAMP" "1")
+             (setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
 
-								      ;; Other variables useful for reproducibility.
-								      (setenv "KBUILD_BUILD_USER" "guix")
-								      (setenv "KBUILD_BUILD_HOST" "guix")
+             ;; Other variables useful for reproducibility.
+             (setenv "KBUILD_BUILD_USER" "guix")
+             (setenv "KBUILD_BUILD_HOST" "guix")
 
-								      ;; Set ARCH and CROSS_COMPILE.
-								      (let ((arch #$(platform-linux-architecture
-										     (lookup-platform-by-target-or-system
-										      (or (%current-target-system)
-											  (%current-system))))))
-									(setenv "ARCH" arch)
-									(format #t "`ARCH' set to `~a'~%" (getenv "ARCH"))
+             ;; Set ARCH and CROSS_COMPILE.
+             (let ((arch #$(platform-linux-architecture
+                            (lookup-platform-by-target-or-system
+                             (or (%current-target-system)
+                                 (%current-system))))))
+               (setenv "ARCH" arch)
+               (format #t "`ARCH' set to `~a'~%" (getenv "ARCH"))
 
-									(when target
-									  (setenv "C_INCLUDE_PATH" (string-join
-												    (cdr (string-split (getenv "C_INCLUDE_PATH") #\:))
-												    ":"))
+               (when target
+                 (setenv "C_INCLUDE_PATH" (string-join
+                                           (cdr (string-split (getenv "C_INCLUDE_PATH") #\:))
+                                           ":"))
 
-									  (setenv "CPLUS_INCLUDE_PATH" (string-join
-													(cdr (string-split (getenv "CPLUS_INCLUDE_PATH") #\:))
-													":"))
+                 (setenv "CPLUS_INCLUDE_PATH" (string-join
+                                               (cdr (string-split (getenv "CPLUS_INCLUDE_PATH") #\:))
+                                               ":"))
 
-									  (setenv "LIBRARY_PATH" (string-join
-												  (cdr (string-split (getenv "LIBRARY_PATH") #\:))
-												  ":"))
-									  (setenv "CROSS_COMPILE" (string-append target "-"))
-									  (format #t "`CROSS_COMPILE' set to `~a'~%"
-										  (getenv "CROSS_COMPILE"))))
-								      (setenv "KERNEL" "kernel8")
-								      (invoke "make" "bcm2711_defconfig")
-								      (let ((port (open-file ".config" "a"))
-									    (extra-configuration #$(config->string %default-extra-linux-options)))
-									(display extra-configuration port)
-									(close-port port))
-
-								      ))))))))
+                 (setenv "LIBRARY_PATH" (string-join
+                                         (cdr (string-split (getenv "LIBRARY_PATH") #\:))
+                                         ":"))
+                 (setenv "CROSS_COMPILE" (string-append target "-"))
+                 (format #t "`CROSS_COMPILE' set to `~a'~%"
+                         (getenv "CROSS_COMPILE"))))
+             (setenv "KERNEL" "kernel8")
+             (invoke "make" "bcm2711_defconfig")
+             (let ((port (open-file ".config" "a"))
+                   (extra-configuration #$(config->string %default-extra-linux-options)))
+               (display extra-configuration port)
+               (close-port port))))))))))
 
 (define-public brcm80211-firmware
   (package
@@ -144,7 +142,7 @@
     (version "20210818-1")
     (source (origin
               (method url-fetch)
-              (uri (string-append 
+              (uri (string-append
                     "http://ftp.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-brcm80211_"
                     version "_all.deb"))
               (sha256 (base32 "04wg9fqay6rpg80b7s4h4g2kwq8msbh81lb3nd0jj45nnxrdxy7p"))))
@@ -172,4 +170,4 @@
     (synopsis "Binary firmware for Broadcom/Cypress 802.11 wireless cards")
     (description "This package contains the binary firmware for wireless
 network cards supported by the brcmsmac or brcmfmac driver.")
-    (license expat)))
+    (license license:expat)))

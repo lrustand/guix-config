@@ -91,15 +91,24 @@ load the Grub bootloader located in the 'Guix_image' root partition."
 						 (string-append root "/u-boot.bin"))
                                (copy-recursively #$(file-append raspberrypi-firmware "/" ) root)
                                (copy-recursively #$(plain-file "config.txt"
-"enable_uart=1
-uart_2ndstage=1
-arm_64bit=1
-kernel=u-boot.bin")
+                                                               (string-append "enable_uart=1\n"
+                                                                              "uart_2ndstage=1\n"
+                                                                              "arm_64bit=1\n"
+                                                                              "kernel=u-boot.bin\n"))
 						 (string-append root "/config.txt"))
                                (copy-recursively #$(plain-file "cmdline.txt"
-"root=LABEL=RASPIROOT rw rootwait console=serial0,115200 console=tty1 console=ttyAMA0,115200 selinux=0 plymouth.enable=0 smsc95xx.turbo_mode=N dwc_otg.lpm_enable=0 kgdboc=serial0,115200")
-						 (string-append root "/cmdline.txt"))
-			       )))))
+                                                               (string-append "root=LABEL=RASPIROOT "
+                                                                              "rw "
+                                                                              "rootwait "
+                                                                              "console=serial0,115200 "
+                                                                              "console=tty1 "
+                                                                              "console=ttyAMA0,115200 "
+                                                                              "selinux=0 "
+                                                                              "plymouth.enable=0 "
+                                                                              "smsc95xx.turbo_mode=N "
+                                                                              "dwc_otg.lpm_enable=0 "
+                                                                              "kgdboc=serial0,115200"))
+						 (string-append root "/cmdline.txt")))))))
 
 (define rpi-root-partition
   (partition
