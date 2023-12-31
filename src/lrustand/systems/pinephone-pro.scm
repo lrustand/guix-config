@@ -18,7 +18,7 @@
   (operating-system (inherit %base-operating-system)
     (host-name "pinephonepro")
 
-    (kernel pinephone-pro-kernel)
+    (kernel pinephone-pro-kernel-6.7)
     (kernel-arguments
      (append
       (list

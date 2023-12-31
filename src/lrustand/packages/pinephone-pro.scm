@@ -93,7 +93,8 @@
                                    "brcm/BCM4345C0.hcd "
                                    "rockchip/dptx.bin\"\n"))
                    (("^#CONFIG_EXTRA_FIRMWARE_DIR=.*$")
-                    "CONFIG_EXTRA_FIRMWARE_DIR=\"ppp/lib/firmware\"\n"))
+                    "CONFIG_EXTRA_FIRMWARE_DIR=\"ppp/lib/firmware\"\n")
+                   (("^CONFIG_DMA_PERNUMA_CMA.*$") "")) ;; For 6.7
                  ))
             (add-after 'configure 'set-firmware-path
                (lambda _
@@ -108,6 +109,10 @@
       "The unmodified Linux kernel, including nonfree blobs, for running Guix
 System on hardware which requires nonfree software to function."))))
 
-(define-public pinephone-pro-kernel
+(define-public pinephone-pro-kernel-6.7
   (linux-pinephone-pro "orange-pi-6.7-20231203-1729"
                        "0v3gpj6qd9ili9xgsmx2k22hr6p62wxxnyg1fvnsv1f1q1qszhf9"))
+
+(define-public pinephone-pro-kernel-6.3
+  (linux-pinephone-pro "orange-pi-6.3-20230612-0227"
+                       "1yx0gk43ya5w5i2b1lxf0qwrq72sb566qjhszzrnrkqnqfrr9agf"))
