@@ -83,8 +83,17 @@
             (add-after 'unpack 'patch-defconfig
                (lambda _
                  (substitute* "arch/arm64/configs/pinephone_pro_defconfig"
-                   (("^#CONFIG_EXTRA_FIRMWARE=.*$") "CONFIG_EXTRA_FIRMWARE=\"regulatory.db regulatory.db.p7s brcm/brcmfmac43455-sdio.bin brcm/brcmfmac43455-sdio.pine64,pinephone-pro.txt brcm/brcmfmac43455-sdio.clm_blob brcm/BCM4345C0.hcd rockchip/dptx.bin\"\n")
-                   (("^#CONFIG_EXTRA_FIRMWARE_DIR=.*$") "CONFIG_EXTRA_FIRMWARE_DIR=\"ppp/lib/firmware\"\n"))
+                   (("^#CONFIG_EXTRA_FIRMWARE=.*$")
+                    (string-append "CONFIG_EXTRA_FIRMWARE=\""
+                                   "regulatory.db "
+                                   "regulatory.db.p7s "
+                                   "brcm/brcmfmac43455-sdio.bin "
+                                   "brcm/brcmfmac43455-sdio.pine64,pinephone-pro.txt "
+                                   "brcm/brcmfmac43455-sdio.clm_blob "
+                                   "brcm/BCM4345C0.hcd "
+                                   "rockchip/dptx.bin\"\n"))
+                   (("^#CONFIG_EXTRA_FIRMWARE_DIR=.*$")
+                    "CONFIG_EXTRA_FIRMWARE_DIR=\"ppp/lib/firmware\"\n"))
                  ))
             (add-after 'configure 'set-firmware-path
                (lambda _
