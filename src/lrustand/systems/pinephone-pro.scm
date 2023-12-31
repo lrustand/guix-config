@@ -2,8 +2,11 @@
   #:use-module (lrustand packages pinephone-pro)
   #:use-module (lrustand systems base)
   #:use-module (lrustand services base)
+  #:use-module (gnu image)
+  #:use-module (gnu packages)
   #:use-module (gnu system)
   #:use-module (gnu system file-systems)
+  #:use-module (gnu system images rock64)
   #:use-module (gnu system linux-initrd)
   #:use-module (gnu system shadow)
   #:use-module (gnu bootloader)
@@ -12,7 +15,8 @@
   #:use-module (gnu services)
   #:use-module (gnu services ssh)
   #:use-module (srfi srfi-1)
-  #:use-module (guix gexp))
+  #:use-module (guix gexp)
+  #:use-module (guix platforms arm))
 
 (define-public %pinephone-pro-operating-system
   (operating-system (inherit %base-operating-system)
@@ -68,4 +72,11 @@
                   `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))))
                  (print-last-log? #t))))))))
 
-%pinephone-pro-operating-system
+(define-public pinephone-pro-image
+  (image
+   (inherit
+    (os+platform->image %pinephone-pro-operating-system aarch64-linux
+                        #:type rock64-image-type))
+   (name 'pinephone-pro-image)))
+
+pinephone-pro-image
