@@ -63,8 +63,9 @@
         %base-packages))
 
     (services
+     (append
       %lr/wifi-networks-services
-      %lr/desktop-services)
+      %lr/desktop-services))
 
      (bootloader
        (bootloader-configuration
