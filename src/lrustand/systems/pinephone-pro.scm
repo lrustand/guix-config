@@ -14,6 +14,7 @@
   #:use-module (gnu packages shells)
   #:use-module (gnu services)
   #:use-module (gnu services ssh)
+  #:use-module (gnu services networking)
   #:use-module (srfi srfi-1)
   #:use-module (guix gexp)
   #:use-module (guix platforms arm))
@@ -22,7 +23,7 @@
   (operating-system (inherit %base-operating-system)
     (host-name "pinephonepro")
 
-    (kernel pinephone-pro-kernel-6.7)
+    (kernel pinephone-pro-kernel-6.3)
     (kernel-arguments
      (append
       (list
@@ -53,14 +54,18 @@
 
     (services
      (append
-      %lr/desktop-services
       (list
-       (service openssh-service-type
-                (openssh-configuration
-                 (x11-forwarding? #f)
-                 (authorized-keys
-                  `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))))
-                 (print-last-log? #t))))))))
+        (service openssh-service-type
+                 (openssh-configuration
+                  (x11-forwarding? #f)
+                  (authorized-keys
+                   `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))))
+                  (print-last-log? #t)))
+        (service dhcp-client-service-type)
+        (service wpa-supplicant-service-type)
+        %lr/wpa-conf-service)
+      %lr/wifi-networks-services
+      %lr/base-services))))
 
 (define-public pinephone-pro-image
   (image
