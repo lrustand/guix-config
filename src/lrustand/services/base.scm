@@ -26,6 +26,7 @@
 
 (define-public %lr/base-services
   (cons*
+    (service elogind-service-type)
     (modify-services %base-services
       (guix-service-type config => (guix-configuration
         (inherit config)
