@@ -53,7 +53,9 @@
             "neovim"
             "htop"
             "tmux"
+            "git"
             "stumpwm"
+            "xterm" ;; For default stump configuration
             "xinitrc-xsession"
             "libinput"
             "xf86-input-libinput"
