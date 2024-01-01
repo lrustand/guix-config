@@ -63,6 +63,7 @@
         %base-packages))
 
     (services
+      %lr/wifi-networks-services
       %lr/desktop-services)
 
      (bootloader

@@ -10,6 +10,20 @@
 (define-public %lr/keyboard-layout
   (keyboard-layout "us,no" #:options '("grp:switch")))
 
+
+(define-public %lr/wpa-conf-service
+  (extra-special-file "/etc/wpa.conf"
+                    (local-file "../../../files/wpa/wpa.conf")))
+
+(define-public %lr/wifi-networks-services
+  (list
+    (extra-special-file "/etc/NetworkManager/system-connections/Altibox532887.nmconnection"
+                        (local-file "../../../files/networkmanager/Altibox532887.nmconnection"))
+    (extra-special-file "/etc/NetworkManager/system-connections/Altibox532887_5G.nmconnection"
+                        (local-file "../../../files/networkmanager/Altibox532887_5G.nmconnection"))
+    (extra-special-file "/etc/NetworkManager/system-connections/eduroam.nmconnection"
+                        (local-file "../../../files/networkmanager/eduroam.nmconnection"))))
+
 (define-public %lr/base-services
   (cons*
     (modify-services %base-services
