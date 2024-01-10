@@ -1,6 +1,7 @@
 (define-module (lrustand services base)
   #:use-module (gnu)
   #:use-module (gnu system keyboard)
+  #:use-module (gnu packages wm)
   #:use-module (gnu services)
   #:use-module (gnu services base)
   #:use-module (gnu services xorg)
@@ -44,6 +45,10 @@
     (set-xorg-configuration
       (xorg-configuration
         (keyboard-layout %lr/keyboard-layout)))
+    (service screen-locker-service-type
+             (screen-locker-configuration
+              (name "i3lock")
+              (program (file-append i3lock "/bin/i3lock"))))
     (modify-services %desktop-services
       (guix-service-type config => (guix-configuration
         (inherit config)
