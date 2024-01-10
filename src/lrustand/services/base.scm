@@ -44,20 +44,13 @@
 
 (define-public %lr/desktop-services
   (cons*
-    (set-xorg-configuration
+    (service xorg-server-service-type
       (xorg-configuration
         (keyboard-layout %lr/keyboard-layout)))
     (service screen-locker-service-type
              (screen-locker-configuration
               (name "i3lock")
               (program (file-append i3lock "/bin/i3lock"))))
-    (modify-services %desktop-services
-      (guix-service-type config => (guix-configuration
-        (inherit config)
-        (substitute-urls
-         (append (list "https://substitutes.nonguix.org")
-           %default-substitute-urls))
-        (authorized-keys
-         (cons
-          (local-file "../../../files/nonguix/nonguix.pub")
-          %default-authorized-guix-keys)))))))
+    (service wpa-supplicant-service-type)
+    (service network-manager-service-type)
+    %lr/base-services))

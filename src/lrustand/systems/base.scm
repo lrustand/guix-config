@@ -54,6 +54,7 @@
             "htop"
             "tmux"
             "git"
+            "sx"
             "stumpwm"
             "xterm" ;; For default stump configuration
             "xinitrc-xsession"
