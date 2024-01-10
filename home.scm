@@ -89,7 +89,7 @@
       "python"
       "nss-certs"
       "neovim"))))
- 
+
  (services
   (list
    (simple-service 'nonguix-channel-service
@@ -216,6 +216,7 @@
                      ("add Mod3" . "Hyper_L")))))
 
    (service home-syncthing-service-type)
+
    (service home-offlineimap-service-type)
 
    (service home-lisgd-service-type
