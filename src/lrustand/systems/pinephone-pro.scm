@@ -2,6 +2,7 @@
   #:use-module (lrustand packages pinephone-pro)
   #:use-module (lrustand systems base)
   #:use-module (lrustand services base)
+  #:use-module (lrustand services grow-part)
   #:use-module (gnu image)
   #:use-module (gnu packages)
   #:use-module (gnu system)
@@ -63,6 +64,11 @@
                   (print-last-log? #t)))
         (service dhcp-client-service-type)
         (service wpa-supplicant-service-type)
+        (service grow-part-service-type
+                 (grow-part-configuration
+                  (device "/dev/mmcblk2")
+                  (part-number 1)
+                  (partition "/dev/mmcblk2p1")))
         %lr/wpa-conf-service)
       %lr/wifi-networks-services
       %lr/base-services))))
