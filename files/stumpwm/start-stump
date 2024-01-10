@@ -1,4 +1,5 @@
 ;; -*- mode: lisp -*-
+(require :asdf)
 (push  "~/code/forks/stumpwm/" asdf:*central-registry*)
 (asdf:load-system :stumpwm)
 (stumpwm:stumpwm)
