@@ -10,18 +10,16 @@
 (define-public %yoga-operating-system
   (operating-system (inherit %base-operating-system)
     (host-name "yoga")
-  
+
     (initrd-modules (append '("vmd") %base-initrd-modules))
-  
-    ;;(kernel-arguments (list "console=ttyS0,115200"))
-  
+
     (services
       (cons*
        (service qemu-binfmt-service-type
                 (qemu-binfmt-configuration
                  (platforms (lookup-qemu-platforms "arm" "aarch64"))))
        %lr/desktop-services))
-  
+
      (file-systems
       (cons*
        (file-system
