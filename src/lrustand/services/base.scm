@@ -6,6 +6,7 @@
   #:use-module (gnu services base)
   #:use-module (gnu services xorg)
   #:use-module (gnu services guix)
+  #:use-module (gnu services networking)
   #:use-module (gnu services desktop))
 
 (define-public %lr/keyboard-layout
@@ -28,6 +29,7 @@
 (define-public %lr/base-services
   (cons*
     (service elogind-service-type)
+    (service ntp-service-type)
     (modify-services %base-services
       (guix-service-type config => (guix-configuration
         (inherit config)
