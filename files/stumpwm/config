@@ -168,20 +168,49 @@
 (when *initializing*
   (mode-line))
 
-(defvar svkbd-visible t)
-(defvar svkbd-xwin nil)
+(defparameter svkbd-visible t)
+(defparameter svkbd-xwin nil)
 
+(defun find-svkbd-window ()
+  (mode-line-window
+   (find t *mode-lines* :key (lambda (ml)
+                               (equal (window-title
+                                       (xwin-to-window (mode-line-window ml)))
+                                      "svkbd")))))
+
+;; DONE get head height dynamically
+;; TODO calculate keyboard height
+;; DONE get head number
+;; DONE get reference to the svkbd window
+;; TODO check if svkbd is running
 (defcommand show-svkbd () ()
-  (stumpwm::resize-head 0 0 0 1920 (- 1080 270))
-  (xlib:map-window (mode-line-window (car *mode-lines*)))
-  (setf (xlib:drawable-y (mode-line-window (car *mode-lines*))) (- 1080 270))
-  (setf (xlib:drawable-height (mode-line-window (car *mode-lines*))) 270)
-  (setf svkbd-visible t))
+  (unless svkbd-visible
+    (let* ((current-head (current-head))
+           (head-width (head-width current-head))
+           (head-full-height (head-height current-head))
+           (keyboard-height 270)
+           (head-adjusted-height (- head-full-height keyboard-height))
+           (head-number (head-number current-head)))
+      (unless svkbd-win
+        (setq svkbd-win
+              (find-svkbd-window)))
+      (stumpwm::resize-head head-number 0 0 head-width head-adjusted-height)
+      (xlib:map-window svkbd-win)
+      (setf (xlib:drawable-y svkbd-win) head-adjusted-height)
+      (setf (xlib:drawable-height svkbd-win) keyboard-height)
+      (setf svkbd-visible t))))
 
 (defcommand hide-svkbd () ()
-  (stumpwm::resize-head 0 0 0 1920 1080)
-  (xlib:unmap-window (mode-line-window (car *mode-lines*)))
-  (setf svkbd-visible nil))
+  (when svkbd-visible
+    (let* ((current-head (current-head))
+           (head-width (head-width current-head))
+           (head-current-height (head-height current-head))
+           (keyboard-height 270)
+           (head-full-height (+ head-current-height keyboard-height))
+           (head-number (head-number current-head)))
+    (stumpwm::resize-head head-number 0 0 head-width head-full-height)
+    (xlib:unmap-window svkbd-win)
+    (setf svkbd-visible nil))))
 
 
 
