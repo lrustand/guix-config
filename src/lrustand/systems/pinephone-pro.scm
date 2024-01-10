@@ -16,6 +16,10 @@
   #:use-module (gnu services)
   #:use-module (gnu services ssh)
   #:use-module (gnu services networking)
+  #:use-module (gnu services xorg)
+  #:use-module (gnu services base)
+  #:use-module (gnu services sound)
+  #:use-module (gnu services desktop)
   #:use-module (srfi srfi-1)
   #:use-module (guix gexp)
   #:use-module (guix platforms arm))
@@ -62,8 +66,15 @@
                   (authorized-keys
                    `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))))
                   (print-last-log? #t)))
+        (service slim-service-type)
         (service dhcp-client-service-type)
-        (service wpa-supplicant-service-type)
+        (service wpa-supplicant-service-type
+                 (wpa-supplicant-configuration
+                  (config-file "/etc/wpa.conf")
+                  (interface "wlan0")))
+        (service x11-socket-directory-service-type)
+        (service pulseaudio-service-type)
+        (service alsa-service-type)
         (service grow-part-service-type
                  (grow-part-configuration
                   (device "/dev/mmcblk2")
