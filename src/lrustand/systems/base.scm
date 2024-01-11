@@ -46,6 +46,7 @@
 
     (packages
       (append
+        ;;TODO maybe remove
         (list sof-firmware)
         (map specification->package
           (list
@@ -57,8 +58,8 @@
             "sx"
             "stumpwm"
             "xterm" ;; For default stump configuration
-            "xinitrc-xsession"
-            "libinput"
+            "xinitrc-xsession" ;; Only for login managers
+            ;; "libinput" ;; Might not be needed
             "xf86-input-libinput"
             "openssh"))
         %base-packages))
