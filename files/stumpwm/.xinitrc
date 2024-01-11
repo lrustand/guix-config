@@ -1,3 +1,6 @@
+# Needed when starting through sx
+xhost +SI:localuser:$USER
+
 autorandr --change
 
 xmodmap ~/.Xmodmap
