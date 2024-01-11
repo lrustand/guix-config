@@ -1,6 +1,8 @@
 # Needed when starting through sx
 xhost +SI:localuser:$USER
 
+xss-lock -- i3lock &
+
 autorandr --change
 
 xmodmap ~/.Xmodmap
