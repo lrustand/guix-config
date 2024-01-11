@@ -35,6 +35,7 @@
      "xprop"
      "xdotool"
      "xmodmap"
+     "xss-lock"
      "xhost"
      "xauth"
      "xinput"
