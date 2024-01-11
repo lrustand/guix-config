@@ -136,6 +136,9 @@
               ("/home/lars/code/guix-config/files/stumpwm/.xinitrc"
                ".xinitrc")
 
+              ("/home/lars/code/guix-config/files/stumpwm/.xinitrc"
+               ".config/sx/sxrc")
+
               ("/home/lars/code/guix-config/files/xmodmap/.Xmodmap"
                ".Xmodmap")
 
