@@ -136,8 +136,8 @@
               ("/home/lars/code/guix-config/files/stumpwm/.xinitrc"
                ".xinitrc")
 
-              ("/home/lars/code/forks/stumpwm"
-               ".quicklisp/local-projects/stumpwm")
+              ("/home/lars/code/guix-config/files/xmodmap/.Xmodmap"
+               ".Xmodmap")
 
               ("/home/lars/code/guix-config/files/stumpwm/start-stump"
                "start-stump")
@@ -206,14 +206,6 @@
                "code/forks/qutebrowser")))
 
    (service home-bash-service-type)
-
-   ;; TODO possibly add this in etc
-   (service home-xmodmap-service-type
-         (home-xmodmap-configuration
-          (key-map '(("remove Lock" . "Caps_Lock")
-                     ("keysym Caps_Lock" . "Hyper_L")
-                     ("remove Mod4" . "Hyper_L")
-                     ("add Mod3" . "Hyper_L")))))
 
    (service home-syncthing-service-type)
 

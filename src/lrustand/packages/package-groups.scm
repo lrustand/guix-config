@@ -34,6 +34,7 @@
      "xrandr"
      "xprop"
      "xdotool"
+     "xmodmap"
      "xhost"
      "xauth"
      "xinput"
