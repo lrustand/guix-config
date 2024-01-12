@@ -67,21 +67,30 @@
                   (authorized-keys
                    `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))))
                   (print-last-log? #t)))
+
         (service slim-service-type)
+
         (service dhcp-client-service-type)
+
         (service wpa-supplicant-service-type
                  (wpa-supplicant-configuration
                   (config-file "/etc/wpa.conf")
                   (interface "wlan0")))
+
         (service x11-socket-directory-service-type)
+
         (service pulseaudio-service-type)
+
         (service alsa-service-type)
+
         (service grow-part-service-type
                  (grow-part-configuration
                   (device "/dev/mmcblk2")
                   (part-number 1)
                   (partition "/dev/mmcblk2p1")))
+
         %lr/wpa-conf-service)
+
       %lr/wifi-networks-services
       %lr/base-services))))
 
