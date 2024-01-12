@@ -169,7 +169,7 @@
   (mode-line))
 
 (defparameter svkbd-visible t)
-(defparameter svkbd-xwin nil)
+(defparameter svkbd-win nil)
 
 (defun find-svkbd-window ()
   (mode-line-window
