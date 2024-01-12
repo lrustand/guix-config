@@ -93,7 +93,6 @@ autorefresh = 0.5
 # 10 quick refreshes between each full refresh, with 0.5 minutes between every
 # refresh, regardless of type.
 quick = 10
-postsynchook = ~/.config/offlineimap/postsync.sh
 
 [Repository " account-name "-local]
 # OfflineIMAP supports Maildir, GmailMaildir, and IMAP for local repositories.
