@@ -1,28 +1,25 @@
 (define-module (lrustand systems rpi)
   #:use-module (lrustand packages rpi)
   #:use-module (lrustand systems base)
+  #:use-module (lrustand services base)
   #:use-module (gnu)
   #:use-module (gnu bootloader)
   #:use-module (gnu bootloader u-boot)
   #:use-module (gnu image)
   #:use-module (gnu packages base)
   #:use-module (gnu packages bootloaders)
-  #:use-module (gnu packages compression)
   #:use-module (gnu packages image)
   #:use-module (gnu packages linux)
-  #:use-module (gnu packages ssh)
+  #:use-module (nongnu packages linux)
   #:use-module (gnu services)
   #:use-module (gnu services base)
+  #:use-module (gnu services networking)
   #:use-module (gnu system)
   #:use-module (gnu system file-systems)
   #:use-module (gnu system image)
   #:use-module (gnu system linux-initrd)
-  #:use-module (guix build-system copy)
-  #:use-module (guix download)
   #:use-module (guix gexp)
-  #:use-module (guix packages)
   #:use-module (guix platforms arm)
-  #:use-module (nongnu packages linux)
   #:use-module (srfi srfi-26)
   #:use-module ((guix licenses) #:prefix license:))
 
@@ -73,9 +70,10 @@ load the Grub bootloader located in the 'Guix_image' root partition."
                            (type "ext4")))
                          %base-file-systems))
 
-   (services %base-services)
-
-   (packages %base-packages)))
+   (services
+    (cons*
+     (service dhcp-client-service-type)
+     %lr/base-services))))
 
 (define rpi-boot-partition
   (partition
