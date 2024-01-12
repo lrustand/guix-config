@@ -43,6 +43,12 @@
           (local-file "../../../files/nonguix/nonguix.pub")
           %default-authorized-guix-keys)))))))
 
+(define (auto-login-to-tty config tty user)
+  (if (string=? tty (mingetty-configuration-tty config))
+        (mingetty-configuration
+         (inherit config)
+         (auto-login user))
+        config))
 
 (define-public %lr/desktop-services
   (cons*
