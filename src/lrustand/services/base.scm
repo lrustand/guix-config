@@ -13,10 +13,12 @@
   (keyboard-layout "us,no" #:options '("grp:switch")))
 
 
+;; TODO make private repository containing these files
 (define-public %lr/wpa-conf-service
   (extra-special-file "/etc/wpa.conf"
                     (local-file "../../../files/wpa/wpa.conf")))
 
+;; TODO make private repository containing these files
 (define-public %lr/wifi-networks-services
   (list
     (extra-special-file "/etc/NetworkManager/system-connections/Altibox532887.nmconnection"
@@ -54,3 +56,10 @@
     (service wpa-supplicant-service-type)
     (service network-manager-service-type)
     %lr/base-services))
+
+    ;; TODO make stronger connection between this and VT1
+    ;; Xorg autostart
+    ;;(modify-services %lr/base-services
+    ;;  (mingetty-service-type config =>
+    ;;                         (auto-login-to-tty
+    ;;                          config "tty1" "lars")))))
