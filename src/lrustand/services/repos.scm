@@ -1,5 +1,6 @@
 (define-module (lrustand services repos)
   #:use-module (gnu)
+  #:use-module (gnu packages version-control)
   #:use-module (gnu services)
   #:use-module (gnu home services))
 
@@ -11,7 +12,9 @@
                       (let ((url (car it))
                             (target (string-append #$(getenv "HOME") "/"
                                                    (cadr it))))
-                        (system* "git" "clone" url target)))
+
+                        (mkdir-p target)
+                        (system* #$(file-append git "/bin/git") "clone" url target)))
                     '#$lst))))
 
 (define-public home-git-clone-service-type
