@@ -1,5 +1,4 @@
-(define-module (lrustand mail offlineimap)
-  #:export (offlineimap-config))
+(define-module (lrustand mail offlineimap))
 
 
 (define nametrans-local-gmail
@@ -8,7 +7,7 @@ nametrans= lambda f: '[Gmail]/' + f if f in ['Drafts', 'Starred', 'Important', '
 
 (define nametrans-remote-gmail
   "nametrans= lambda f: f.replace('[Gmail]/','')")
-  
+
 (define nametrans-remote-outlook
   "# Folders to skip during sync.
 folderfilter = lambda foldername: foldername not in [
@@ -49,7 +48,7 @@ folderfilter = lambda foldername: foldername not in [
     ((#:davmail) 1143)
     (else 993)))
 
-(define* (offlineimap-config accounts)
+(define-public (offlineimap-config accounts)
   (string-append
     (format #f "[general]
 # List of accounts to be synced, separated by a comma.
@@ -104,7 +103,7 @@ localfolders = ~/mail/" account-name "\n"
 (case provider
   ((#:gmail) nametrans-local-gmail)
   (else ""))
-    
+
 "
 folderfilter = lambda folder: folder not in ['Trash', 'Sent Mail']
 

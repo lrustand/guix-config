@@ -1,8 +1,7 @@
 (define-module (lrustand services symlinks)
   #:use-module (gnu)
   #:use-module (gnu services)
-  #:use-module (gnu home services)
-  #:export (home-symlinks-service-type))
+  #:use-module (gnu home services))
 
 (define (symlink-files lst)
   (with-imported-modules '((guix build utils))
@@ -24,7 +23,7 @@
                          target-file))))
          '#$lst))))
 
-(define home-symlinks-service-type
+(define-public home-symlinks-service-type
   (service-type
    (name 'symlink)
    (extensions

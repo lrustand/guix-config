@@ -1,8 +1,7 @@
 (define-module (lrustand services repos)
   #:use-module (gnu)
   #:use-module (gnu services)
-  #:use-module (gnu home services)
-  #:export (home-git-clone-service-type))
+  #:use-module (gnu home services))
 
 (define (clone lst)
     (with-imported-modules '((guix build utils))
@@ -15,7 +14,7 @@
                         (system* "git" "clone" url target)))
                     '#$lst))))
 
-(define home-git-clone-service-type
+(define-public home-git-clone-service-type
   (service-type
    (name 'git-clone)
    (extensions

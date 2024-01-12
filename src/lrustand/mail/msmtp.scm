@@ -1,6 +1,5 @@
 (define-module (lrustand mail msmtp)
-  #:use-module (ice-9 optargs)
-  #:export (msmtp-config))
+  #:use-module (ice-9 optargs))
 
 ;;(define* (msmtp-davmail-config-fragment account)
 ;;  "tls off
@@ -57,7 +56,7 @@ host smtp.office365.com\n")
       (let ((acc (car accounts)))
         (string-append (msmtp-account-config-fragment acc) (msmtp-accounts-config-fragments (cdr accounts))))))
 
-(define* (msmtp-config accounts default)
+(define-public (msmtp-config accounts default)
   (string-append "# Set default values for all following accounts.
 defaults
 auth on
