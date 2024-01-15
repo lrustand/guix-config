@@ -1,4 +1,4 @@
-remove Lock = Caps_Lock
 keysym Caps_Lock = Hyper_L
+clear Lock
 remove Mod4 = Hyper_L
 add Mod3 = Hyper_L
