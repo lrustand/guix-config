@@ -5,6 +5,7 @@
   #:use-module (gnu system file-systems)
   #:use-module (gnu system linux-initrd)
   #:use-module (gnu services)
+  #:use-module (gnu services desktop)
   #:use-module (gnu services virtualization))
 
 (define-public %yoga-operating-system
@@ -18,6 +19,7 @@
        (service qemu-binfmt-service-type
                 (qemu-binfmt-configuration
                  (platforms (lookup-qemu-platforms "arm" "aarch64"))))
+       (service bluetooth-service-type)
        %lr/desktop-services))
 
      (file-systems
