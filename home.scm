@@ -32,13 +32,7 @@
   (list '(("account-name" . "gmail")
           ("address" . "rustand.lars@gmail.com")
           ("user" . "rustand.lars@gmail.com")
-          ("provider" . #:gmail))
-        '(("account-name" . "rustandtech")
-          ("address" . "lars@rustand.tech")
-          ("user" . "lars")
-          ("provider" . #:plain)
-          ("imap-host" . "mail.rustand.tech")
-          ("smtp-host" . "mail.rustand.tech"))))
+          ("provider" . #:gmail))))
 
 (define-public qutebrowser-with-tldextract
   (package/inherit qutebrowser
