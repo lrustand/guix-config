@@ -17,7 +17,7 @@
   #:use-module (gnu bootloader u-boot)
   #:use-module (gnu packages shells)
   #:use-module (gnu services)
-  #:use-module (gnu services home) ;; From RDE. Used to embed HE into OS
+  ;;#:use-module (gnu services home) ;; From RDE. Used to embed HE into OS
   #:use-module (gnu services ssh)
   #:use-module (gnu services networking)
   #:use-module (gnu services xorg)
@@ -70,10 +70,10 @@
                    `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))))
                   (print-last-log? #t)))
 
-        (service guix-home-service-type
-                 `(,(cons
-                     "lars"
-                     %home-environment)))
+        ;;(service guix-home-service-type
+        ;;         `(,(cons
+        ;;             "lars"
+        ;;             %home-environment)))
 
         (service slim-service-type)
 
