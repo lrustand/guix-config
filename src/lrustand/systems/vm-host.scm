@@ -28,12 +28,15 @@
           "kvm.report_ignored_msrs=0"
           "pcie_acs_override=downstream,multifunction"
           "rd.driver.pre=vfio-pci"
-    (initrd-modules (cons* "vfio" "vfio_pci" "vfio_iommu_type1" %base-initrd-modules))
           "nomodeset"
           ;; Hugepages
           "default_hugepagesz=1G"
           "hugepagesz=1G"
           "hugepages=65")))
+    (initrd-modules (cons* "vfio"
+                           "vfio_pci"
+                           "vfio_iommu_type1"
+                           %base-initrd-modules))
 
     (kernel-loadable-modules (list (specification->package "vendor-reset-linux-module")))
 
