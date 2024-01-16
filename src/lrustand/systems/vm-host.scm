@@ -25,8 +25,12 @@
           "kvm.report_ignored_msrs=0"
           "pcie_acs_override=downstream,multifunction"
           "rd.driver.pre=vfio-pci"
-          "nomodeset")))
     (initrd-modules (cons* "vfio" "vfio_pci" "vfio_iommu_type1" %base-initrd-modules))
+          "nomodeset"
+          ;; Hugepages
+          "default_hugepagesz=1G"
+          "hugepagesz=1G"
+          "hugepages=65")))
 
     (kernel-loadable-modules (list (specification->package "vendor-reset-linux-module")))
 
@@ -116,6 +120,11 @@
           (device (uuid "CE8E-65A2"
                         'fat32))
           (type "vfat"))
+        (file-system
+          (mount-point "/hugepages")
+          (device "hugetlbfs")
+          (options "rw,pagesize=1G,uid=997,gid=984,mode=0770")
+          (type "hugetlbfs"))
         %base-file-systems))))
 
 %vm-host-operating-system
