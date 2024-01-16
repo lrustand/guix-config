@@ -5,6 +5,7 @@
   #:use-module (gnu)
   #:use-module (gnu packages firmware)
   #:use-module (gnu packages shells)
+  #:use-module (gnu services sound)
   #:use-module (gnu services home)
   #:use-module (gnu services ssh)
   #:use-module (gnu services virtualization))
@@ -100,19 +101,28 @@
              `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))
                ("guix-deploy" ,(local-file "../../../files/ssh/yoga.pub"))))
             (print-last-log? #t)))
+
         (service libvirt-service-type
           (libvirt-configuration
             (unix-sock-group "kvm")))
+
         (service virtlog-service-type)
 
-    (modify-services %lr/desktop-services
-      (guix-service-type config => (guix-configuration
-        (inherit config)
-        (authorized-keys
-         (cons*
-          (local-file "../../../files/guix/yoga.pub")
-          (local-file "../../../files/nonguix/nonguix.pub")
-          %default-authorized-guix-keys)))))))
+        (service pulseaudio-service-type
+          (pulseaudio-configuration
+            (extra-script-files
+             (list (plain-file "kvm-socket.pa"
+                              "load-module module-native-protocol-unix socket=/tmp/pulseaudio.sock auth-group=kvm auth-cookie-enabled=0\n")))))
+
+        (modify-services %lr/desktop-services
+
+          (guix-service-type config => (guix-configuration
+            (inherit config)
+            (authorized-keys
+             (cons*
+              (local-file "../../../files/guix/yoga.pub")
+              (local-file "../../../files/nonguix/nonguix.pub")
+              %default-authorized-guix-keys)))))))
 
     (swap-devices
       (list
