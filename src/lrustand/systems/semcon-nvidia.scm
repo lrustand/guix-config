@@ -25,10 +25,10 @@
   #:use-module (guix packages)
   #:use-module (guix transformations))
 
-;this can be inlined as it's only called once
-(define transform
- (options->transformation
-  '((with-graft . "mesa=nvda"))))
+;;;this can be inlined as it's only called once
+;;(define transform
+;; (options->transformation
+;;  '((with-graft . "mesa=nvda"))))
 
 (define %semcon-operating-system
   (operating-system (inherit %base-operating-system)
@@ -37,7 +37,7 @@
     (kernel linux-lts)
     (kernel-loadable-modules (list nvidia-module))
 
-    (kernel-arguments (append 
+    (kernel-arguments (append
 			'("modprobe.blacklist=pcspkr,snd_pcsp,nouveau"
 			  "acpi_osi=\"Windows 2009\"")
 			%default-kernel-arguments))
@@ -96,7 +96,7 @@
          (xorg-server-service-type config => (xorg-configuration
           (inherit config)
           (modules (cons* nvidia-driver %default-xorg-modules))
-          (server (transform xorg-server))
+          ;;(server (transform xorg-server))
           (drivers '("nvidia")))))))
 
     (file-systems
