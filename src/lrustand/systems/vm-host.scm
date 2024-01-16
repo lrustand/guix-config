@@ -8,6 +8,7 @@
   #:use-module (gnu services sound)
   #:use-module (gnu services home)
   #:use-module (gnu services ssh)
+  #:use-module (gnu services sysctl)
   #:use-module (gnu services virtualization))
 
 (define-public %vm-host-operating-system
@@ -115,6 +116,11 @@
                               "load-module module-native-protocol-unix socket=/tmp/pulseaudio.sock auth-group=kvm auth-cookie-enabled=0\n")))))
 
         (modify-services %lr/desktop-services
+
+          (sysctl-service-type config => (sysctl-configuration
+            (inherit config)
+            (settings (append '(("net.ipv4.ip_forward" . "1"))
+                              %default-sysctl-settings))))
 
           (guix-service-type config => (guix-configuration
             (inherit config)
