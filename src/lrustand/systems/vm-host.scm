@@ -88,7 +88,15 @@
           (libvirt-configuration
             (unix-sock-group "kvm")))
         (service virtlog-service-type)
-        %lr/desktop-services))
+
+    (modify-services %lr/desktop-services
+      (guix-service-type config => (guix-configuration
+        (inherit config)
+        (authorized-keys
+         (cons*
+          (local-file "../../../files/guix/yoga.pub")
+          (local-file "../../../files/nonguix/nonguix.pub")
+          %default-authorized-guix-keys)))))))
 
     (swap-devices
       (list
