@@ -1,8 +1,11 @@
 (define-module (lrustand systems vm-host)
   #:use-module (lrustand systems base)
   #:use-module (lrustand services base)
+  #:use-module (lrustand home)
   #:use-module (gnu)
   #:use-module (gnu packages firmware)
+  #:use-module (gnu packages shells)
+  #:use-module (gnu services home)
   #:use-module (gnu services ssh)
   #:use-module (gnu services virtualization))
 
@@ -49,6 +52,7 @@
           (name "lars")
           (comment "")
           (group "users")
+          (shell (file-append zsh "/bin/zsh"))
           (home-directory "/home/lars")
           (supplementary-groups '("wheel" "netdev" "audio" "video" "libvirt" "kvm")))
         %base-user-accounts))
@@ -81,6 +85,11 @@
 
     (services
       (cons*
+        (service guix-home-service-type
+                 `(,(cons
+                     "lars"
+                     %home-environment)))
+
         (service openssh-service-type
           (openssh-configuration
             (x11-forwarding? #t)
