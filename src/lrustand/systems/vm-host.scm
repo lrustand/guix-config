@@ -74,7 +74,6 @@
             "nss-certs"
             "neovim"
             "htop"
-            "qtile"
             "tmux"
             "mdadm"
             "xf86-video-amdgpu"
