@@ -30,8 +30,17 @@
 
     (kernel-loadable-modules (list (specification->package "vendor-reset-linux-module")))
 
+    (groups
+      (cons*
+        (user-group (name "admin"))
+        %base-groups))
+
     (users
       (cons*
+        (user-account
+          (name "guix-deploy")
+          (comment "")
+          (group "admin"))
         (user-account
           (name "lars")
           (comment "")
@@ -40,6 +49,11 @@
           (supplementary-groups '("wheel" "netdev" "audio" "video" "libvirt" "kvm")))
         %base-user-accounts))
 
+    (sudoers-file
+     (plain-file "sudoers"
+                 (string-append (plain-file-content %sudoers-specification)
+                                (format #f "~a ALL = NOPASSWD: ALL~%"
+                                        "guix-deploy"))))
     (packages
       (append
         (map specification->package
@@ -65,7 +79,11 @@
       (cons*
         (service openssh-service-type
           (openssh-configuration
-            (x11-forwarding? #t)))
+            (x11-forwarding? #t)
+            (authorized-keys
+             `(("lars" ,(local-file "../../../files/ssh/yoga.pub"))
+               ("guix-deploy" ,(local-file "../../../files/ssh/yoga.pub"))))
+            (print-last-log? #t)))
         (service libvirt-service-type
           (libvirt-configuration
             (unix-sock-group "kvm")))
