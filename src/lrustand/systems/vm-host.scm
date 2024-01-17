@@ -6,7 +6,7 @@
   #:use-module (gnu packages firmware)
   #:use-module (gnu packages shells)
   #:use-module (gnu services sound)
-  #:use-module (gnu services home)
+  ;;#:use-module (gnu services home)
   #:use-module (gnu services ssh)
   #:use-module (gnu services sysctl)
   #:use-module (gnu services virtualization))
@@ -89,10 +89,10 @@
 
     (services
       (cons*
-        (service guix-home-service-type
-                 `(,(cons
-                     "lars"
-                     %home-environment)))
+        ;;(service guix-home-service-type
+        ;;         `(,(cons
+        ;;             "lars"
+        ;;             %home-environment)))
 
         (service openssh-service-type
           (openssh-configuration
