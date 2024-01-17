@@ -1,73 +1,42 @@
 (define-module (lrustand systems semcon-nvidia)
-  #:use-module (lrustand systems base)
-  #:use-module (lrustand services base)
+  #:use-module (lrustand systems semcon)
+  #:use-module (lrustand home)
   #:use-module (gnu)
+  #:use-module (gnu home)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu packages nvidia)
   #:use-module (nongnu services nvidia)
-  #:use-module (nongnu system linux-initrd)
-  #:use-module (gnu packages firmware)
-  #:use-module (gnu packages shells)
   #:use-module (gnu packages xorg)
-  #:use-module (gnu packages xdisorg)
-  #:use-module (gnu packages wm)
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
   #:use-module (gnu services xorg)
-
-  #:use-module (gnu services networking)
-  #:use-module (gnu services ssh)
-  #:use-module (gnu services admin)
-  #:use-module (gnu services linux)
-  #:use-module (gnu services desktop)
-  #:use-module (gnu services docker)
-
   #:use-module (guix packages)
   #:use-module (guix transformations))
 
-;;;this can be inlined as it's only called once
-;;(define transform
-;; (options->transformation
-;;  '((with-graft . "mesa=nvda"))))
 
-(define %semcon-operating-system
-  (operating-system (inherit %base-operating-system)
-    (host-name "semcon")
+;this can be inlined as it's only called once
+(define transform
+ (options->transformation
+  '((with-graft . "mesa=nvda"))))
+
+(define-public %semcon-nvidia-home-environment
+  (home-environment
+    (inherit %semcon-home-environment)
+    (packages
+     (cons*
+      (transform qutebrowser-with-tldextract)
+      (delete qutebrowser-with-tldextract
+      %lr/default-home-packages)))))
+
+(define-public %semcon-nvidia-operating-system
+  (operating-system (inherit %semcon-operating-system)
 
     (kernel linux-lts)
     (kernel-loadable-modules (list nvidia-module))
 
     (kernel-arguments (append
-			'("modprobe.blacklist=pcspkr,snd_pcsp,nouveau"
-			  "acpi_osi=\"Windows 2009\"")
+			'("modprobe.blacklist=pcspkr,snd_pcsp,nouveau")
 			%default-kernel-arguments))
-
-    (users
-      (cons*
-        (user-account
-          (name "lars")
-          (comment "")
-          (group "users")
-          (shell (file-append zsh "/bin/zsh"))
-          (home-directory "/home/lars")
-          (supplementary-groups '("wheel" "docker")))
-        %base-user-accounts))
-
-    ;;(packages
-    ;;  (append
-    ;;    (list sof-firmware)
-    ;;          ;;(transform sx))
-    ;;    (map specification->package
-    ;;      (list
-    ;;        "nss-certs"
-    ;;        "neovim"
-    ;;        "htop"
-    ;;        "tmux"
-    ;;        ;;"nvidia-driver"
-    ;;        ;;"nvidia-module"
-    ;;        "stumpwm"
-    ;;        "openssh"))
-    ;;    %base-packages))
 
     (services
       (cons*
@@ -90,24 +59,14 @@
 
        (service nvidia-service-type)
 
-       (service docker-service-type)
-
-       (modify-services %lr/desktop-services
+       (modify-services %semcon-services
          (xorg-server-service-type config => (xorg-configuration
           (inherit config)
           (modules (cons* nvidia-driver %default-xorg-modules))
-          ;;(server (transform xorg-server))
-          (drivers '("nvidia")))))))
+          (server (transform xorg-server))
+          (drivers '("nvidia")))))))))
 
-    (file-systems
-     (cons*
-      (file-system
-        (mount-point "/")
-        (device (file-system-label "semcon-guix"))
-        (type "ext4"))
-      (file-system
-        (mount-point "/boot/efi")
-        (device (file-system-label "semcon-efi"))
-        (type "vfat")) %base-file-systems))))
-
-%semcon-operating-system
+(if (and (string=? "home" (cadr (command-line)))
+         (string=? "reconfigure" (caddr (command-line))))
+    %semcon-nvidia-home-environment
+    %semcon-nvidia-operating-system)
