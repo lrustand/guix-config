@@ -46,50 +46,54 @@
     (inputs (modify-inputs (package-inputs qutebrowser)
                            (prepend python-tldextract)))))
 
+(define-public %lr/default-home-packages
+ (append
+  (list qutebrowser-with-tldextract)
+  %shell-packages
+  %emacs-packages
+  %mail-packages
+  %x11-packages
+  %password-store-packages
+  (specifications->packages
+   '("htop"
+     "git"
+     "tmux"
+     "ecryptfs-utils"
+     "guile-readline"
+     "guile-colorized"
+     "cmake"
+     "make"
+     "gcc-toolchain"
+     "sqlite" ;; Needed for qutebrowser
+     "tree"
+     "file"
+     "zip"
+     "unzip"
+     "ncdu"
+     "the-silver-searcher"
+     "curl"
+     "font-google-noto"
+     "font-google-noto-emoji"
+     "font-dejavu"
+     "nyxt"
+     "gst-libav"
+     "gst-plugins-base"
+     "gst-plugins-good"
+     "gst-plugins-bad"
+     "gst-plugins-bad-minimal"
+     "gst-plugins-ugly"
+     "sbcl"
+     "sbcl-clx-truetype"
+     "sbcl-slynk"
+     "python"
+     "nss-certs"
+     "neovim"))))
+
+
 (define-public %home-environment
   (home-environment
    (packages
-    (append
-     (list qutebrowser-with-tldextract)
-     %shell-packages
-     %emacs-packages
-     %mail-packages
-     %x11-packages
-     %password-store-packages
-     (specifications->packages
-      '("htop"
-        "git"
-        "tmux"
-        "ecryptfs-utils"
-        "guile-readline"
-        "guile-colorized"
-        "cmake"
-        "make"
-        "gcc-toolchain"
-        "sqlite" ;; Needed for qutebrowser
-        "tree"
-        "file"
-        "zip"
-        "unzip"
-        "ncdu"
-        "the-silver-searcher"
-        "curl"
-        "font-google-noto"
-        "font-google-noto-emoji"
-        "font-dejavu"
-        "nyxt"
-        "gst-libav"
-        "gst-plugins-base"
-        "gst-plugins-good"
-        "gst-plugins-bad"
-        "gst-plugins-bad-minimal"
-        "gst-plugins-ugly"
-        "sbcl"
-        "sbcl-clx-truetype"
-        "sbcl-slynk"
-        "python"
-        "nss-certs"
-        "neovim"))))
+    %lr/default-home-packages)
 
    (services
     (list
