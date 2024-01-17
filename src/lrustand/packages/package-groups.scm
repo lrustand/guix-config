@@ -1,22 +1,63 @@
 (define-module (lrustand packages package-groups)
   #:use-module (gnu packages))
 
+(define-public %embedded-packages
+  (specifications->packages
+   '("dfu-util"
+     "dtc"
+     "minicom"
+     "openocd"
+     "screen"
+     "stlink")))
+
+(define-public %lr/base-packages
+  (specifications->packages
+   '("curl"
+     "file"
+     "git"
+     "htop"
+     "neovim"
+     "nss-certs"
+     "the-silver-searcher"
+     "tmux"
+     "tree"
+     "unzip"
+     "wget"
+     "zip")))
+
+(define-public %build-packages
+  (specifications->packages
+   '("cmake"
+     "gcc-toolchain"
+     "make"
+     "patchelf"
+     "python")))
+
+(define-public %nyxt-packages
+  (specifications->packages
+   '("nyxt"
+     "gst-libav"
+     "gst-plugins-good"
+     ;;"gst-plugins-bad"
+     "gst-plugins-bad-minimal"
+     "gst-plugins-ugly")))
+
 (define-public %shell-packages
   (specifications->packages
    '("zsh"
-     "zsh-completions"
-     "zsh-syntax-highlighting"
      "zsh-autosuggestions"
-     "zsh-history-substring-search")))
+     "zsh-completions"
+     "zsh-history-substring-search"
+     "zsh-syntax-highlighting")))
 
 (define-public %emacs-packages
   (specifications->packages
-   '("emacs-next"
-     "libvterm"
-     "emacs-vterm"
+   '("emacs-geiser"
+     "emacs-geiser-guile"
      "emacs-multi-vterm"
-     "emacs-geiser"
-     "emacs-geiser-guile")))
+     "emacs-next"
+     "emacs-vterm"
+     "libvterm")))
 
 (define-public %mail-packages
   (specifications->packages
@@ -25,34 +66,43 @@
      "notmuch"
      "offlineimap3")))
 
+(define-public %guile-packages
+  (specifications->packages
+   '("guile"
+     "guile-colorized"
+     "guile-readline")))
+
 (define-public %x11-packages
   (specifications->packages
-   '("scrot"
-     "rofi"
-     "i3lock"
-     "xev"
-     "xrandr"
-     "xprop"
-     "xdotool"
-     "xmodmap"
-     "xss-lock"
-     "xhost"
-     "xauth"
-     "xinput"
-     "xclip"
-     "papirus-icon-theme"
+   '("alacritty"
+     "autorandr"
      "feh"
+     "font-dejavu"
+     "font-google-noto"
+     "font-google-noto-emoji"
+     "i3lock"
      "mpv"
-     "youtube-dl"
-     "yt-dlp"
-     "alacritty"
+     "papirus-icon-theme"
      "pavucontrol"
-     "autorandr")))
+     "rofi"
+     "scrot"
+     "xauth"
+     "xclip"
+     "xdotool"
+     "xev"
+     "xhost"
+     "xinput"
+     "xmodmap"
+     "xprop"
+     "xrandr"
+     "xss-lock"
+     "youtube-dl"
+     "yt-dlp")))
 
 (define-public %password-store-packages
   (specifications->packages
-   '("password-store"
+   '("gnupg"
      "pass-otp"
-     "gnupg"
+     "password-store"
      "pinentry")))
 
