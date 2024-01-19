@@ -31,13 +31,17 @@
 (define-public %lr/base-services
   (cons*
     (service elogind-service-type)
+
     (service ntp-service-type)
+
     (modify-services %base-services
       (guix-service-type config => (guix-configuration
         (inherit config)
+
         (substitute-urls
          (append (list "https://substitutes.nonguix.org")
            %default-substitute-urls))
+
         (authorized-keys
          (cons
           (local-file "../../../files/nonguix/nonguix.pub")
@@ -55,12 +59,16 @@
     (service xorg-server-service-type
       (xorg-configuration
         (keyboard-layout %lr/keyboard-layout)))
+
     (service screen-locker-service-type
              (screen-locker-configuration
               (name "i3lock")
               (program (file-append i3lock "/bin/i3lock"))))
+
     (service wpa-supplicant-service-type)
+
     (service network-manager-service-type)
+
     %lr/base-services))
 
     ;; TODO make stronger connection between this and VT1
