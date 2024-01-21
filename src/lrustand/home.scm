@@ -89,55 +89,53 @@
      "nss-certs"
      "neovim"))))
 
+(define-public %guix-channels-home-services
+  (list
+   (simple-service 'nonguix-channel-service
+                   home-channels-service-type
+                   (list
+                    (channel
+                     (name 'nonguix)
+                     (url "https://gitlab.com/nonguix/nonguix")
+                     ;; Enable signature verification:
+                     (introduction
+                      (make-channel-introduction
+                       "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+                       (openpgp-fingerprint
+                        "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))))
+   (simple-service 'lrustand-channel-service
+                   home-channels-service-type
+                   (list
+                    (channel
+                     (name 'lrustand)
+                     (url "https://github.com/lrustand/guix-config")
+                     (introduction
+                      (make-channel-introduction
+                       "050796f9d48e8a5af8b99a03cdfe7ff1fda8d2a3"
+                       (openpgp-fingerprint
+                        "8A20 89FB 60FA 2311 3046  5178 022B 5FFE 7AEE F619"))))))
+   (simple-service 'rde-channel-service
+                   home-channels-service-type
+                   (list
+                    (channel
+                      (name 'rde)
+                      (url "https://github.com/abcdw/rde")
+                      (introduction
+                       (make-channel-introduction
+                        "257cebd587b66e4d865b3537a9a88cccd7107c95"
+                        (openpgp-fingerprint
+                         "2841 9AC6 5038 7440 C7E9  2FFA 2208 D209 58C1 DEB0"))))))))
 
-(define-public %home-environment
-  (home-environment
-   (packages
-    %lr/default-home-packages)
+(define-public %base-home-services
+  (list
+    (service home-shepherd-service-type)
 
-   (services
-    (list
-     (simple-service 'nonguix-channel-service
-                     home-channels-service-type
-                     (list
-                      (channel
-                       (name 'nonguix)
-                       (url "https://gitlab.com/nonguix/nonguix")
-                       ;; Enable signature verification:
-                       (introduction
-                        (make-channel-introduction
-                         "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-                         (openpgp-fingerprint
-                          "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))))
-     (simple-service 'lrustand-channel-service
-                     home-channels-service-type
-                     (list
-                      (channel
-                       (name 'lrustand)
-                       (url "https://github.com/lrustand/guix-config")
-                       (introduction
-                        (make-channel-introduction
-                         "050796f9d48e8a5af8b99a03cdfe7ff1fda8d2a3"
-                         (openpgp-fingerprint
-                          "8A20 89FB 60FA 2311 3046  5178 022B 5FFE 7AEE F619"))))))
-     (simple-service 'rde-channel-service
-                     home-channels-service-type
-                     (list
-                      (channel
-                        (name 'rde)
-                        (url "https://github.com/abcdw/rde")
-                        (introduction
-                         (make-channel-introduction
-                          "257cebd587b66e4d865b3537a9a88cccd7107c95"
-                          (openpgp-fingerprint
-                           "2841 9AC6 5038 7440 C7E9  2FFA 2208 D209 58C1 DEB0"))))))
+    (service home-bash-service-type)
 
-     (service home-shepherd-service-type)
-
-     (service home-zsh-service-type
-              (home-zsh-configuration
-               (zshrc (list
-                       (local-file "../../files/zsh/zshrc")))))
+    (service home-zsh-service-type
+             (home-zsh-configuration
+              (zshrc (list
+                      (local-file "../../files/zsh/zshrc")))))
 
      (service home-symlinks-service-type
               '(("/home/lars/code/guix-config/files/emacs/init.el"
@@ -185,7 +183,17 @@
                 ("/home/lars/code/guix-config/files/guile/.guile" ".guile")
 
                 ("/home/lars/code/guix-config/files/tmux/tmux.conf"
-                 ".config/tmux/tmux.conf")))
+                 ".config/tmux/tmux.conf")))))
+
+
+(define-public %home-environment
+  (home-environment
+   (packages
+    %lr/default-home-packages)
+
+   (services
+    (append
+    (list
 
      (service home-git-clone-service-type
               '(("https://github.com/stumpwm/stumpwm"
@@ -224,11 +232,10 @@
                 ("https://github.com/qutebrowser/qutebrowser"
                  "code/forks/qutebrowser")))
 
-     (service home-bash-service-type)
 
      (service home-syncthing-service-type)
 
-     ;;(service home-offlineimap-service-type)
+     (service home-offlineimap-service-type)
 
      ;;(service home-lisgd-service-type
      ;;         (lisgd-configuration
@@ -249,6 +256,8 @@
                    "" (msmtp-config email-accounts "gmail")))
                 ("offlineimap/config"
                  ,(plain-file
-                   "" (offlineimap-config email-accounts)))))))))
+                   "" (offlineimap-config email-accounts))))))
+    %base-home-services
+    %guix-channels-home-services))))
 
 %home-environment
