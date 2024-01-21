@@ -115,4 +115,4 @@ System on hardware which requires nonfree software to function."))))
 
 (define-public pinephone-pro-kernel-6.3
   (linux-pinephone-pro "orange-pi-6.3-20230612-0227"
-                       "1yx0gk43ya5w5i2b1lxf0qwrq72sb566qjhszzrnrkqnqfrr9agf"))
+                       "0gwv048iak0jis4x0x970sbfpzmdssnnkfg1qclf8ifvy9ays911"))
