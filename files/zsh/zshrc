@@ -95,3 +95,7 @@ elif [[ -z "$INSIDE_EMACS" ]]; then
 fi
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=239"
+
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  exec sx &>/dev/null
+fi
