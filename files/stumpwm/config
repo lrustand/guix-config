@@ -1,5 +1,4 @@
-#-quicklisp ;; -*- lisp -*-
-;;(ql:quickload "stumpwm")
+;; -*- lisp -*-
 
 (in-package :stumpwm)
 (setf *default-package* :stumpwm)
@@ -241,12 +240,11 @@
 
 (asdf:load-system "clx-truetype")
 (load-module "ttf-fonts")
-
 (setf xft:*font-dirs* (list (concat (getenv "HOME") "/.guix-home/profile/share/fonts/")))
 (setf clx-truetype::+font-cache-filename+ (concat (getenv "HOME") "/.fonts/font-cache.sexp"))
 (xft:cache-fonts)
-
 (set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Bold" :size 10 :antialias t))
+
 (setf cpu::*cpu-modeline-fmt* "%c %t")
 (setf mem::*mem-modeline-fmt* "mem: ")
 (setf maildir::*maildir-modeline-fmt* "mail: %l %n %c %t")

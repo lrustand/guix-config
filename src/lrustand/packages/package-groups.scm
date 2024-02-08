@@ -82,7 +82,7 @@
      "font-google-noto-emoji"
      "i3lock"
      "mpv"
-     "papirus-icon-theme"
+     ;;"papirus-icon-theme"
      "pavucontrol"
      "rofi"
      "scrot"

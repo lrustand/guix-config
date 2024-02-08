@@ -2,4 +2,5 @@
 (require :asdf)
 (push  "~/code/forks/stumpwm/" asdf:*central-registry*)
 (asdf:load-system :stumpwm)
+(setf asdf:*central-registry* nil)
 (stumpwm:stumpwm)
