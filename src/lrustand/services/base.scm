@@ -69,7 +69,7 @@
                         (udev-rule
                          "40-autorandr.rules"
                          (string-append "ACTION==\"change\", SUBSYSTEM==\"drm\", "
-                                        "RUN+=\"/home/lars/.guix-home/profile/bin/autorandr --batch --change\"")))
+                                        "RUN+=\"/home/lars/.guix-home/profile/bin/autorandr --batch --change --match-edid\"")))
 
     (service wpa-supplicant-service-type)
 
