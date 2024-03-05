@@ -271,3 +271,19 @@
 
 (when *initializing*
   (run-shell-command "svkbd-mobile-intl -l minimal,symbols -d -g -0-0"))
+
+
+;; Get the first line of str
+(defun my/first-line (str)
+  (subseq str 0 (position #\newline str)))
+
+(defparameter *current-display-configuration* (my/first-line (run-shell-command "autorandr --current" t)))
+(remove-all-hooks *new-head-hook*)
+(add-hook *new-head-hook*
+          (lambda (a b)
+            (let* ((new-display-configuration (my/first-line (run-shell-command "autorandr --current" t)))
+                   (new-dump-file (dump-pathname new-display-configuration)))
+              (dump-desktop-to-file *current-display-configuration*)
+              (when (uiop:file-exists-p new-dump-file)
+                (restore-from-file new-dump-file))
+              (setf *current-display-configuration* new-display-configuration))))
