@@ -65,6 +65,12 @@
               (name "i3lock")
               (program (file-append i3lock "/bin/i3lock"))))
 
+    (udev-rules-service 'autorandr
+                        (udev-rule
+                         "40-autorandr.rules"
+                         (string-append "ACTION==\"change\", SUBSYSTEM==\"drm\", "
+                                        "RUN+=\"/home/lars/.guix-home/profile/bin/autorandr --batch --change\"")))
+
     (service wpa-supplicant-service-type)
 
     (service network-manager-service-type)
