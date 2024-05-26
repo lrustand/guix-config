@@ -142,6 +142,9 @@
               '(("/home/lars/code/guix-config/files/emacs/init.el"
                  ".emacs.d/init.el")
 
+                ("/home/lars/code/guix-config/files/alacritty/alacritty.toml"
+                 ".config/alacritty/alacritty.toml")
+
                 ("/home/lars/code/guix-config/files/alacritty/alacritty.yml"
                  ".config/alacritty/alacritty.yml")
 
