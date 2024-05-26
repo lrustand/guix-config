@@ -287,3 +287,7 @@
               (when (uiop:file-exists-p new-dump-file)
                 (restore-from-file new-dump-file))
               (setf *current-display-configuration* new-display-configuration))))
+
+;; Set normal mouse pointer as default
+(run-shell-command "xsetroot -cursor_name left_ptr")
+

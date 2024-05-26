@@ -85,6 +85,7 @@
      "sbcl"
      "sbcl-clx-truetype"
      "sbcl-slynk"
+     "xsetroot"
      "python"
      "nss-certs"
      "neovim"))))
