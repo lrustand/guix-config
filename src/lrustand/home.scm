@@ -3,6 +3,7 @@
   #:use-module (gnu home)
   #:use-module (gnu home services)
   #:use-module (gnu home services messaging)
+  #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
   #:use-module (gnu services)
   #:use-module (gnu packages web-browsers)
@@ -87,6 +88,7 @@
      "sbcl-slynk"
      "xsetroot"
      "python"
+     "xdg-utils"
      "nss-certs"
      "neovim"))))
 
@@ -236,6 +238,8 @@
                 ("https://github.com/qutebrowser/qutebrowser"
                  "code/forks/qutebrowser")))
 
+;; TODO: Add home-run-on-first-login-service-type
+;; It works by first login after each boot
 
      (service home-syncthing-service-type)
 
@@ -253,6 +257,19 @@
      ;;                           "-g" "1,UD,B,*,P,xdotool key Hyper_L+M"
      ;;                           "-g" "1,UD,T,*,P,rofi -show drun -show-icons -icon-theme Papirus"
      ;;                           "-g" "1,DLUR,TR,*,P,xdotool key Super_L+f"))))
+
+     (service home-xdg-mime-applications-service-type
+              (home-xdg-mime-applications-configuration
+               (added '((application/pdf . okular.desktop)))
+               (default '((application/pdf . okular.desktop)))
+               (removed '((application/pdf . libreoffice-draw.desktop)))
+               (desktop-entries
+                (list (xdg-desktop-entry
+                       (file "okular")
+                       (name "Okular")
+                       (type 'application)
+                       (config
+                        '((exec . "okular"))))))))
 
      (service home-xdg-configuration-files-service-type
               `(("msmtp/config"
