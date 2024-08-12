@@ -2,6 +2,7 @@
   #:use-module (gnu)
   #:use-module (gnu home)
   #:use-module (gnu home services)
+  #:use-module (gnu home services mail)
   #:use-module (gnu home services messaging)
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
@@ -271,11 +272,30 @@
                        (config
                         '((exec . "okular"))))))))
 
+     (service home-msmtp-service-type
+              (home-msmtp-configuration
+               (defaults
+                 (msmtp-configuration
+                  (auth? #t)
+                  (tls? #t)
+                  (tls-starttls? #f)
+                  (tls-trust-file "/etc/ssl/certs/ca-certificates.crt")
+                  (port 465)
+                  (log-file "~/.msmtp.log")))
+               (accounts
+                (list
+                 (msmtp-account
+                  (name "gmail")
+                  (configuration
+                   (msmtp-configuration
+                    (host "smtp.gmail.com")
+                    (user "rustand.lars@gmail.com")
+                    (from "rustand.lars@gmail.com")
+                    (password-eval "\"pass show $(find ~/.password-store -wholename '*/mutt/rustand.lars@gmail.com' | cut -d '/' -f 5-)/app_password\""))))))
+               (default-account "gmail")))
+
      (service home-xdg-configuration-files-service-type
-              `(("msmtp/config"
-                 ,(plain-file
-                   "" (msmtp-config email-accounts "gmail")))
-                ("offlineimap/config"
+              `(("offlineimap/config"
                  ,(plain-file
                    "" (offlineimap-config email-accounts))))))
     %base-home-services
