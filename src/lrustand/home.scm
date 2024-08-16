@@ -23,8 +23,7 @@
   #:use-module (lrustand services davmail)
   #:use-module (lrustand services repos)
   #:use-module (lrustand services symlinks)
-  #:use-module (lrustand mail offlineimap)
-  #:use-module (lrustand mail msmtp))
+  #:use-module (lrustand mail offlineimap))
 
 (use-home-service-modules
  shells
