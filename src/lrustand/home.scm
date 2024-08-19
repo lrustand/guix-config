@@ -92,7 +92,7 @@
      "xdg-desktop-portal"
      "xdg-desktop-portal-gtk"
      ;; TODO: fix this shit
-     "xdg-desktop-portal-termfilechooser"
+     ;;"xdg-desktop-portal-termfilechooser"
      ;; Needs export XDG_SESSION_TYPE=x11
      ;; and possibly export XDG_CURRENT_DESKTOP=GNOME
      "xdg-desktop-portal-gnome"
