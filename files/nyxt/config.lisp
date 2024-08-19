@@ -38,6 +38,17 @@
            "C-h v" 'describe-variable
            )))))
 
+(defvar *my-search-engines*
+  (list
+   '("google" "https://google.com/search?q=~a" "https://google.com"))
+  "List of search engines.")
+
+(define-configuration buffer
+  "Go through the search engines above and make-search-engine out of them."
+  ((search-engines
+    (mapcar (lambda (engine) (apply 'make-search-engine engine))
+            *my-search-engines*))))
+
 (define-configuration nyxt/mode/hint:hint-mode
   ((nyxt/mode/hint:hinting-type :vi)
    (nyxt/mode/hint:hints-alphabet "kdjflsgha")))
