@@ -111,11 +111,6 @@
 (define-key *top-map* (kbd "s-e") "gselect 3")
 (define-key *top-map* (kbd "s-r") "gselect 4")
 (define-key *top-map* (kbd "s-t") "gselect 5")
-(define-key *top-map* (kbd "s-y") "gselect 6")
-(define-key *top-map* (kbd "s-u") "gselect 7")
-(define-key *top-map* (kbd "s-i") "gselect 8")
-(define-key *top-map* (kbd "s-o") "gselect 9")
-(define-key *top-map* (kbd "s-p") "gselect 10")
 
 ;; Move window to workspace
 (define-key *top-map* (kbd "s-Q") "gmove-and-follow 1")
@@ -123,11 +118,6 @@
 (define-key *top-map* (kbd "s-E") "gmove-and-follow 3")
 (define-key *top-map* (kbd "s-R") "gmove-and-follow 4")
 (define-key *top-map* (kbd "s-T") "gmove-and-follow 5")
-(define-key *top-map* (kbd "s-Y") "gmove-and-follow 6")
-(define-key *top-map* (kbd "s-U") "gmove-and-follow 7")
-(define-key *top-map* (kbd "s-I") "gmove-and-follow 8")
-(define-key *top-map* (kbd "s-O") "gmove-and-follow 9")
-(define-key *top-map* (kbd "s-P") "gmove-and-follow 10")
 
 ;; Change workspace/screen
 (define-key *top-map* (kbd "H-h") "sprev")
