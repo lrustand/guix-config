@@ -261,7 +261,12 @@
      (service home-xdg-mime-applications-service-type
               (home-xdg-mime-applications-configuration
                (added '((application/pdf . okular.desktop)))
-               (default '((application/pdf . okular.desktop)))
+               (default '((application/pdf . okular.desktop)
+                          (text/html . org.qutebrowser.qutebrowser.desktop)
+                          (text/xml . org.qutebrowser.qutebrowser.desktop)
+                          (application/xhtml . org.qutebrowser.qutebrowser.desktop)
+                          (x-scheme-handler/http . org.qutebrowser.qutebrowser.desktop)
+                          (x-scheme-handler/https . org.qutebrowser.qutebrowser.desktop)))
                (removed '((application/pdf . libreoffice-draw.desktop)))
                (desktop-entries
                 (list (xdg-desktop-entry
