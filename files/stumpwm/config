@@ -27,6 +27,16 @@
   (vsplit)
   (move-focus :down))
 
+(defcommand (move-window-to-current-frame tile-group)
+    (&optional (fmt *window-format*)) (:rest)
+  "Grab a window from elsewhere and move it here."
+  (let ((pulled-window (select-window-from-menu
+                        (act-on-matching-windows (w) (and (grouped-p w)
+                                                          (not (in-frame-p w))) w)
+                        fmt)))
+    (when pulled-window
+      (pull-window pulled-window))))
+
 (set-prefix-key (kbd "s-space"))
 
 (define-key *top-map* (kbd "s-RET") "alacritty")
@@ -141,7 +151,7 @@
 (define-key *top-map* (kbd "H-S-Right") "snext-with-window")
 
 ;; Show hidden windows
-(define-key *top-map* (kbd "s-g") "pull-from-windowlist")
+(define-key *top-map* (kbd "s-g") "move-window-to-current-frame")
 (define-key *top-map* (kbd "s-n") "next-in-frame")
 (define-key *top-map* (kbd "s-p") "prev-in-frame")
 (define-key *top-map* (kbd "s-TAB") "other-in-frame")
