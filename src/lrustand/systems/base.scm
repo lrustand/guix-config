@@ -50,7 +50,6 @@
         (list sof-firmware)
         (map specification->package
           (list
-            "nss-certs"
             "neovim"
             "htop"
             "tmux"
