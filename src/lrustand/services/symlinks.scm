@@ -13,14 +13,19 @@
                 (target-file (string-append #$(getenv "HOME") "/"
                                             (cadr it))))
             (mkdir-p (dirname target-file))
-            (if (and (file-exists? target-file)
-                     (equal? 'symlink (stat:type (lstat target-file)))
-                     (equal? (canonicalize-path target-file)
-                             (canonicalize-path from-file)))
+            (cond
+             ((and (file-exists? target-file)
+                   (equal? 'symlink (stat:type (lstat target-file)))
+                   (equal? (canonicalize-path target-file)
+                           (canonicalize-path from-file)))
                 (format #t "~a is already a symlink to ~a!\n"
-                        target-file from-file)
+                        target-file from-file))
+             ((file-exists? target-file)
+                (format #t "~a already exists!!!\n"
+                        target-file))
+             (else
                 (symlink from-file
-                         target-file))))
+                         target-file)))))
          '#$lst))))
 
 (define-public home-symlinks-service-type
