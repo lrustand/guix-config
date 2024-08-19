@@ -39,7 +39,7 @@
            )))))
 
 (define-configuration nyxt/mode/hint:hint-mode
-  ((nyxt/mode/hint:hinting-type :emacs)
+  ((nyxt/mode/hint:hinting-type :vi)
    (nyxt/mode/hint:hints-alphabet "kdjflsgha")))
 
 ;;(define-configuration browser
