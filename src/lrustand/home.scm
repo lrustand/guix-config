@@ -100,7 +100,6 @@
      "xsetroot"
      "python"
      "xdg-utils"
-     "nss-certs"
      "neovim"))))
 
 (define-public %guix-channels-home-services
