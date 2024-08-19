@@ -125,5 +125,3 @@ seeks to add support for the screenshot, screencast, and possibly
 remote-desktop @code{xdg-desktop-portal} interfaces for wlroots based
 compositors.")
     (license license:expat)))
-
-xdg-desktop-portal-termfilechooser
