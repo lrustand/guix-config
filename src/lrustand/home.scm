@@ -15,6 +15,7 @@
   #:use-module (guix channels)
   #:use-module (guix packages)
   #:use-module (guix utils)
+  #:use-module (lrustand termfilechooser)
   #:use-module (lrustand packages package-groups)
   #:use-module (lrustand packages lisgd)
   #:use-module (lrustand home services)
@@ -86,6 +87,13 @@
      "sbcl"
      "sbcl-clx-truetype"
      "sbcl-slynk"
+     "xdg-desktop-portal"
+     "xdg-desktop-portal-gtk"
+     "xdg-desktop-portal-termfilechooser"
+     ;; Needs export XDG_SESSION_TYPE=x11
+     ;; and possibly export XDG_CURRENT_DESKTOP=GNOME
+     "xdg-desktop-portal-gnome"
+     "xdg-desktop-portal-kde"
      "xsetroot"
      "python"
      "xdg-utils"
