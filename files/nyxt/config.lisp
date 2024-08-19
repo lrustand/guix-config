@@ -24,8 +24,9 @@
      nyxt/keyscheme:vi-normal
      (list "J"     'switch-buffer-next
            "K"     'switch-buffer-previous
-           "r"     'reload-buffer
+           "r"     'reload-current-buffer
            "C-x b" 'switch-buffer
+           "C-x o" 'switch-buffer-last
            "M-x"   'execute-command
            "g i"   'nyxt/mode/document:focus-first-input-field
            "C-h k" 'describe-key
