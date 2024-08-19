@@ -84,6 +84,8 @@
      "gst-plugins-bad"
      "gst-plugins-bad-minimal"
      "gst-plugins-ugly"
+     ;; For seamlessly opening archives in dired with dired-avfs package
+     "avfs"
      "sbcl"
      "sbcl-clx-truetype"
      "sbcl-slynk"
