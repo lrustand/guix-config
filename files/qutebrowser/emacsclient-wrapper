@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+emacsclient -e "(progn (setenv \"QUTE_FIFO\" \"$QUTE_FIFO\") $@ (setenv \"QUTE_FIFO\" nil))"
