@@ -164,6 +164,10 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 
 
 config.set('editor.command', ["emacsclient", "+{line}:{column}", "{file}"])
+config.set('tabs.tabs_are_windows', True)
+config.set('tabs.show', 'multiple')
+# Avoid browser being focused when sending commands
+config.set('new_instance_open_target', 'tab-silent')
 
 # Insert passwords
 config.bind(',p', 'spawn --userscript qute-pass')
@@ -178,3 +182,5 @@ config.bind("o", "spawn --userscript qutedmenu open")
 config.bind("O", "spawn --userscript qutedmenu tab")
 config.bind("wo", "spawn --userscript qutedmenu window")
 config.bind("W", "spawn --userscript qutedmenu private")
+
+config.bind("u", "undo --window")
