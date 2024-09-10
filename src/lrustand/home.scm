@@ -76,6 +76,9 @@
      "ncdu"
      "the-silver-searcher"
      "curl"
+     ;; Needed for emacs PDFView (pdf-tools)
+     "libpng"
+     "emacs-pdf-tools"
      "font-google-noto"
      "font-google-noto-emoji"
      "font-dejavu"
