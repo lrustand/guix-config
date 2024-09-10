@@ -163,11 +163,7 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
 
-
-
-
-config.set('editor.command', ['alacritty', '-o', "colors.primary.background='#002b36'", '-e', 'nvim', '-f', '{file}', '-c', 'normal {line}G{column0}l'])
-
+config.set('editor.command', ["emacsclient", "+{line}:{column}", "{file}"])
 
 # Insert passwords
 config.bind(',p', 'spawn --userscript qute-pass')
