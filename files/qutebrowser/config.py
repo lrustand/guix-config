@@ -108,7 +108,7 @@ config.set('content.geolocation', False)
 # JavaScript requires a restart.
 # Type: FormatString
 #config.set('content.headers.user_agent', ua.chrome, '*://*')
-config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', '*://*')
+#config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', '*://*')
 config.set('content.canvas_reading', True)
 config.set('content.webgl', True)
 config.set('content.hyperlink_auditing', False)
