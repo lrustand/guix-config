@@ -196,6 +196,9 @@
                 ("/home/lars/code/guix-config/files/qutebrowser/qutedmenu"
                  ".local/share/qutebrowser/userscripts/qutedmenu")
 
+                ("/home/lars/code/guix-config/files/qutebrowser/emacsclient-wrapper"
+                 ".local/share/qutebrowser/userscripts/emacsclient-wrapper")
+
                 ("/home/lars/code/guix-config/files/guile/.guile" ".guile")
 
                 ("/home/lars/code/guix-config/files/tmux/tmux.conf"
