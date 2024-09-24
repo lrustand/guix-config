@@ -11,4 +11,5 @@ xmodmap -e "remove Mod4 = Hyper_L"
 xmodmap -e "add Mod3 = Hyper_L"
 
 # Start stumpwm from git checkout
-exec sbcl --load start-stump
+#exec sbcl --load start-stump
+exec dbus-launch --exit-with-session emacs
