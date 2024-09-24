@@ -77,8 +77,13 @@ config.bind("o", "spawn --userscript emacsclient-wrapper '(qute-launcher)'")
 config.bind("O", "spawn --userscript emacsclient-wrapper '(qute-launcher-tab)'")
 config.bind("wo", "spawn --userscript emacsclient-wrapper '(qute-launcher-window)'")
 config.bind("W", "spawn --userscript emacsclient-wrapper '(qute-launcher-private)'")
+config.bind("go", "spawn --userscript emacsclient-wrapper '(qute-launcher nil nil \"{url:pretty}\")'")
+config.bind("gO", "spawn --userscript emacsclient-wrapper '(qute-launcher-tab nil nil \"{url:pretty}\")'")
 
 config.bind("u", "undo --window")
+
+config.bind('<Ctrl-g>', 'mode-leave', mode='command')
+config.bind('<Ctrl-g>', 'mode-leave', mode='prompt')
 
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Scheme name: Solarized Dark
