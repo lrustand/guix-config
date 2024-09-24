@@ -58,6 +58,9 @@ config.set('editor.command', ["emacsclient",
 
 config.set('tabs.tabs_are_windows', True)
 config.set('tabs.show', 'multiple')
+
+config.set('window.title_format', '{audio}{private}{current_title}{title_sep}{current_url}')
+
 # Avoid browser being focused when sending commands
 config.set('new_instance_open_target', 'tab-silent')
 
