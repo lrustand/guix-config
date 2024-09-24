@@ -1,25 +1,7 @@
 
-with config.pattern('*://lichess.org/*') as p:
-    p.hints.selectors['all'] += [
-        'div.lobby__app__content.lpools > div',
-        '.tabs-horiz > span:not(.active)',
-        '.toggle',
-        'div.lobby__app__content.lreal_time tr',
-        '.orientation-white.manipulable piece.white',
-        '.orientation-black.manipulable piece.black',
-        '.analyse piece',
-        'square.move-dest',
-        '.ceval .switch',
-        '.mselect',
-    ]
-
-with config.pattern('*://usn.no/*') as p:
-    p.hints.selectors['all'] += [
-        'usn-rail-item',
-        '.tools-item',
-    ]
-
 config.load_autoconfig(False)
+
+# * Privacy and Security
 
 config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 config.set('content.cookies.accept', 'all', 'devtools://*')
@@ -31,6 +13,7 @@ config.set('content.canvas_reading', True)
 config.set('content.webgl', True)
 config.set('content.hyperlink_auditing', False)
 
+# * Adblocking
 # Valid values:
 #   - auto: Use Brave's ABP-style adblocker if available, host blocking otherwise
 #   - adblock: Use Brave's ABP-style adblocker
@@ -52,6 +35,8 @@ c.content.blocking.adblock.lists = [
     'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/quick-fixes.txt',
 ]
 
+# * EXWM stuff
+
 config.set('editor.command', ["emacsclient",
                               "+{line}:{column}",
                               "{file}"])
@@ -63,6 +48,9 @@ config.set('window.title_format', '{audio}{private}{current_title}{title_sep}{cu
 
 # Avoid browser being focused when sending commands
 config.set('new_instance_open_target', 'tab-silent')
+
+
+# * Keybinds
 
 # Insert passwords
 config.bind(',p', 'spawn --userscript qute-pass')
@@ -85,6 +73,29 @@ config.bind("u", "undo --window")
 config.bind('<Ctrl-g>', 'mode-leave', mode='command')
 config.bind('<Ctrl-g>', 'mode-leave', mode='prompt')
 
+# * Site-specific fixes and tweaks
+
+with config.pattern('*://lichess.org/*') as p:
+    p.hints.selectors['all'] += [
+        'div.lobby__app__content.lpools > div',
+        '.tabs-horiz > span:not(.active)',
+        '.toggle',
+        'div.lobby__app__content.lreal_time tr',
+        '.orientation-white.manipulable piece.white',
+        '.orientation-black.manipulable piece.black',
+        '.analyse piece',
+        'square.move-dest',
+        '.ceval .switch',
+        '.mselect',
+    ]
+
+with config.pattern('*://usn.no/*') as p:
+    p.hints.selectors['all'] += [
+        'usn-rail-item',
+        '.tools-item',
+    ]
+
+# * Solarized Dark Colortheme
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Scheme name: Solarized Dark
 # Scheme author: Ethan Schoonover (modified by aramisgithub)
