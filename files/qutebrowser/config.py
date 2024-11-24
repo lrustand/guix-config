@@ -30,7 +30,7 @@ c.content.blocking.adblock.lists = [
     'https://easylist-downloads.adblockplus.org/antiadblockfilters.txt',
     'https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt',
     'https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances.txt',
-    'https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-other.txt',
+    'https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-others.txt',
     'https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-cookies.txt',
     'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/quick-fixes.txt',
 ]
