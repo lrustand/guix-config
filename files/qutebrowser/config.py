@@ -1,3 +1,22 @@
+from qutebrowser.api import message
+from qutebrowser.keyinput import modeman
+from qutebrowser.misc import objects
+
+def on_enter_insert_mode(mode):
+    pass
+    #message.info(f"Entered {mode}")
+
+def on_leave_insert_mode(mode):
+    pass
+    #message.info(f"Left {mode}")
+
+def on_new(window):
+    mode_manager = modeman.instance(window.win_id)
+    mode_manager.entered.connect(on_enter_insert_mode)
+    mode_manager.left.connect(on_leave_insert_mode)
+
+# Fails if run during startup, qapp not initialized yet
+#objects.qapp.new_window.connect(on_new)
 
 config.load_autoconfig(False)
 
