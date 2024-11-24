@@ -95,6 +95,9 @@ with config.pattern('*://usn.no/*') as p:
         '.tools-item',
     ]
 
+# * Darkmode
+config.set('colors.webpage.preferred_color_scheme', 'dark')
+
 # * Load Emacs theme
 config.source("emacs_theme.py")
 
