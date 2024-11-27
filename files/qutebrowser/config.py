@@ -22,15 +22,12 @@ config.load_autoconfig(False)
 
 # * Privacy and Security
 
-config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
-config.set('content.cookies.accept', 'all', 'devtools://*')
-config.set('content.cookies.accept', 'no-3rdparty')
-config.set('content.cookies.accept', 'all', 'https://usn.instructure.com/*')
+c.content.cookies.accept = 'no-3rdparty'
 
-config.set('content.geolocation', False)
-config.set('content.canvas_reading', True)
-config.set('content.webgl', True)
-config.set('content.hyperlink_auditing', False)
+c.content.geolocation = False
+c.content.canvas_reading = False
+c.content.webgl = False
+c.content.hyperlink_auditing = False
 
 # * Adblocking
 # Valid values:
@@ -56,17 +53,17 @@ c.content.blocking.adblock.lists = [
 
 # * EXWM stuff
 
-config.set('editor.command', ["emacsclient",
-                              "+{line}:{column}",
-                              "{file}"])
+c.editor.command = ["emacsclient",
+                    "+{line}:{column}",
+                    "{file}"]
 
-config.set('tabs.tabs_are_windows', True)
-config.set('tabs.show', 'multiple')
+c.tabs.tabs_are_windows = True
+c.tabs.show = 'multiple'
 
-config.set('window.title_format', '{audio}{private}{current_title}{title_sep}{current_url}')
+c.window.title_format = '{audio}{private}{current_title}{title_sep}{current_url}'
 
 # Avoid browser being focused when sending commands
-config.set('new_instance_open_target', 'tab-silent')
+c.new_instance_open_target = 'tab-silent'
 
 
 # * Keybinds
@@ -114,8 +111,14 @@ with config.pattern('*://usn.no/*') as p:
         '.tools-item',
     ]
 
+with config.pattern('https://usn.instructure.com/*') as p:
+    p.content.cookies.accept = 'all'
+
+with config.pattern('*devtools://*') as p:
+    p.content.cookies.accept = 'all'
+
 # * Darkmode
-config.set('colors.webpage.preferred_color_scheme', 'dark')
+c.colors.webpage.preferred_color_scheme = 'dark'
 
 # * Load Emacs theme
 config.source("emacs_theme.py")
