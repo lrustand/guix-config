@@ -77,12 +77,12 @@ config.bind(';m', 'hint links spawn --detach mpv --force-window yes {hint-url}')
 config.bind(',m', 'spawn --detach mpv --force-window yes {url}')
 
 # Open urls through dmenu
-config.bind("o", "spawn --userscript emacsclient-wrapper '(qute-launcher)'")
-config.bind("O", "spawn --userscript emacsclient-wrapper '(qute-launcher-tab)'")
-config.bind("wo", "spawn --userscript emacsclient-wrapper '(qute-launcher-window)'")
-config.bind("W", "spawn --userscript emacsclient-wrapper '(qute-launcher-private)'")
-config.bind("go", "spawn --userscript emacsclient-wrapper '(qute-launcher nil nil \"{url:pretty}\")'")
-config.bind("gO", "spawn --userscript emacsclient-wrapper '(qute-launcher-tab nil nil \"{url:pretty}\")'")
+config.bind("o", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher)'")
+config.bind("O", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-tab)'")
+config.bind("wo", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-window)'")
+config.bind("W", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-private)'")
+config.bind("go", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher nil nil \"{url:pretty}\")'")
+config.bind("gO", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-tab nil nil \"{url:pretty}\")'")
 
 config.bind("u", "undo --window")
 
