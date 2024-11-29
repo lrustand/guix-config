@@ -122,7 +122,7 @@ with config.pattern('*://usn.no/*') as p:
 with config.pattern('https://usn.instructure.com/*') as p:
     p.content.cookies.accept = 'all'
 
-with config.pattern('*devtools://*') as p:
+with config.pattern('devtools://*') as p:
     p.content.cookies.accept = 'all'
 
 # * Darkmode
