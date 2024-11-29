@@ -1,19 +1,27 @@
 from qutebrowser.api import message
 from qutebrowser.keyinput import modeman
 from qutebrowser.misc import objects
+from qutebrowser.utils import objreg
 
-def on_enter_insert_mode(mode):
-    pass
-    #message.info(f"Entered {mode}")
+from subprocess import run
 
-def on_leave_insert_mode(mode):
-    pass
-    #message.info(f"Left {mode}")
+def on_enter_mode(mode):
+    run(["emacsclient", "-e", f'(message "Entering {mode}")'])
 
-def on_new(window):
+def on_leave_mode(mode):
+    run(["emacsclient", "-e", f'(message "Exiting {mode}")'])
+
+def enable_mode_hooks (window):
     mode_manager = modeman.instance(window.win_id)
-    mode_manager.entered.connect(on_enter_insert_mode)
-    mode_manager.left.connect(on_leave_insert_mode)
+    mode_manager.entered.connect(on_enter_mode)
+    mode_manager.left.connect(on_leave_mode)
+
+# Enable the mode hooks on startup in the current window
+enable_mode_hooks(objreg.last_visible_window())
+
+# Enable the mode hooks for each new window
+def on_new(window):
+    enable_mode_hooks(window)
 
 # Fails if run during startup, qapp not initialized yet
 #objects.qapp.new_window.connect(on_new)
