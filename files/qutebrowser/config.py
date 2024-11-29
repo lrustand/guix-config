@@ -89,8 +89,8 @@ config.bind("o", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher)
 config.bind("O", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-tab)'")
 config.bind("wo", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-window)'")
 config.bind("W", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-private)'")
-config.bind("go", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher nil nil \"{url:pretty}\")'")
-config.bind("gO", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-tab nil nil \"{url:pretty}\")'")
+config.bind("go", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher \"{url:pretty}\")'")
+config.bind("gO", "spawn --userscript emacsclient-wrapper '(qutebrowser-launcher-tab \"{url:pretty}\")'")
 
 config.bind("u", "undo --window")
 
