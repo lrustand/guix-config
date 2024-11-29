@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-emacsclient -e "(setenv \"QUTE_FIFO\" \"$QUTE_FIFO\")"
-emacsclient -e "$@"
-emacsclient -e "(setenv \"QUTE_FIFO\" nil)"
+emacsclient -e "(let ((qute-fifo \"$QUTE_FIFO\")
+                      (qutebrowser-command-backend 'qutebrowser-fifo-send))
+                  $@)"
