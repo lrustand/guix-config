@@ -77,9 +77,15 @@
      "ncdu"
      "the-silver-searcher"
      "curl"
+     "graphviz"
+     "imagemagick"
+     "zbar"
      ;; Needed for emacs PDFView (pdf-tools)
      "libpng"
      "emacs-pdf-tools"
+     "python-pyserial"
+     "python-ipython"
+     "python-hy"
      "font-google-noto"
      "font-google-noto-emoji"
      "font-dejavu"
@@ -90,6 +96,7 @@
      "gst-plugins-bad"
      "gst-plugins-bad-minimal"
      "gst-plugins-ugly"
+     "pandoc"
      ;; For seamlessly opening archives in dired with dired-avfs package
      "avfs"
      "sbcl"
@@ -103,6 +110,8 @@
      "xdg-desktop-portal-kde"
      "xsetroot"
      "python"
+     "python-readability"
+     "w3m"
      "xdg-utils"
      "neovim"))))
 
