@@ -4,6 +4,7 @@
   #:use-module (gnu home services)
   #:use-module (gnu home services mail)
   #:use-module (gnu home services messaging)
+  #:use-module (gnu home services sound)
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
   #:use-module (gnu services)
@@ -313,6 +314,12 @@
                     (from "rustand.lars@gmail.com")
                     (password-eval "\"pass show $(find ~/.password-store -wholename '*/mutt/rustand.lars@gmail.com' | cut -d '/' -f 5-)/app_password\""))))))
                (default-account "gmail")))
+
+     (service home-dbus-service-type)
+
+     (service home-pipewire-service-type
+              (home-pipewire-configuration
+               (enable-pulseaudio? #t)))
 
      (service home-xdg-configuration-files-service-type
               `(("offlineimap/config"
