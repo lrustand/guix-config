@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-emacsclient -e "(let ((qute-fifo \"$QUTE_FIFO\")
-                      (qutebrowser-command-backend 'qutebrowser-fifo-send))
-                  $@)"
+emacsclient -e \
+  "(let ((qutebrowser-fifo \"$QUTE_FIFO\")
+         (qutebrowser-command-backend 'qutebrowser-fifo-send))
+     (condition-case nil
+         $@
+       (t \"\")))" ; true
