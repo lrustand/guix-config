@@ -228,41 +228,14 @@
     (list
 
      (service home-git-clone-service-type
-              '(("https://github.com/stumpwm/stumpwm"
-                 "code/forks/stumpwm")
-
-                ("https://github.com/stumpwm/stumpwm-contrib"
-                 "code/forks/stumpwm-contrib")
-
-                ("https://github.com/lihebi/clx-truetype"
-                 ".quicklisp/local-projects/clx-truetype")
-
-                ("https://github.com/atlas-engineer/nyxt"
-                 "code/forks/nyxt")
-
-                ("https://github.com/lrustand/guix-config"
+              '(("https://github.com/lrustand/guix-config"
                  "code/guix-config")
-
-                ("https://git.savannah.gnu.org/git/guix.git"
-                 "code/forks/guix")
-
-                ("https://gitlab.com/nonguix/nonguix"
-                 "code/forks/nonguix")
-
-                ("https://git.sr.ht/~abcdw/rde"
-                 "code/forks/rde")
-
-                ("https://github.com/lrustand/dotfiles_ansible"
-                 "code/dotfiles_ansible")
 
                 ("https://github.com/lrustand/qmk_firmware"
                  "code/qmk")
 
                 ("https://github.com/lrustand/zmk"
-                 "code/zmk")
-
-                ("https://github.com/qutebrowser/qutebrowser"
-                 "code/forks/qutebrowser")))
+                 "code/zmk")))
 
 ;; TODO: Add home-run-on-first-login-service-type
 ;; It works by first login after each boot
