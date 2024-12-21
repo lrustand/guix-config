@@ -286,8 +286,7 @@
 
      (service home-xdg-mime-applications-service-type
               (home-xdg-mime-applications-configuration
-               (added '((application/pdf . okular.desktop)))
-               (default '((application/pdf . okular.desktop)
+               (default '((application/pdf . PDFView.desktop)
                           (text/html . org.qutebrowser.qutebrowser.desktop)
                           (text/xml . org.qutebrowser.qutebrowser.desktop)
                           (application/xhtml . org.qutebrowser.qutebrowser.desktop)
@@ -296,11 +295,12 @@
                (removed '((application/pdf . libreoffice-draw.desktop)))
                (desktop-entries
                 (list (xdg-desktop-entry
-                       (file "okular")
-                       (name "Okular")
+                       (file "PDFView")
+                       (name "PDFView")
                        (type 'application)
                        (config
-                        '((exec . "okular"))))))))
+                        '((exec . "emacsclient %u")
+                          (mimetype . "application/pdf"))))))))
 
      (service home-msmtp-service-type
               (home-msmtp-configuration
