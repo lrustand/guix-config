@@ -19,6 +19,12 @@ export PROMPT=$'%(?..
 %K{black}%F{blue} %k
 %K{black}%F{blue} -> %k%f'
 
+if [[ "$INSIDE_EMACS" = 'vterm' ]] \
+    && [[ -n ${EMACS_VTERM_PATH} ]] \
+    && [[ -f ${EMACS_VTERM_PATH}/etc/emacs-vterm-zsh.sh ]]; then
+    source ${EMACS_VTERM_PATH}/etc/emacs-vterm-zsh.sh
+fi
+
 autoload -Uz compinit
 compinit
 
@@ -68,6 +74,15 @@ bindkey '^[[4~' end-of-line
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
+# update window title
+__preexec-title() {
+    print -Pn "\e]0;$1\a"} #sets title for running command
+__precmd-title() {
+    #print -Pn "\e]2;%m:%2~\a"} #sets title to HOSTNAME:PWD
+    print -Pn "\e]2;%2~\a"} #sets title to PWD otherwise
+preexec_functions+=( __preexec-title )
+precmd_functions+=( __precmd-title )
+
 if [[ -v TMUX ]]; then
     # Check if has TrueColor support and set corresponding tmux active bg"
     if [ -z "$(tmux showenv TC 2>&1 | cut -s -d'=' -f2)" ]; then
@@ -81,13 +96,6 @@ if [[ -v TMUX ]]; then
             tmux setenv TC 0
         fi
     fi
-    # update window title
-    __preexec-title() {
-        print -Pn "\e]0;$1\a"} #sets title for running command
-    __precmd-title() {
-        print -Pn "\e]0;$PWD\a"} #sets title to PWD otherwise
-    preexec_functions+=( __preexec-title )
-    precmd_functions+=( __precmd-title )
 elif [[ -o login ]]; then
     echo "This is a login shell, so not starting tmux"
 elif [[ -z "$INSIDE_EMACS" ]]; then
@@ -99,3 +107,7 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=239"
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   exec sx &>/dev/null
 fi
+
+# Local Variables:
+# mode: sh
+# End:
