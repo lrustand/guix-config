@@ -16,9 +16,9 @@
   #:use-module (guix channels)
   #:use-module (guix packages)
   #:use-module (guix utils)
-  #:use-module (lrustand termfilechooser)
+  ;;#:use-module (lrustand termfilechooser)
   #:use-module (lrustand packages package-groups)
-  #:use-module (lrustand packages lisgd)
+  ;;#:use-module (lrustand packages lisgd)
   #:use-module (lrustand home services)
   #:use-module (lrustand services offlineimap)
   #:use-module (lrustand services lisgd)
@@ -51,9 +51,9 @@
 
 (define-public %lr/default-home-packages
  (append
-  (list qutebrowser-with-tldextract
+  (list qutebrowser-with-tldextract)
         ;; TODO: fix this shit
-        xdg-desktop-portal-termfilechooser)
+        ;;xdg-desktop-portal-termfilechooser)
   %shell-packages
   %emacs-packages
   %mail-packages
@@ -69,7 +69,7 @@
      "cmake"
      "make"
      "gcc-toolchain"
-     "sqlite" ;; Needed for qutebrowser
+     ;;"sqlite" ;; Needed for qutebrowser
      "tree"
      "file"
      "zip"
@@ -85,19 +85,14 @@
      "emacs-pdf-tools"
      "python-pyserial"
      "python-ipython"
-     "python-hy"
+     ;; Fails to build
+     ;;"python-hy"
      "font-google-noto"
      "font-google-noto-emoji"
      "font-dejavu"
      "pandoc"
      ;; For seamlessly opening archives in dired with dired-avfs package
      "avfs"
-     "xdg-desktop-portal"
-     "xdg-desktop-portal-gtk"
-     ;; Needs export XDG_SESSION_TYPE=x11
-     ;; and possibly export XDG_CURRENT_DESKTOP=GNOME
-     "xdg-desktop-portal-gnome"
-     "xdg-desktop-portal-kde"
      "xsetroot"
      "python"
      "python-readability"
