@@ -45,6 +45,7 @@ c.window.title_format = '{audio}{private}{current_title}'
 
 # Avoid browser being focused when sending commands
 c.new_instance_open_target = 'tab-silent'
+c.new_instance_open_target_window = 'last-visible'
 
 
 # * Keybinds
