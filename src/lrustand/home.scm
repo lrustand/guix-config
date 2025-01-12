@@ -295,4 +295,8 @@
     %base-home-services
     %guix-channels-home-services))))
 
-%home-environment
+;; Don't print a screenful of garbage when evaling in repl
+(let ((arg (cadr (command-line))))
+  (cond
+   ((string=? "repl" arg) #t)
+   (else %home-environment)))
