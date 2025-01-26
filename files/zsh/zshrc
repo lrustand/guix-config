@@ -12,10 +12,26 @@ setopt INC_APPEND_HISTORY_TIME
 
 setopt prompt_subst
 
+function git_branch_name()
+{
+  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+  if [[ $branch == "" ]];
+  then
+    :
+  else
+    echo " [$branch]"
+  fi
+}
+
+PROMPT_EXIT_CODE="%K{black}[%F{red}%?%f]%k)"
+PROMPT_USERNAME_HOSTNAME="%B%F{%(!.red.green)}%n%f@%F{green}%m%f%b"
+PROMPT_PATH="%B%F{grey}[%~]%f%b"
+PROMPT_GIT_INFO="$(git_branch_name)"
+
 export PROMPT=$'%(?..
 %K{black}[%F{red}%?%f]%k)
 %F{green}%B%K{black}[%T, %D{%d/%m/%y}]%f%k%b
-%B%K{black}%F{%(!.red.green)}%n%f@%F{green}%m %F{grey}[$(pwd)]%f%f%k%b
+%B%K{black}%F{%(!.red.green)}%n%f@%F{green}%m %F{grey}[%~]%f$(git_branch_name)%k%b
 %K{black}%F{blue} %k
 %K{black}%F{blue} -> %k%f'
 
