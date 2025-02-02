@@ -54,11 +54,17 @@
          (auto-login user))
         config))
 
+(define %lr/xorg-configuration
+  (xorg-configuration
+   (keyboard-layout %lr/keyboard-layout)))
+
 (define-public %lr/desktop-services
   (cons*
     (service xorg-server-service-type
-      (xorg-configuration
-        (keyboard-layout %lr/keyboard-layout)))
+      %lr/xorg-configuration)
+
+    (service startx-command-service-type
+             %lr/xorg-configuration)
 
     (service screen-locker-service-type
              (screen-locker-configuration
