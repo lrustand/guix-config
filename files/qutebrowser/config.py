@@ -1,3 +1,22 @@
+"""My Qutebrowser config."""
+
+from __future__ import annotations
+
+try:
+    # This will add completion support when
+    # https://github.com/qutebrowser/qutebrowser/pull/8351 is merged.
+    from qutebrowser.api.configpy import c, config
+except ImportError:
+    # While waiting for that to be merged, we can achieve some level
+    # of type hinting by the following:
+    from qutebrowser.config.configfiles import ConfigAPI
+    from qutebrowser.config.config import ConfigContainer
+    config: ConfigAPI = config
+
+    # This won't work for completion of config options until #8351 is merged.
+    c: ConfigContainer = c
+
+
 config.load_autoconfig(False)
 
 # * Privacy and Security
