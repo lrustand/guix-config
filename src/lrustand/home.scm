@@ -264,27 +264,29 @@
                         '((exec . "emacsclient %u")
                           (mimetype . "application/pdf"))))))))
 
-     (service home-msmtp-service-type
-              (home-msmtp-configuration
-               (defaults
-                 (msmtp-configuration
-                  (auth? #t)
-                  (tls? #t)
-                  (tls-starttls? #f)
-                  (tls-trust-file "/etc/ssl/certs/ca-certificates.crt")
-                  (port 465)
-                  (log-file "~/.msmtp.log")))
-               (accounts
-                (list
-                 (msmtp-account
-                  (name "gmail")
-                  (configuration
-                   (msmtp-configuration
-                    (host "smtp.gmail.com")
-                    (user "rustand.lars@gmail.com")
-                    (from "rustand.lars@gmail.com")
-                    (password-eval "\"pass show $(find ~/.password-store -wholename '*/mutt/rustand.lars@gmail.com' | cut -d '/' -f 5-)/app_password\""))))))
-               (default-account "gmail")))
+     ;; Not in use anymore, using smtpmail package in emacs
+     ;;(service home-msmtp-service-type
+     ;;         (home-msmtp-configuration
+     ;;          (defaults
+     ;;            (msmtp-configuration
+     ;;             (auth? #t)
+     ;;             (tls? #t)
+     ;;             (tls-starttls? #f)
+     ;;             (tls-trust-file "/etc/ssl/certs/ca-certificates.crt")
+     ;;             (port 465)
+     ;;             (log-file "~/.msmtp.log")))
+     ;;          (accounts
+     ;;           (list
+     ;;            (msmtp-account
+     ;;             (name "gmail")
+     ;;             (configuration
+     ;;              (msmtp-configuration
+     ;;               (host "smtp.gmail.com")
+     ;;               (user "rustand.lars@gmail.com")
+     ;;               (from "rustand.lars@gmail.com")
+     ;;               (password-eval "\"pass show $(find ~/.password-store -wholename '*/mutt/rustand.lars@gmail.com' | cut -d '/' -f 5-)/app_password\""))))))
+     ;;          (default-account "gmail")))
+
 
      (service home-dbus-service-type)
 
