@@ -66,6 +66,7 @@
      "ecryptfs-utils"
      "guile-readline"
      "guile-colorized"
+     "fyi" ; Notification sender, similar to notify-send
      "cmake"
      "make"
      "gcc-toolchain"
@@ -181,6 +182,9 @@
 
                 ("/home/lars/code/guix-config/files/offlineimap/auth.py"
                  ".config/offlineimap/auth.py")
+
+                ("/home/lars/code/guix-config/files/offlineimap/postsync.sh"
+                 ".config/offlineimap/postsync.sh")
 
                 ("/home/lars/code/guix-config/files/davmail/davmail.properties"
                  ".config/davmail/davmail.properties")

@@ -57,6 +57,7 @@ accounts = ~a\n" (string-join
                          (assoc-ref acc "account-name")) accounts)
                   ", "))
     "pythonfile = ~/.config/offlineimap/auth.py
+postsynchook = ~/.config/offlineimap/postsync.sh
 # Controls how many accounts may be synced simultaneously
 maxsyncaccounts = 1
 "

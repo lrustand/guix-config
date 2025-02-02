@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Import new messages to notmuch database
 notmuch new
@@ -10,7 +10,7 @@ while IFS= read -r MESSAGE; do
     COUNT="$(echo $MESSAGE | cut -d ' ' -f 3)"
     SENDER="$(echo $MESSAGE | cut -d ' ' -f 5- | cut -d ';' -f 1)"
     TITLE="$(echo $MESSAGE | cut -d ' ' -f 5- | cut -d ';' -f 2 | sed -e 's/^ //g')"
-    notify-send "$SENDER" "$TITLE"
+    notify-send "$SENDER" "$TITLE" || fiy-send "$SENDER" "$TITLE"
 done <<< "$NEW_MAIL"
 
 # Remove "new" tag
