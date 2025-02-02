@@ -3,7 +3,7 @@ xhost +SI:localuser:$USER
 
 xss-lock -- i3lock -c 000000 &
 
-autorandr --change
+autorandr --change --match-edid
 
 xmodmap -e "clear lock"
 xmodmap -e "keysym Caps_Lock = Hyper_L"
