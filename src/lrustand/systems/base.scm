@@ -55,7 +55,6 @@
             "tmux"
             "git"
             "sx"
-            "stumpwm"
             "xterm" ;; For default stump configuration
             "xinitrc-xsession" ;; Only for login managers
             ;; "libinput" ;; Might not be needed
