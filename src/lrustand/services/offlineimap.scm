@@ -14,7 +14,6 @@
             offlineimap-configuration?
 
             offlineimap-configuration-log-file
-            offlineimap-configuration-pid-file
 
             offlineimap-shepherd-service
             offlineimap-service-type
@@ -53,7 +52,8 @@ arbitrary command-line arguments to ‘offlineimap’ as a list of strings.")
                              "-l" #$log-file)
                      #:user #$user
                      #:environment-variables
-                     (list (string-append "HOME=" (passwd:dir (getpw #$user))))
+                     (cons* (string-append "HOME=" (passwd:dir (getpw #$user)))
+                            (default-environment-variables))
                      #:log-file #$log-file))
            (stop #~(make-kill-destructor))
            (one-shot? #f)
