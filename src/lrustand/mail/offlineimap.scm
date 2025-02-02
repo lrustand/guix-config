@@ -32,7 +32,7 @@ folderfilter = lambda foldername: foldername not in [
     'Sync Issues/Local Failures',
     'Sync Issues/Server Failures',
     'Tasks',
-`    'Tasks/Sub Folder 1',
+    'Tasks/Sub Folder 1',
     'Tasks/Sub Folder 2',
     'Trash']")
 
