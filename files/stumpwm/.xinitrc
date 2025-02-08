@@ -1,7 +1,7 @@
 # Needed when starting through sx
-xhost +SI:localuser:$USER
+#xhost +SI:localuser:$USER
 
-xss-lock -- i3lock -c 000000 &
+#xss-lock -- i3lock -c 000000 &
 
 autorandr --change --match-edid
 
