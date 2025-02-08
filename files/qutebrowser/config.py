@@ -123,6 +123,9 @@ with config.pattern('https://usn.instructure.com/*') as p:
 with config.pattern('devtools://*') as p:
     p.content.cookies.accept = 'all'
 
+with config.pattern('https://maconomyportal.semcon.com/*') as p:
+    p.content.javascript.can_open_tabs_automatically = True
+
 # * Darkmode
 c.colors.webpage.preferred_color_scheme = 'dark'
 
