@@ -1,6 +1,14 @@
-source ~/.guix-home/profile/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.guix-home/profile/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.guix-home/profile/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+DISTRO="$(grep ID /etc/os-release | cut -d= -f 2)"
+
+if [ "$DISTRO" = "debian" ]; then
+    ZSH_PLUGIN_PATH="/usr/share"
+else
+    ZSH_PLUGIN_PATH="~/.guix-home/profile/share/zsh/plugins"
+fi
+
+source ${ZSH_PLUGIN_PATH}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ${ZSH_PLUGIN_PATH}/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ${ZSH_PLUGIN_PATH}/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 HISTORY_SUBSTRING_SEARCH_FUZZY=1
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
