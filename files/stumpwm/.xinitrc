@@ -12,4 +12,6 @@ xmodmap -e "add Mod3 = Hyper_L"
 
 # Start stumpwm from git checkout
 #exec sbcl --load start-stump
+
+export PATH="$HOME/.emacs.d/guix-profile/bin:$PATH"
 exec dbus-launch --exit-with-session emacs --maximized --fullscreen --no-splash
