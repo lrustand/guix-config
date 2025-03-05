@@ -19,6 +19,11 @@ except ImportError:
 
 config.load_autoconfig(False)
 
+# * Settings
+
+# Accept any language. Hopefully use default lang of sites.
+c.content.headers.accept_language = "*"
+
 # * Privacy and Security
 
 c.content.cookies.accept = 'no-3rdparty'
