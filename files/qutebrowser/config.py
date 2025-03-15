@@ -22,7 +22,7 @@ config.load_autoconfig(False)
 # * Settings
 
 # Accept any language. Hopefully use default lang of sites.
-c.content.headers.accept_language = "*"
+c.content.headers.accept_language = "en-US,en;q=0.9,*;q=0.8"
 
 # * Privacy and Security
 
