@@ -24,6 +24,8 @@ config.load_autoconfig(False)
 # Accept any language. Hopefully use default lang of sites.
 c.content.headers.accept_language = "en-US,en;q=0.9,*;q=0.8"
 
+c.content.register_protocol_handler = False
+
 # * Privacy and Security
 
 c.content.cookies.accept = 'no-3rdparty'
