@@ -2,12 +2,14 @@
   #:use-module (gnu)
   #:use-module (gnu home)
   #:use-module (gnu home services)
+  #:use-module (gnu home services gnupg)
   #:use-module (gnu home services mail)
   #:use-module (gnu home services messaging)
   #:use-module (gnu home services sound)
   #:use-module (gnu home services xdg)
   #:use-module (gnu packages)
   #:use-module (gnu services)
+  #:use-module (gnu packages gnupg)
   #:use-module (gnu packages web-browsers)
   #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages cross-base)
@@ -66,6 +68,7 @@
      "ecryptfs-utils"
      "guile-readline"
      "guile-colorized"
+     "pinentry-emacs"
      "fyi" ; Notification sender, similar to notify-send
      "cmake"
      "make"
@@ -287,6 +290,11 @@
      ;;               (password-eval "\"pass show $(find ~/.password-store -wholename '*/mutt/rustand.lars@gmail.com' | cut -d '/' -f 5-)/app_password\""))))))
      ;;          (default-account "gmail")))
 
+     (service home-gpg-agent-service-type
+              (home-gpg-agent-configuration
+               (pinentry-program
+                (file-append pinentry-emacs "/bin/pinentry-emacs"))
+               (ssh-support? #t)))
 
      (service home-dbus-service-type)
 
