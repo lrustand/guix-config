@@ -842,9 +842,6 @@ Automatically exits fullscreen if any window-changing command is executed."
 (use-package evil-easymotion
   :after evil
   :ensure t
-  :general
-  (:keymaps 'evilem-map
-            "p" #'my-org-rich-yank)
   :config
   ;; TODO: forward/backward sexp/symbol/defun
   ;; TODO: beginning/end of ...
