@@ -96,7 +96,6 @@
      "xprop"
      "xrandr"
      "xss-lock"
-     "youtube-dl"
      "yt-dlp")))
 
 (define-public %password-store-packages

@@ -769,10 +769,12 @@ Automatically exits fullscreen if any window-changing command is executed."
   ;; Avoid accidentally invoking `zap-char' when pressing Alt.
   :bind (:map global-map
               ("M-z" . nil))
+  :config
+  (defun my/prog-mode-init ()
+    (setq-local show-trailing-whitespace t)
+    (display-line-numbers-mode))
   :hook
-  (prog-mode . (lambda ()
-                 (setq-local show-trailing-whitespace t)
-                 (display-line-numbers-mode))))
+  (prog-mode . my/prog-mode-init))
   ;;(server-after-make-frame . set-line-number-background)
   ;;(window-setup . set-line-number-background)
 
@@ -927,7 +929,7 @@ Automatically exits fullscreen if any window-changing command is executed."
 
 (use-package emacs
   :unless (display-graphic-p)
-  :demand t
+  :ensure nil
   :bind*
   (("M-h" . windmove-left)
    ("M-j" . windmove-down)
@@ -953,6 +955,7 @@ Automatically exits fullscreen if any window-changing command is executed."
 
 (use-package which-key
   :ensure t
+  :defer 5
   :custom
   (which-key-show-docstrings t)
   (which-key-show-operator-state-maps t)
@@ -1923,9 +1926,8 @@ targets."
 (use-package org
   :config
   (require 'org-inlinetask)
-  (with-eval-after-load "org"
-    (add-to-list 'org-modules 'org-checklist))
-    ;;(add-to-list 'org-modules 'org-habit))
+  (add-to-list 'org-modules 'org-checklist)
+  ;;(add-to-list 'org-modules 'org-habit))
   ;; Don't open links in a new window (for fucks sake)
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
   :custom
@@ -2097,7 +2099,7 @@ targets."
 
 (use-package org-roam
   :ensure t
-  :demand t  ;; Ensure org-roam is loaded by default
+  :defer t
   :after org
   :init
   (make-directory "~/org-roam" t)
