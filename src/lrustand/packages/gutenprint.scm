@@ -3,6 +3,7 @@
   #:use-module (gnu packages cups)
   #:use-module (gnu packages perl)
   #:use-module (gnu packages time)
+  #:use-module (gnu packages pkg-config)
   #:use-module (guix build-system gnu)
   #:use-module (guix download)
   #:use-module (guix gexp)
@@ -16,7 +17,7 @@
 (define-public gutenprint
   (package
     (name "gutenprint")
-    (version "5.3.4")
+    (version "5.3.5")
     (source
      (origin
        (method url-fetch)
@@ -24,7 +25,7 @@
                            (version-major+minor version) "/" version "/"
                            name "-" version ".tar.xz"))
        (sha256
-        (base32 "0fq2y9sx37d342fihp1ys9kf4sr2j5nc1kl33j9sirmqs80sfi6v"))))
+        (base32 "0w4dcswwagibxyq9p05yxap1nr4sg9jbrkv942pb2c45w9yz9agm"))))
     (build-system gnu-build-system)
     (arguments
      `(#:tests? #f
@@ -33,6 +34,7 @@
                                "--enable-globalized-cups-ppds"
                                "--enable-cups-ppds"
                                "--enable-cups-1_2-enhancements")
+       #:make-flags (list "CFLAGS+=-Wno-incompatible-pointer-types")
        #:phases
        (modify-phases %standard-phases
          (add-before 'configure 'fix-paths
@@ -55,7 +57,8 @@
                #t))))))
     (native-inputs
      (list perl
-           time))
+           time
+           pkg-config))
     (inputs
      (list cups-minimal))
     (synopsis "Printer drivers for CUPS")
@@ -65,3 +68,6 @@ the same code base.  This driver supports widespread inkjet printers by major ve
   including Canon, Epson, Fujitsu, SONY, @dots{}")
     (home-page "http://gimp-print.sourceforge.net/")
     (license license:gpl2+)))
+
+
+gutenprint
