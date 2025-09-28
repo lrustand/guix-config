@@ -53,7 +53,8 @@
 
 (define-public %lr/default-home-packages
  (append
-  (list qutebrowser-with-tldextract)
+  (list ;;qutebrowser-with-tldextract
+        qutebrowser)
         ;; TODO: fix this shit
         ;;xdg-desktop-portal-termfilechooser)
   %shell-packages
